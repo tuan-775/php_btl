@@ -5,9 +5,7 @@ require 'db.php';
 // Kiểm tra nếu người dùng đã đăng nhập
 $isLoggedIn = isset($_SESSION['username']);
 $isAdmin = ($isLoggedIn && $_SESSION['role'] === 'admin');
-if (isset($_GET['message']) && $_GET['message'] === 'login_required') {
-    echo "<p style='color: red;'>Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!</p>";
-}
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -120,10 +118,23 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                     </ul>
                 </li>
                 <li><a href="#">Bộ sưu tập</a></li>
-                <li><a href="#">New Arrival</a></li>
-                <li><a href="#">⚡ SALE ⚡</a></li>
-                <li><a href="#">Cửa hàng</a></li>
-                <li><a href="#">Tin tức</a></li>
+                <li class="dropdown">
+                    <a href="#">New Arrival</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="new_arrival.php?category=Bé gái">New Arrival Bé gái</a></li>
+                        <li><a href="new_arrival.php?category=Bé trai">New Arrival Bé trai</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">⚡ SALE ⚡</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="sale.php?sale_range=10-25">Sale 10%-25%</a></li>
+                        <li><a href="sale.php?sale_range=25-50">Sale 25%-50%</a></li>
+                        <li><a href="sale.php?category=Bé gái">Sale Bé gái</a></li>
+                        <li><a href="sale.php?category=Bé trai">Sale Bé trai</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </nav>
     </header>

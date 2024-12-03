@@ -46,7 +46,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
             <p><strong>Giá:</strong> <?php echo number_format($product['price'], 0, ',', '.'); ?> VND</p>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <!-- Nút "Thêm vào giỏ hàng" cho người dùng đã đăng nhập -->
-                <form action="add_to_cart.php" method="POST">
+                <form action="cart/add_to_cart.php" method="POST">
                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                     <input type="number" name="quantity" value="1" min="1">
                     <button type="submit" name="add_to_cart">Thêm vào giỏ hàng</button>

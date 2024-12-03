@@ -1,17 +1,22 @@
 <?php
-session_start();
 require '../db.php';
+session_start();
 
-if (isset($_GET['cart_id'])) {
-    $cart_id = $_GET['cart_id'];
-
-    // Xóa sản phẩm khỏi giỏ hàng
-    $stmt = $pdo->prepare("DELETE FROM cart WHERE id = ?");
-    $stmt->execute([$cart_id]);
-
-    // Quay lại trang giỏ hàng
-    header("Location: cart.php");
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login/login.php");
     exit;
-} else {
-    die("ID giỏ hàng không hợp lệ.");
 }
+
+$user_id = $_SESSION['user_id'];
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($product_id > 0) {
+    // Xóa sản phẩm khỏi giỏ hàng
+    $stmt = $pdo->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
+    $stmt->execute([$user_id, $product_id]);
+}
+
+// Quay lại giỏ hàng
+header("Location: cart.php");
+exit;
+?>

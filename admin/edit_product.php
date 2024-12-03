@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $sale_percentage = $_POST['sale_percentage'];
 
     // Xử lý upload ảnh mới nếu có
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -50,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Cập nhật sản phẩm
-    $stmt = $pdo->prepare("UPDATE products SET product_code = ?, category = ?, category_name = ?, name = ?, image = ?, description = ?, price = ? WHERE id = ?");
-    $stmt->execute([$product_code, $category, $category_name, $name, $image_url, $description, $price, $id]);
+    $stmt = $pdo->prepare("UPDATE products SET product_code = ?, category = ?, category_name = ?, name = ?, image = ?, description = ?, price = ?, sale_percentage = ? WHERE id = ?");
+    $stmt->execute([$product_code, $category, $category_name, $name, $image_url, $description, $price, $sale_percentage, $id]);
 
     echo "Cập nhật sản phẩm thành công!";
     header("Location: dashboard.php");
@@ -70,32 +71,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h1>Sửa sản phẩm</h1>
     <form method="POST" enctype="multipart/form-data">
-        <label for="product_code">Mã sản phẩm:</label>
-        <input type="text" id="product_code" name="product_code" value="<?php echo htmlspecialchars($product['product_code']); ?>" required><br>
+        <label for="product_code">Mã sản phẩm:</label><br>
+        <input type="text" id="product_code" name="product_code" value="<?php echo htmlspecialchars($product['product_code']); ?>" required><br><br>
 
-        <label for="category">Loại sản phẩm:</label>
+        <label for="category">Loại sản phẩm:</label><br>
         <select id="category" name="category" required>
-            <option value="Bé trai" <?php echo $product['category'] === 'Bé trai' ? 'selected' : ''; ?>>Bé trai</option>
             <option value="Bé gái" <?php echo $product['category'] === 'Bé gái' ? 'selected' : ''; ?>>Bé gái</option>
-        </select><br>
+            <option value="Bé trai" <?php echo $product['category'] === 'Bé trai' ? 'selected' : ''; ?>>Bé trai</option>
+        </select><br><br>
 
-        <label for="category_name">Tên loại sản phẩm:</label>
-        <input type="text" id="category_name" name="category_name" value="<?php echo htmlspecialchars($product['category_name']); ?>" required><br>
+        <label for="category_name">Tên loại sản phẩm:</label><br>
+        <input type="text" id="category_name" name="category_name" value="<?php echo htmlspecialchars($product['category_name']); ?>" required><br><br>
 
-        <label for="name">Tên sản phẩm:</label>
-        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($product['name']); ?>" required><br>
+        <label for="name">Tên sản phẩm:</label><br>
+        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($product['name']); ?>" required><br><br>
 
-        <label for="image">Hình ảnh:</label>
+        <label for="description">Mô tả:</label><br>
+        <textarea id="description" name="description" rows="5" required><?php echo htmlspecialchars($product['description']); ?></textarea><br><br>
+
+        <label for="price">Giá:</label><br>
+        <input type="number" id="price" name="price" value="<?php echo htmlspecialchars($product['price']); ?>" required><br><br>
+
+        <label for="sale_percentage">Giảm giá (%):</label><br>
+        <input type="number" id="sale_percentage" name="sale_percentage" value="<?php echo htmlspecialchars($product['sale_percentage']); ?>" min="0" max="100"><br><br>
+
+        <label for="image">Ảnh sản phẩm:</label><br>
         <input type="file" id="image" name="image"><br>
-        <p>Ảnh hiện tại: <img src="<?php echo htmlspecialchars($product['image']); ?>" style="width: 50px; height: 50px;"></p>
+        <p>Ảnh hiện tại:</p>
+        <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="width: 100px; height: 100px;"><br><br>
 
-        <label for="description">Mô tả:</label>
-        <textarea id="description" name="description" required><?php echo htmlspecialchars($product['description']); ?></textarea><br>
-
-        <label for="price">Giá:</label>
-        <input type="number" id="price" name="price" value="<?php echo htmlspecialchars($product['price']); ?>" required><br>
-
-        <button type="submit">Cập nhật sản phẩm</button>
+        <button type="submit">Cập nhật</button>
     </form>
+    <a href="dashboard.php">Quay lại danh sách</a>
 </body>
 </html>

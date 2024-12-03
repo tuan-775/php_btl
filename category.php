@@ -36,7 +36,16 @@ if (!empty($category_name)) {
 <?php include 'header.php'; ?>
 
 <main>
-    <h1>Sản phẩm thuộc: <?php echo htmlspecialchars($category . ' > ' . $category_name); ?></h1>
+    <div class="breadcrumb">
+        <a href="index.php">Trang chủ</a> / 
+        <a href="category.php?category=<?php echo urlencode($category); ?>">
+            <?php echo htmlspecialchars($category); ?>
+        </a> 
+        <?php if (!empty($category_name)): ?>
+            / <span><?php echo htmlspecialchars($category_name); ?></span>
+        <?php endif; ?>
+    </div>
+
 
     <?php if (empty($products)): ?>
         <p>Không có sản phẩm nào trong danh mục này.</p>

@@ -25,12 +25,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h1>Danh sách sản phẩm</h1>
     </header>
     <main>
-        <!-- Nút quay lại trang index -->
         <a href="../index.php" class="back-btn">Quay lại Trang chủ</a>
-        <!-- Liên kết đến trang thêm sản phẩm -->
         <a href="add_product.php" class="add-btn">Thêm sản phẩm mới</a>
 
-        <!-- Danh sách sản phẩm -->
         <h2>Danh sách sản phẩm</h2>
         <table>
             <thead>
@@ -43,6 +40,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th>Hình ảnh</th>
                     <th>Mô tả</th>
                     <th>Giá</th>
+                    <th>Sale</th>
                     <th>Ngày thêm</th>
                     <th>Thao tác</th>
                 </tr>
@@ -60,10 +58,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                         <td><?php echo htmlspecialchars($product['description']); ?></td>
                         <td><?php echo htmlspecialchars($product['price']); ?> VND</td>
+                        <td><?php echo htmlspecialchars($product['sale_percentage']); ?>%</td>
                         <td><?php echo htmlspecialchars($product['created_at']); ?></td>
-                        <td class="action-buttons">
-                            <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="edit-btn">Sửa</a>
-                            <a href="delete_product.php?id=<?php echo $product['id']; ?>" class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</a>
+                        <td>
+                            <a href="edit_product.php?id=<?php echo $product['id']; ?>">Sửa</a>
+                            <a href="delete_product.php?id=<?php echo $product['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
