@@ -17,6 +17,7 @@ if (!empty($collection)) {
     // Không có thông tin bộ sưu tập hợp lệ
     die("Vui lòng chọn bộ sưu tập hợp lệ.");
 }
+
 ?>
 
 <!DOCTYPE html>
