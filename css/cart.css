@@ -14,17 +14,18 @@ body {
 
 /* Đặt lại cấu trúc main */
 main {
-    flex: 1;
+    /* flex: 1; */
     /* Chiếm không gian còn lại giữa header và footer */
     padding: 20px;
     background-color: #fff;
-    margin: 0 auto;
+    margin: 20px auto;
     /* Căn giữa nội dung */
     width: 90%;
     max-width: 1200px;
     /* Đảm bảo chiều rộng tối đa */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    margin-top: 130px;
 }
 
 
@@ -105,6 +106,12 @@ table img {
 }
 
 /* Cart summary */
+.cart-total {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
 .cart-summary {
     text-align: right;
     margin-top: 20px;

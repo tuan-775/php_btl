@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,40 +62,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../css/checkout.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
-<?php include '../header.php'; ?>
+    <?php include '../header.php'; ?>
 
-<main>
-    <h1>Thanh toán</h1>
+    <main>
+        <h1>Thanh toán</h1>
 
-    <?php if (!empty($error)): ?>
-        <p class="error"><?php echo $error; ?></p>
-    <?php endif; ?>
+        <?php if (!empty($error)): ?>
+            <p class="error"><?php echo $error; ?></p>
+        <?php endif; ?>
 
-    <?php if (empty($cartItems)): ?>
-        <p class="empty-cart">Giỏ hàng của bạn đang trống.</p>
-        <a href="../index.php" class="back-to-shop">Quay lại mua sắm</a>
-    <?php else: ?>
-        <div class="checkout-container">
-            <div class="order-summary">
-                <h2>Tổng tiền: <?php echo number_format($total, 0, ',', '.'); ?> VND</h2>
+        <?php if (empty($cartItems)): ?>
+            <p class="empty-cart">Giỏ hàng của bạn đang trống.</p>
+            <a href="../index.php" class="back-to-shop">Quay lại mua sắm</a>
+        <?php else: ?>
+            <div class="checkout-container">
+                <div class="order-summary">
+                    <h2>Tổng tiền: <?php echo number_format($total, 0, ',', '.'); ?> VND</h2>
+                </div>
+                <form method="POST" class="checkout-form">
+                    <label for="name">Họ và tên:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="address">Địa chỉ:</label>
+                    <input type="text" id="address" name="address" required>
+
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" id="phone" name="phone" required>
+
+                    <button type="submit" class="btn-checkout">Hoàn thành</button>
+                </form>
             </div>
-            <form method="POST" class="checkout-form">
-                <label for="name">Họ và tên:</label>
-                <input type="text" id="name" name="name" required>
+        <?php endif; ?>
+    </main>
 
-                <label for="address">Địa chỉ:</label>
-                <input type="text" id="address" name="address" required>
-
-                <label for="phone">Số điện thoại:</label>
-                <input type="text" id="phone" name="phone" required>
-
-                <button type="submit" class="btn-checkout">Hoàn thành</button>
-            </form>
-        </div>
-    <?php endif; ?>
-</main>
-
-<?php include '../footer.php'; ?>
+    <?php include '../footer.php'; ?>
 </body>
+
 </html>

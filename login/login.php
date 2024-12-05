@@ -30,16 +30,16 @@ $message = isset($_GET['message']) && $_GET['message'] === 'login_required' ? "V
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
-    <link rel="stylesheet" href="../css/style.css"> <!-- Liên kết file CSS -->
+    <link rel="stylesheet" href="../css/login.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
 </head>
-<body>
-    <h2>Đăng nhập</h2>
 
+<body>
     <?php if ($message): ?>
         <div class="notification-message">
             <i class="fas fa-exclamation-circle"></i>
@@ -48,11 +48,14 @@ $message = isset($_GET['message']) && $_GET['message'] === 'login_required' ? "V
     <?php endif; ?>
 
     <form method="post">
+        <h2>Đăng nhập</h2>
         <label for="username">Tên đăng nhập:</label><br>
         <input type="text" id="username" name="username" required><br>
         <label for="password">Mật khẩu:</label><br>
         <input type="password" id="password" name="password" required><br><br>
         <button type="submit">Đăng nhập</button>
+        <a href="../index.php">Quay lại trang chủ</a>
     </form>
 </body>
+
 </html>
