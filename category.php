@@ -26,44 +26,47 @@ if (!empty($category_name)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($category_name); ?></title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/category.css">
 </head>
+
 <body>
-<?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-<main>
-    <div class="breadcrumb">
-        <a href="index.php">Trang chủ</a> / 
-        <a href="category.php?category=<?php echo urlencode($category); ?>">
-            <?php echo htmlspecialchars($category); ?>
-        </a> 
-        <?php if (!empty($category_name)): ?>
-            / <span><?php echo htmlspecialchars($category_name); ?></span>
-        <?php endif; ?>
-    </div>
-
-
-    <?php if (empty($products)): ?>
-        <p>Không có sản phẩm nào trong danh mục này.</p>
-    <?php else: ?>
-        <div class="product-container">
-            <?php foreach ($products as $product): ?>
-                <div class="product-card">
-                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
-                        <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
-                        <h3><?php echo htmlspecialchars($product['name']); ?></h3>
-                        <p><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</p>
-                    </a>
-                </div>
-            <?php endforeach; ?>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.php">Trang chủ</a> /
+            <a href="category.php?category=<?php echo urlencode($category); ?>">
+                <?php echo htmlspecialchars($category); ?>
+            </a>
+            <?php if (!empty($category_name)): ?>
+                / <span><?php echo htmlspecialchars($category_name); ?></span>
+            <?php endif; ?>
         </div>
-    <?php endif; ?>
-</main>
 
-<?php include 'footer.php'; ?>
+
+        <?php if (empty($products)): ?>
+            <p>Không có sản phẩm nào trong danh mục này.</p>
+        <?php else: ?>
+            <div class="category-container">
+                <?php foreach ($products as $product): ?>
+                    <div class="category-card">
+                        <a href="product_detail.php?id=<?php echo $product['id']; ?>">
+                            <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                            <h3><?php echo htmlspecialchars($product['name']); ?></h3>
+                            <p><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</p>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </main>
+
+    <?php include 'footer.php'; ?>
 </body>
+
 </html>

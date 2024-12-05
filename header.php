@@ -31,39 +31,52 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle ?? 'Trang Web'; ?></title>
     <link rel="stylesheet" href="css/style.css"> <!-- Liên kết tới file CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playpen+Sans:wght@100..800&family=Sofadi+One&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header class="header">
         <div class="header-top">
             <!-- Logo -->
             <div class="logo">
-                <a href="/BTL_PHP/index.php">
-                    <img src="/BTL_PHP/logo.png" alt="Rabity Logo">
+                <a href="./index.php">
+                    <!-- <img src="/BTL_PHP/logo.png" alt="Rabity Logo"> -->
+                    <img src="./logo.png" />
                 </a>
             </div>
+
+            <div class="business-strategy">
+                <a href="business_strategy.php">Giới thiệu</a>
+            </div>
+
+            <!-- <div><a href="./index.php">Trang chủ</a></div> -->
 
             <!-- Thanh tìm kiếm ở giữa -->
             <form class="search-bar" action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Bạn cần tìm gì?" required>
                 <button type="submit"><i class="fas fa-search"></i></button>
+                </input>
             </form>
 
             <!-- Icon bên phải -->
             <div class="header-icons">
-            <?php if (isset($_SESSION['username']) && isset($_SESSION['role'])): ?>
+                <?php if (isset($_SESSION['username']) && isset($_SESSION['role'])): ?>
                     <?php if ($_SESSION['role'] === 'admin'): ?>
                         <!-- Menu cho Admin -->
                         <div class="user-welcome">
                             Quản trị, <?php echo htmlspecialchars($_SESSION['username']); ?>!
                             <div class="dropdown-menu">
-                                <a href="/BTL_PHP/admin/dashboard.php">Quản trị</a>
-                                <a href="/BTL_PHP/login/logout.php">Đăng xuất</a>
+                                <a href="./admin/dashboard.php">Quản trị</a>
+                                <a href="./login/logout.php">Đăng xuất</a>
                             </div>
                         </div>
                     <?php else: ?>
@@ -71,8 +84,8 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <div class="user-welcome">
                             Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?>!
                             <div class="dropdown-menu">
-                                <a href="/BTL_PHP/profile.php">Hồ sơ</a>
-                                <a href="/BTL_PHP/login/logout.php">Đăng xuất</a>
+                                <a href="./profile.php">Hồ sơ</a>
+                                <a href="./login/logout.php">Đăng xuất</a>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -81,17 +94,17 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                     <div class="user-icon">
                         <i class="fas fa-user"></i>
                         <div class="dropdown-menu">
-                            <a href="/BTL_PHP/login/login.php">Đăng nhập</a>
-                            <a href="/BTL_PHP/login/register.php">Đăng ký</a>
+                            <a href="./login/login.php">Đăng nhập</a>
+                            <a href="./login/register.php">Đăng ký</a>
                         </div>
                     </div>
-            <?php endif; ?>
-            <div class="icon cart-icon">
-                <a href="/BTL_PHP/cart/cart.php">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count"><?php echo $cart_count; ?></span>
-                </a>
-            </div>
+                <?php endif; ?>
+                <div class="icon cart-icon">
+                    <a href="./cart/cart.php">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count"><?php echo $cart_count; ?></span>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -117,7 +130,15 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <li><a href="category.php?category=Bé trai&category_name=Phụ kiện">Phụ kiện</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Bộ sưu tập</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Bộ sưu tập</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="collection.php?collection=BST Thu Đông">BST Thu Đông</a></li>
+                        <li><a href="collection.php?collection=BST Đồ Bộ Mặc Nhà">BST Đồ Bộ Mặc Nhà</a></li>
+                        <li><a href="collection.php?collection=BST Đồ Đi Chơi Noel">BST Đồ Đi Chơi Noel</a></li>
+                        <li><a href="collection.php?collection=BST Disney - Friends">BST Disney - Friends</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#">New Arrival</a>
                     <ul class="dropdown-menu">
@@ -134,7 +155,7 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <li><a href="sale.php?category=Bé trai">Sale Bé trai</a></li>
                     </ul>
                 </li>
-
             </ul>
         </nav>
     </header>
+</body>

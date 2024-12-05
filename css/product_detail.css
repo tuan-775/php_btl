@@ -5,7 +5,7 @@
     align-items: flex-start;
     gap: 30px;
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 150px auto 10px;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -19,7 +19,7 @@
 }
 
 .product-image img {
-    max-width: 100%;
+    width: 440px;
     height: auto;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -27,20 +27,21 @@
 
 /* Thông tin sản phẩm */
 .product-info {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    width: 780px;
+    height: auto;
+    margin-left: 100px;
 }
 
 .product-info h1 {
-    font-size: 28px;
+    font-size: 24px;
     color: #333;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
 }
 
 .product-info p {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 14px;
+    /* line-height: 1.6; */
     color: #555;
 }
 
@@ -106,52 +107,12 @@
     font-size: 24px;
     text-align: left;
     color: #333;
-    margin-bottom: 20px;
 }
 
-.related-products-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: flex-start;
-}
-
-/* Card sản phẩm liên quan */
-.product-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 200px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.product-card img {
-    max-width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.product-card h3 {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.product-card p {
-    font-size: 14px;
-    font-weight: bold;
-    color: #ff5722;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+@media (max-width: 768px) {
+    .product-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
 }
 
 /* Thông báo */
