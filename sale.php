@@ -32,61 +32,69 @@ $sale_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SALE</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/sale.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
     <?php include 'header.php'; ?>
 
     <main>
-    <nav class="breadcrumb">
-        <a href="index.php">Trang chủ</a> /
-        <span>
-            <?php
-            if (isset($_GET['sale_percentage']) && $_GET['sale_percentage'] === 'Sale 10%-25%') {
-                echo "Sale 10%-25%";
-            } elseif (isset($_GET['sale_percentage']) && $_GET['sale_percentage'] == '25-50') {
-                echo "Sale 25%-50%";
-            } elseif (isset($_GET['sale']) && $_GET['sale'] == 'girls') {
-                echo "Sale Bé Gái";
-            } elseif (isset($_GET['sale']) && $_GET['sale'] == 'boys') {
-                echo "Sale Bé Trai";
-            } else {
-                echo "Sale";
-            }
-            ?>
-        </span>
-    </nav>
+        <nav class="breadcrumb">
+            <a href="index.php">Trang chủ</a> /
+            <span>
+                <?php
+                if (isset($_GET['sale_percentage']) && $_GET['sale_percentage'] === 'Sale 10%-25%') {
+                    echo "Sale 10%-25%";
+                } elseif (isset($_GET['sale_percentage']) && $_GET['sale_percentage'] == '25-50') {
+                    echo "Sale 25%-50%";
+                } elseif (isset($_GET['sale']) && $_GET['sale'] == 'girls') {
+                    echo "Sale Bé Gái";
+                } elseif (isset($_GET['sale']) && $_GET['sale'] == 'boys') {
+                    echo "Sale Bé Trai";
+                } else {
+                    echo "Sale";
+                }
+                ?>
+            </span>
+        </nav>
 
         <h1>SALE</h1>
-        <!-- Hiển thị sản phẩm -->
-        <div class="product-container">
-            <?php if (count($sale_products) > 0): ?>
-                <?php foreach ($sale_products as $product): ?>
-                    <div class="product-card">
-                        <a href="product_detail.php?id=<?php echo $product['id']; ?>">
-                            <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
-                            <h3><?php echo htmlspecialchars($product['name']); ?></h3>
-                            <p>
+        <div class="product">
+            <!-- Hiển thị sản phẩm -->
+            <div class="product-container">
+                <?php if (count($sale_products) > 0): ?>
+                    <?php foreach ($sale_products as $product): ?>
+                        <div class="product-card">
+                            <a href="product_detail.php?id=<?php echo $product['id']; ?>">
+                                <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                                 <?php if ($product['sale_percentage'] > 0): ?>
-                                    <span class="sale-price"><?php echo number_format($product['price'] * (1 - $product['sale_percentage'] / 100), 0, ',', '.'); ?> VND</span>
-                                    <span class="original-price"><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</span>
+                                    <span class="sale-percentage">Giảm <?php echo htmlspecialchars($product['sale_percentage']); ?>%</span>
+                                    <p class="price-sale">
+                                        ₫<?php
+                                            $sale_price = $product['price'] * (1 - $product['sale_percentage'] / 100);
+                                            echo number_format($sale_price, 0, ',', '.'); ?>
+                                    </p>
                                 <?php else: ?>
-                                    <span><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</span>
+                                    <p class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?></p>
                                 <?php endif; ?>
-                            </p>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Không có sản phẩm nào trong danh mục này.</p>
-            <?php endif; ?>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Không có sản phẩm nào trong danh mục này.</p>
+                <?php endif; ?>
+            </div>
         </div>
     </main>
 
     <?php include 'footer.php'; ?>
 </body>
+
 </html>

@@ -36,7 +36,8 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle ?? 'Trang Web'; ?></title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Liên kết tới file CSS -->
+    <!-- <link rel="stylesheet" href="css/style.css">  -->
+    <link rel="stylesheet" href="./css/header.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,12 +54,6 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                     <img src="./logo.png" />
                 </a>
             </div>
-
-            <div class="business-strategy">
-                <a href="business_strategy.php">Giới thiệu</a>
-            </div>
-
-            <!-- <div><a href="./index.php">Trang chủ</a></div> -->
 
             <!-- Thanh tìm kiếm ở giữa -->
             <form class="search-bar" action="search.php" method="GET">
@@ -111,6 +106,10 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
         <!-- Thanh menu -->
         <nav class="header-nav">
             <ul>
+                <div><a href="./index.php">Trang chủ</a></div>
+                <div class="business-strategy">
+                    <a href="business_strategy.php">Giới thiệu</a>
+                </div>
                 <li class="dropdown">
                     <a href="category.php?category=Bé gái" class="dropdown-toggle">Bé gái</a>
                     <ul class="dropdown-menu">

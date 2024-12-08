@@ -16,18 +16,22 @@ $new_arrivals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Arrival - <?php echo htmlspecialchars($category ?: 'Tất cả'); ?></title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Thêm link CSS -->
+    <link rel="stylesheet" href="./css/sale.css">
+    <link rel="stylesheet" href="./css/style.css">
+
 </head>
+
 <body>
     <?php include 'header.php'; ?>
 
     <main>
         <div class="breadcrumb">
-            <a href="index.php">Trang chủ</a> / 
+            <a href="index.php">Trang chủ</a> /
             <?php if ($category): ?>
                 <a href="new_arrival.php">New Arrival</a> / <span><?php echo htmlspecialchars($category); ?></span>
             <?php else: ?>
@@ -43,7 +47,7 @@ $new_arrivals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <a href="product_detail.php?id=<?php echo $product['id']; ?>">
                             <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             <h3><?php echo htmlspecialchars($product['name']); ?></h3>
-                            <p><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</p>
+                            <p class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?></p>
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -55,4 +59,5 @@ $new_arrivals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <?php include 'footer.php'; ?>
 </body>
+
 </html>
