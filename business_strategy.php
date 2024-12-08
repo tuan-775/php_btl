@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giới thiệu chiến lược kinh doanh</title>
     <link rel="stylesheet" href="./css/business_strategy.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -46,7 +47,8 @@
                 Để đạt được tầm nhìn và sứ mệnh, chúng tôi áp dụng các chiến lược sau:
             </p>
             <ul style="list-style: disc; margin-left: 20px;">
-                <li><strong>Đầu tư vào nghiên cứu và phát triển:</strong> Không ngừng cải tiến sản phẩm và dịch vụ.</li>/-strong/-heart:>:o:-((:-h <li><strong>Mở rộng thị trường:</strong> Tăng cường hiện diện tại các thành phố lớn và thị trường quốc tế.</li>
+                <li><strong>Đầu tư vào nghiên cứu và phát triển:</strong> Không ngừng cải tiến sản phẩm và dịch vụ.</li>
+                <li><strong>Mở rộng thị trường:</strong> Tăng cường hiện diện tại các thành phố lớn và thị trường quốc tế.</li>
                 <li><strong>Ứng dụng công nghệ:</strong> Sử dụng công nghệ tiên tiến trong sản xuất và phân phối.</li>
                 <li><strong>Phát triển đội ngũ:</strong> Xây dựng một đội ngũ chuyên nghiệp và nhiệt huyết.</li>
             </ul>
