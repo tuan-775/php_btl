@@ -19,9 +19,10 @@
 
         <!-- Phần thông tin công ty -->
         <div class="footer-section">
-            <h3>Công ty TNHH Tân Phú</h3>
-            <p>Hotline: 1900633520</p>
+            <h3>Công ty TNHH Double2T</h3>
+            <p>Hotline: 0369585104</p>
             <p>Email: cskh@rabity.vn</p>
+            <p>Địa chỉ: Số 43, đường Trần Duy Hưng, Cầu Giấy, Hà Nội</p>
         </div>
     </div>
 </footer>
