@@ -30,6 +30,8 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Giỏ hàng</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 
 <body>
