@@ -1,7 +1,8 @@
 .breadcrumb {
     display: flex;
-    justify-content: center;
-    margin-bottom: 5px;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 1280px;
 
     a {
         font-size: 16px;

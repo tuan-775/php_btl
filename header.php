@@ -106,52 +106,52 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
         <!-- Thanh menu -->
         <nav class="header-nav">
             <ul>
-                <div><a href="./index.php">Trang chủ</a></div>
+                <div><a href="/php_btl/index.php">Trang chủ</a></div>
                 <div class="business-strategy">
-                    <a href="business_strategy.php">Giới thiệu</a>
+                    <a href="/php_btl/business_strategy.php">Giới thiệu</a>
                 </div>
                 <li class="dropdown">
-                    <a href="category.php?category=Bé gái" class="dropdown-toggle">Bé gái</a>
+                    <a href="/php_btl/category.php?category=Bé gái" class="dropdown-toggle">Bé gái</a>
                     <ul class="dropdown-menu">
-                        <li><a href="category.php?category=Bé gái&&category_name=Đầm váy">Đầm váy</a></li>
-                        <li><a href="category.php?category=Bé gái&category_name=Áo">Áo</a></li>
-                        <li><a href="category.php?category=Bé gái&category_name=Đồ bộ">Đồ bộ</a></li>
-                        <li><a href="category.php?category=Bé gái&category_name=Phụ kiện">Phụ kiện</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé gái&&category_name=Đầm váy">Đầm váy</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé gái&category_name=Áo">Áo</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé gái&category_name=Đồ bộ">Đồ bộ</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé gái&category_name=Phụ kiện">Phụ kiện</a></li>
                     </ul>
                 </li>
                 <!-- Bé trai -->
                 <li class="dropdown">
-                    <a href="category.php?category=Bé trai" class="dropdown-toggle">Bé trai</a>
+                    <a href="/php_btl/category.php?category=Bé trai" class="dropdown-toggle">Bé trai</a>
                     <ul class="dropdown-menu">
-                        <li><a href="category.php?category=Bé trai&category_name=Áo">Áo</a></li>
-                        <li><a href="category.php?category=Bé trai&category_name=Quần">Quần</a></li>
-                        <li><a href="category.php?category=Bé trai&category_name=Đồ bộ">Đồ bộ</a></li>
-                        <li><a href="category.php?category=Bé trai&category_name=Phụ kiện">Phụ kiện</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Áo">Áo</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Quần">Quần</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Đồ bộ">Đồ bộ</a></li>
+                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Phụ kiện">Phụ kiện</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Bộ sưu tập</a>
                     <ul class="dropdown-menu">
-                        <li><a href="collection.php?collection=BST Thu Đông">BST Thu Đông</a></li>
-                        <li><a href="collection.php?collection=BST Đồ Bộ Mặc Nhà">BST Đồ Bộ Mặc Nhà</a></li>
-                        <li><a href="collection.php?collection=BST Đồ Đi Chơi Noel">BST Đồ Đi Chơi Noel</a></li>
-                        <li><a href="collection.php?collection=BST Disney - Friends">BST Disney - Friends</a></li>
+                        <li><a href="/php_btl/collection.php?collection=BST Thu Đông">BST Thu Đông</a></li>
+                        <li><a href="/php_btl/collection.php?collection=BST Đồ Bộ Mặc Nhà">BST Đồ Bộ Mặc Nhà</a></li>
+                        <li><a href="/php_btl/collection.php?collection=BST Đồ Đi Chơi Noel">BST Đồ Đi Chơi Noel</a></li>
+                        <li><a href="/php_btl/collection.php?collection=BST Disney - Friends">BST Disney - Friends</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#">New Arrival</a>
                     <ul class="dropdown-menu">
-                        <li><a href="new_arrival.php?category=Bé gái">New Arrival Bé gái</a></li>
-                        <li><a href="new_arrival.php?category=Bé trai">New Arrival Bé trai</a></li>
+                        <li><a href="/php_btl/new_arrival.php?category=Bé gái">New Arrival Bé gái</a></li>
+                        <li><a href="/php_btl/new_arrival.php?category=Bé trai">New Arrival Bé trai</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#">⚡ SALE ⚡</a>
                     <ul class="dropdown-menu">
-                        <li><a href="sale.php?sale_range=10-25">Sale 10%-25%</a></li>
-                        <li><a href="sale.php?sale_range=25-50">Sale 25%-50%</a></li>
-                        <li><a href="sale.php?category=Bé gái">Sale Bé gái</a></li>
-                        <li><a href="sale.php?category=Bé trai">Sale Bé trai</a></li>
+                        <li><a href="/php_btl/sale.php?sale_range=10-25">Sale 10%-25%</a></li>
+                        <li><a href="/php_btl/sale.php?sale_range=25-50">Sale 25%-50%</a></li>
+                        <li><a href="/php_btl/sale.php?category=Bé gái">Sale Bé gái</a></li>
+                        <li><a href="/php_btl/sale.php?category=Bé trai">Sale Bé trai</a></li>
                     </ul>
                 </li>
             </ul>
