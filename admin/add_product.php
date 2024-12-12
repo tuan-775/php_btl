@@ -9,8 +9,8 @@ require '../db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_code = $_POST['product_code'];
-    $category = isset($_POST['category_name']) ? implode(', ', $_POST['category_name']) : ''; // Lưu nhiều loại sản phẩm
-    $category_type = $_POST['category_type']; // Lấy tên loại sản phẩm
+    $category = isset($_POST['category_name']) ? implode(', ', $_POST['category_name']) : ''; 
+    $category_type = $_POST['category_type'];
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
@@ -18,21 +18,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stock = $_POST['stock'];
     $cost_price = $_POST['cost_price'];
 
-    $image = $_FILES['image']['name'];
-    $target = "../uploads/" . basename($image);
+    // Upload ảnh chính
+    $main_image = $_FILES['image']['name'];
+    $target = "../uploads/" . basename($main_image);
 
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-        $stmt = $pdo->prepare("
-            INSERT INTO products (product_code, category, category_name, name, description, price, sale_percentage, stock, cost_price, image) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ");
-        $stmt->execute([$product_code, $category, $category_type, $name, $description, $price, $sale_percentage, $stock, $cost_price, $image]);
-
-        header("Location: dashboard.php?message=Product added successfully");
-        exit;
-    } else {
-        $error = "Failed to upload image.";
+    if (!move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+        $error = "Failed to upload main image.";
     }
+
+    // Thêm sản phẩm vào DB
+    $stmt = $pdo->prepare("
+        INSERT INTO products (product_code, category, category_name, name, description, price, sale_percentage, stock, cost_price, image) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+    $stmt->execute([$product_code, $category, $category_type, $name, $description, $price, $sale_percentage, $stock, $cost_price, $main_image]);
+
+    $product_id = $pdo->lastInsertId(); // Lấy ID sản phẩm vừa thêm
+
+    // Xử lý upload nhiều ảnh
+    if (!empty($_FILES['additional_images']['name'][0])) {
+        $additional_images = $_FILES['additional_images'];
+        for ($i = 0; $i < count($additional_images['name']); $i++) {
+            $filename = $additional_images['name'][$i];
+            $filetmp = $additional_images['tmp_name'][$i];
+            $target_additional = "../uploads/" . basename($filename);
+
+            if (move_uploaded_file($filetmp, $target_additional)) {
+                // Lưu vào bảng product_images
+                $img_stmt = $pdo->prepare("INSERT INTO product_images (product_id, image_path) VALUES (?, ?)");
+                $img_stmt->execute([$product_id, $filename]);
+            } else {
+                // Có thể xử lý lỗi từng ảnh hoặc bỏ qua
+            }
+        }
+    }
+
+    header("Location: dashboard.php?message=Product added successfully");
+    exit;
 }
 ?>
 
@@ -86,8 +108,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="cost_price">Giá nhập:</label>
         <input type="number" id="cost_price" name="cost_price" required>
 
-        <label for="image">Hình ảnh:</label>
+        <label for="image">Hình ảnh chính:</label>
         <input type="file" id="image" name="image" required>
+
+        <label for="additional_images">Hình ảnh phụ (chọn nhiều):</label>
+        <input type="file" id="additional_images" name="additional_images[]" multiple>
 
         <button type="submit">Thêm sản phẩm</button>
     </form>

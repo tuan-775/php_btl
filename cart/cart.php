@@ -1,8 +1,8 @@
 <?php
+session_start();
 require '../db.php';
 
-session_start();
-
+// Kiểm tra đăng nhập
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login/login.php");
     exit;
@@ -10,9 +10,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Lấy dữ liệu giỏ hàng từ bảng cart
+// Lấy dữ liệu giỏ hàng, bao gồm cả kích cỡ
 $stmt = $pdo->prepare("
-    SELECT cart.quantity, cart.product_id, products.name, products.price, products.sale_percentage, products.image 
+    SELECT cart.quantity, cart.size, cart.product_id, products.name, products.price, products.sale_percentage, products.image 
     FROM cart 
     JOIN products ON cart.product_id = products.id 
     WHERE cart.user_id = ?
@@ -50,6 +50,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <tr>
                             <th>Hình ảnh</th>
                             <th>Tên sản phẩm</th>
+                            <th>Kích cỡ</th>
                             <th>Số lượng</th>
                             <th>Giá gốc</th>
                             <th>Giá giảm</th>
@@ -68,8 +69,13 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             $total += $subtotal;
                         ?>
                             <tr>
-                                <td><img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>"></td>
+                                <td>
+                                    <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" 
+                                         alt="<?php echo htmlspecialchars($item['name']); ?>" 
+                                         style="width:50px; height:50px; object-fit:cover;">
+                                </td>
                                 <td align="center"><?php echo htmlspecialchars($item['name']); ?></td>
+                                <td align="center"><?php echo htmlspecialchars($item['size']); ?></td>
                                 <td align="center"><?php echo $item['quantity']; ?></td>
                                 <td align="center"><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
                                 <td align="center">
@@ -79,9 +85,9 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </td>
                                 <td align="center"><?php echo number_format($subtotal, 0, ',', '.'); ?> VND</td>
                                 <td align="center">
-                                    <a href="remove_from_cart.php?id=<?php echo $item['product_id']; ?>" class="btn-remove">Xóa</a>
+                                    <!-- Xóa sản phẩm khỏi giỏ hàng (thêm size vào GET nếu cần) -->
+                                    <a href="remove_from_cart.php?id=<?php echo $item['product_id']; ?>&size=<?php echo urlencode($item['size']); ?>" class="btn-remove">Xóa</a>
                                 </td>
-
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

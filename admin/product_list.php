@@ -19,7 +19,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách sản phẩm</title>
-    <!-- <link rel="stylesheet" href="../css/admin.css"> -->
     <link rel="stylesheet" href="../css/product_list.css">
 </head>
 
@@ -50,6 +49,12 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach ($products as $product): ?>
+                        <?php
+                        // Lấy danh sách ảnh phụ cho sản phẩm này
+                        $img_stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id = ?");
+                        $img_stmt->execute([$product['id']]);
+                        $additional_images = $img_stmt->fetchAll(PDO::FETCH_ASSOC);
+                        ?>
                         <tr>
                             <td><?php echo htmlspecialchars($product['id']); ?></td>
                             <td><?php echo htmlspecialchars($product['product_code']); ?></td>
@@ -57,7 +62,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo htmlspecialchars($product['category_name']); ?></td>
                             <td><?php echo htmlspecialchars($product['name']); ?></td>
                             <td>
+                                <!-- Ảnh chính -->
                                 <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="width: 50px; height: 50px;">
+
+                                <!-- Ảnh phụ -->
+                                <?php foreach ($additional_images as $img): ?>
+                                    <img src="../uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" style="width: 50px; height: 50px; margin-left:5px;">
+                                <?php endforeach; ?>
                             </td>
                             <td><?php echo htmlspecialchars($product['description']); ?></td>
                             <td><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</td>

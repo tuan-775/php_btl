@@ -17,11 +17,16 @@ if (!$product) {
     die("Sản phẩm không tồn tại.");
 }
 
+// Lấy danh sách ảnh phụ hiện có
+$img_stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id = ?");
+$img_stmt->execute([$product_id]);
+$additional_images = $img_stmt->fetchAll(PDO::FETCH_ASSOC);
+
 // Xử lý cập nhật sản phẩm
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_code = $_POST['product_code'];
-    $category = isset($_POST['category']) ? implode(',', $_POST['category']) : ''; // Multiple categories
-    $category_name = $_POST['category_name']; // Tên loại sản phẩm
+    $category = isset($_POST['category']) ? implode(',', $_POST['category']) : ''; 
+    $category_name = $_POST['category_name'];
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
@@ -33,10 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image = $_FILES['image']['name'] ? $_FILES['image']['name'] : $product['image'];
     $target = "../uploads/" . basename($image);
 
-    // Di chuyển ảnh nếu được upload
+    // Upload ảnh chính nếu có file mới
     if ($_FILES['image']['name']) {
         if (!move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            $error = "Tải ảnh lên thất bại.";
+            $error = "Tải ảnh chính lên thất bại.";
         }
     }
 
@@ -47,6 +52,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         WHERE id = ?
     ");
     $stmt->execute([$product_code, $category, $category_name, $name, $description, $price, $sale_percentage, $stock, $cost_price, $image, $product_id]);
+
+    // Xử lý xóa ảnh phụ
+    if (!empty($_POST['delete_images'])) {
+        foreach ($_POST['delete_images'] as $del_id) {
+            // Lấy đường dẫn ảnh để xóa file
+            $del_stmt = $pdo->prepare("SELECT image_path FROM product_images WHERE id = ? AND product_id = ?");
+            $del_stmt->execute([$del_id, $product_id]);
+            $del_img = $del_stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($del_img) {
+                // Xóa file
+                $file_path = "../uploads/" . $del_img['image_path'];
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+                // Xóa DB
+                $del_stmt2 = $pdo->prepare("DELETE FROM product_images WHERE id = ?");
+                $del_stmt2->execute([$del_id]);
+            }
+        }
+    }
+
+    // Xử lý thêm ảnh phụ mới
+    if (!empty($_FILES['additional_images']['name'][0])) {
+        $new_images = $_FILES['additional_images'];
+        for ($i = 0; $i < count($new_images['name']); $i++) {
+            $filename = $new_images['name'][$i];
+            $filetmp = $new_images['tmp_name'][$i];
+            $target_additional = "../uploads/" . basename($filename);
+
+            if (move_uploaded_file($filetmp, $target_additional)) {
+                // Lưu vào bảng product_images
+                $img_stmt = $pdo->prepare("INSERT INTO product_images (product_id, image_path) VALUES (?, ?)");
+                $img_stmt->execute([$product_id, $filename]);
+            }
+        }
+    }
 
     header("Location: dashboard.php?message=Product updated successfully");
     exit;
@@ -107,9 +149,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="cost_price">Giá nhập:</label>
         <input type="number" id="cost_price" name="cost_price" value="<?php echo htmlspecialchars($product['cost_price']); ?>" required>
 
-        <label for="image">Hình ảnh:</label>
+        <label for="image">Hình ảnh chính:</label>
         <input type="file" id="image" name="image">
-        <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Hình ảnh sản phẩm" style="max-width: 100px; margin-top: 10px;">
+        <div style="margin-top:10px;">
+            <img src="../uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Hình ảnh sản phẩm" style="max-width: 100px;">
+        </div>
+
+        <h2>Ảnh phụ hiện có</h2>
+        <?php if (!empty($additional_images)): ?>
+            <div class="additional-images">
+                <?php foreach ($additional_images as $img): ?>
+                    <div style="display:inline-block; margin:10px;">
+                        <img src="../uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="" style="width:100px;"><br>
+                        <label><input type="checkbox" name="delete_images[]" value="<?php echo $img['id']; ?>"> Xóa</label>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p>Không có ảnh phụ.</p>
+        <?php endif; ?>
+
+        <label for="additional_images">Thêm ảnh phụ mới (chọn nhiều):</label>
+        <input type="file" id="additional_images" name="additional_images[]" multiple>
 
         <button type="submit">Lưu thay đổi</button>
     </form>
