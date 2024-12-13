@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <option value="Agribank">Ngân hàng Agribank</option>
                         </select>
                         <div id="qr-codes" style="margin-top: 10px;">
-                            <img id="mb-qr" src="../images/mb-qr.png" alt="QR MB" style="display: none; width: 200px;">
+                            <img id="mb-qr" src="../images/image.png" alt="QR MB" style="display: none; width: 200px;">
                             <img id="vcb-qr" src="../images/vcb-qr.png" alt="QR VCB" style="display: none; width: 200px;">
                             <img id="agr-qr" src="../images/agr-qr.png" alt="QR Agribank" style="display: none; width: 200px;">
                         </div>
