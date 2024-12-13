@@ -65,9 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Lưu từng sản phẩm vào bảng orders và cập nhật kho
             foreach ($cartItems as $item) {
-                $stmt = $pdo->prepare("INSERT INTO orders (user_name, phone, address, product_id, product_name, price, quantity, payment_method, shipping_method, bank, total_price, shipping_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt = $pdo->prepare("INSERT INTO orders (user_id, user_name, phone, address, product_id, product_name, price, quantity, payment_method, shipping_method, bank, total_price, shipping_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->execute([
-                    $name, $phone, $address, $item['product_id'], $item['product_name'], $item['price'], $item['quantity'],
+                    $user_id, $name, $phone, $address, $item['product_id'], $item['product_name'], $item['price'], $item['quantity'],
                     $payment_method, $shipping_method, $bank, $total_price, $shipping_cost
                 ]);
 
