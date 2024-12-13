@@ -40,6 +40,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,33 +49,46 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <?php include 'header.php'; ?>
     <main>
-        <table>
-            <tr>
-                <td valign="top">
+        <section>
+            <div class="infomation_product">
+                <div class="main-image">
+                    <img id='main-product-image' src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="300"><br><br>
+
+                    <!-- Ảnh chính trong thumbnail -->
+                    <img id='thumbnail-image' src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Ảnh chính" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
+
+                    <!-- Ảnh phụ -->
+                    <?php foreach ($productImages as $img): ?>
+                        <img src="uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="Ảnh phụ" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="infomation">
                     <h1><?php echo htmlspecialchars($product['name']); ?></h1>
+                    <div class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?> </div>
                     <p><strong>Mã sản phẩm:</strong> <?php echo htmlspecialchars($product['product_code']); ?></p>
                     <p><strong>Mô tả:</strong> <?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
-                    <p><strong>Giá:</strong> <?php echo number_format($product['price'], 0, ',', '.'); ?> VND</p>
 
                     <!-- Chọn kích thước: radio button -->
                     <p><strong>Kích thước:</strong></p>
                     <form action="cart/add_to_cart.php" method="POST">
                         <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                        
+
                         <?php foreach ($sizeOptions as $opt): ?>
-                            <label style="display:inline-block; margin-right:10px; border:1px solid #ccc; padding:5px;">
+                            <label id='size' style="display:inline-block; margin-right:10px;margin-bottom:10px; border:1px solid #ccc; padding:5px;">
                                 <input type="radio" name="selected_size" value="<?php echo htmlspecialchars($opt['value']); ?>">
                                 <?php echo htmlspecialchars($opt['label']); ?>
                             </label>
                         <?php endforeach; ?>
-                        
+
                         <br><br>
-                        <label>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
+                        <label id='quantity'>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
                         <br><br>
-                        
+
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <button type="submit" name="add_to_cart">Thêm vào giỏ hàng</button>
                         <?php else: ?>
@@ -84,48 +98,43 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         <?php endif; ?>
                     </form>
-                </td>
-
-                <td valign="top" style="padding-left:20px;">
-                    <!-- Khu vực hình ảnh -->
-                    <img id="main-product-image" src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="300"><br><br>
-
-                    <!-- Ảnh chính trong thumbnail -->
-                    <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Ảnh chính" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
-
-                    <!-- Ảnh phụ -->
-                    <?php foreach ($productImages as $img): ?>
-                        <img src="uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="Ảnh phụ" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
-                    <?php endforeach; ?>
-                </td>
-            </tr>
-        </table>
-
-        <h2>Sản phẩm liên quan</h2>
-        <?php foreach ($related_products as $related): ?>
-            <div style="display:inline-block; margin:10px;">
-                <a href="product_detail.php?id=<?php echo $related['id']; ?>">
-                    <img src="uploads/<?php echo htmlspecialchars($related['image']); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>" width="100">
-                    <h3><?php echo htmlspecialchars($related['name']); ?></h3>
-                    <?php if ($related['sale_percentage'] > 0): ?>
-                        <span>Giảm <?php echo htmlspecialchars($related['sale_percentage']); ?>%</span><br>
-                        <?php
-                            $sale_price = $related['price'] * (1 - $related['sale_percentage'] / 100);
-                            echo "₫" . number_format($sale_price, 0, ',', '.');
-                        ?>
-                    <?php else: ?>
-                        ₫<?php echo number_format($related['price'], 0, ',', '.'); ?>
-                    <?php endif; ?>
-                </a>
+                </div>
             </div>
-        <?php endforeach; ?>
+        </section>
+
+        <section class="relate">
+            <div class="related-products">
+                <h2>Sản phẩm liên quan</h2>
+                <div class="related-products-container">
+                    <?php foreach ($related_products as $related): ?>
+                        <div class="product-card">
+                            <a href="product_detail.php?id=<?php echo $related['id']; ?>">
+                                <img src="uploads/<?php echo htmlspecialchars($related['image']); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">
+                                <h3><?php echo htmlspecialchars($related['name']); ?></h3>
+                                <?php if ($related['sale_percentage'] > 0): ?>
+                                    <span class="sale-percentage">Giảm <?php echo htmlspecialchars($related['sale_percentage']); ?>%</span>
+                                    <p class="price-sale">
+                                        ₫<?php
+                                            $sale_price = $related['price'] * (1 - $related['sale_percentage'] / 100);
+                                            echo number_format($sale_price, 0, ',', '.'); ?>
+                                    </p>
+                                <?php else: ?>
+                                    <p class="price">₫<?php echo number_format($related['price'], 0, ',', '.'); ?></p>
+                                <?php endif; ?>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
     </main>
     <?php include 'footer.php'; ?>
 
     <script>
-    function changeMainImage(src) {
-        document.getElementById('main-product-image').src = src;
-    }
+        function changeMainImage(src) {
+            document.getElementById('main-product-image').src = src;
+        }
     </script>
 </body>
+
 </html>

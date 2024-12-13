@@ -9,6 +9,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +18,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="./css/index.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <?php include 'header.php'; ?>
     <main>
@@ -29,19 +31,17 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                             <?php if ($product['sale_percentage'] > 0): ?>
-                                <span class="sale-percentage">Giảm <?php echo htmlspecialchars($product['sale_percentage']); ?>%</span>
-                                <p class="price-sale">
+                                <div class="price-sale">
                                     ₫<?php
                                         $sale_price = $product['price'] * (1 - $product['sale_percentage'] / 100);
-                                        echo number_format($sale_price, 0, ',', '.'); ?>
-                                </p>
+                                        echo number_format($sale_price, 0, ',', '.'); ?> <span class="sale-percentage">-<?php echo htmlspecialchars($product['sale_percentage']); ?>%</span>
+                                </div>
                             <?php else: ?>
                                 <p class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?></p>
                             <?php endif; ?>
 
                             <!-- Hiển thị số lượng đã bán -->
-                            <p class="sold-quantity">Đã bán: <?php echo number_format($product['sold_quantity'], 0, ',', '.'); ?></p>
-
+                            <div class="sold-quantity">Đã bán: <?php echo number_format($product['sold_quantity'], 0, ',', '.'); ?></div>
                         </a>
                     </div>
                 <?php endforeach; ?>
@@ -50,4 +50,5 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </main>
     <?php include 'footer.php'; ?>
 </body>
+
 </html>
