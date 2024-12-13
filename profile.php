@@ -10,8 +10,15 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Lấy thông tin người dùng từ cơ sở dữ liệu
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+// Lấy thông tin người dùng từ bảng users và user_profiles
+$stmt = $pdo->prepare(
+    "SELECT users.username, users.email, users.created_at,
+            user_profiles.gender, user_profiles.birthdate, 
+            user_profiles.phone, user_profiles.address 
+     FROM users 
+     LEFT JOIN user_profiles ON users.id = user_profiles.user_id 
+     WHERE users.id = ?"
+);
 $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -39,6 +46,10 @@ if (!$user) {
             <h1>Hồ sơ của bạn</h1>
             <div class="profile-info">
                 <p><strong>Tên người dùng:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
+                <p><strong>Giới tính:</strong> <?php echo htmlspecialchars($user['gender'] ?: 'Chưa cập nhật'); ?></p>
+                <p><strong>Ngày sinh:</strong> <?php echo htmlspecialchars($user['birthdate'] ?: 'Chưa cập nhật'); ?></p>
+                <p><strong>Số điện thoại:</strong> <?php echo htmlspecialchars($user['phone'] ?: 'Chưa cập nhật'); ?></p>
+                <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($user['address'] ?: 'Chưa cập nhật'); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
                 <p><strong>Ngày đăng ký:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
             </div>

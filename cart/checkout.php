@@ -148,7 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <option value="">-- Chọn phương thức --</option>
                             <option value="COD">Thanh toán khi nhận hàng (COD)</option>
                             <option value="bank_transfer">Chuyển khoản ngân hàng</option>
-                            <option value="credit_card">Thẻ tín dụng</option>
                         </select>
                     </div>
                     <div class="form-group" id="bank-selection" style="display: none;">
