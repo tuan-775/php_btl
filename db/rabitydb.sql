@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2024 at 04:12 PM
+-- Generation Time: Dec 13, 2024 at 07:27 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,14 +63,14 @@ CREATE TABLE `orders` (
   `payment_method` varchar(20) NOT NULL,
   `shipping_method` varchar(50) DEFAULT NULL,
   `shipping_cost` float DEFAULT NULL,
-  `bank_name` varchar(255) DEFAULT NULL
+  `bank` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_name`, `phone`, `address`, `product_id`, `product_name`, `price`, `quantity`, `total_price`, `created_at`, `payment_method`, `shipping_method`, `shipping_cost`, `bank_name`) VALUES
+INSERT INTO `orders` (`id`, `user_name`, `phone`, `address`, `product_id`, `product_name`, `price`, `quantity`, `total_price`, `created_at`, `payment_method`, `shipping_method`, `shipping_cost`, `bank`) VALUES
 (1, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, NULL, '2024-11-24 16:51:38', '', NULL, NULL, NULL),
 (2, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 5, 'Đồ bộ thun tăm dài tay bé gái Rabity', 99999999.99, 1, NULL, '2024-11-24 17:55:23', '', NULL, NULL, NULL),
 (3, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-11-24 17:55:59', '', NULL, NULL, NULL),
@@ -114,7 +114,17 @@ INSERT INTO `orders` (`id`, `user_name`, `phone`, `address`, `product_id`, `prod
 (41, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-12-10 07:15:58', 'Bank Transfer', 'Standard', 20000, 'Vietcombank'),
 (42, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-11 17:55:07', '', NULL, NULL, NULL),
 (43, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-12 10:08:46', '', NULL, NULL, NULL),
-(44, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 14:48:52', '', NULL, NULL, NULL);
+(44, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 14:48:52', '', NULL, NULL, NULL),
+(45, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 5, NULL, '2024-12-12 15:44:05', '', NULL, NULL, NULL),
+(46, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 15:48:39', '', NULL, NULL, NULL),
+(47, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-13 05:44:36', 'bank_transfer', 'express', NULL, 'MB'),
+(48, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 150000.00, '2024-12-13 05:59:26', 'bank_transfer', 'express', 50000, 'MB'),
+(49, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:06:42', 'bank_transfer', 'standard', 30000, 'MB'),
+(50, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:08:24', 'bank_transfer', 'standard', 30000, 'VCB'),
+(51, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:12:34', 'bank_transfer', 'standard', 30000, 'VCB'),
+(52, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:13:12', 'bank_transfer', 'standard', 30000, 'MB'),
+(53, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 2, 250000.00, '2024-12-13 06:23:24', 'bank_transfer', 'express', 50000, 'MB'),
+(54, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:25:50', 'bank_transfer', 'standard', 30000, 'VCB');
 
 -- --------------------------------------------------------
 
@@ -135,23 +145,24 @@ CREATE TABLE `products` (
   `sale_percentage` int(11) DEFAULT 0,
   `stock` int(11) DEFAULT 50,
   `cost_price` decimal(10,2) DEFAULT NULL,
-  `sale_price` decimal(10,2) DEFAULT NULL
+  `sale_price` decimal(10,2) DEFAULT NULL,
+  `sold_quantity` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_code`, `category`, `category_name`, `name`, `image`, `description`, `price`, `created_at`, `sale_percentage`, `stock`, `cost_price`, `sale_price`) VALUES
-(1, '001', 'Bé trai,BST Đồ Bộ Mặc Nhà', 'Áo', 'Áo thun tay dài', 'Screenshot 2024-12-12 211557.png', 'Nội dung đang được cập nhật', 100000.00, '2024-11-24 14:56:38', 10, 49, 10000.00, NULL),
-(2, '002', 'Bé trai', 'Đồ bộ', 'Bộ đồ thun ngắn tay', '../uploads/Screenshot 2024-11-23 182601.png', 'Mô tả sản phẩm\r\nĐồ bộ thun bé trai sẽ là outfits tiện lợi cho mẹ và bé, với kiểu dáng áo thun, quần short cá tính, năng động giúp bé thoải mái vận động. Với những mẫu đồ bộ tính dụng cao bé có thể mặc mặc ở nhà, đi học, đi chơi,... \r\n\r\n1. Thông tin Bộ thun ngắn tay Mickey bé trai Rabity 560.001\r\n- Chất liệu 95% vải cotton và 5% spandex thoáng mát, co giãn và an toàn cho làn da của bé\r\n\r\n- Loại sản phẩm: Đồ bộ bé trai\r\n\r\n- Phù hợp với bé trai cân nặng từ 11-21kg, từ 2-6 tuổi\r\n\r\n- Bộ thun ngắn tay in hình Mickey bản quyền Disney, hình in sắc nét và màu sắc hài hòa\r\n\r\n \r\n\r\n2. Thông tin chi tiết Bộ thun ngắn tay Mickey bé trai Rabity 560.001\r\nBộ thun ngắn tay bé trai form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.', 120000.00, '2024-11-24 15:11:40', 0, 50, NULL, NULL),
-(3, '003', 'Bé gái', 'Đầm váy', 'Đầm váy thô cổ sen ngắn tay bé gái', '../uploads/Screenshot 2024-11-23 183607.png', 'Đầm váy thô cổ sen ngắn tay bé gái Rabity 93113\r\n1. Thông tin Đầm váy thô cổ sen ngắn tay bé gái Rabity 93113\r\n- Chất liệu 100% thoáng mát, mềm mịn dễ chịu\r\n\r\n- Loại sản phẩm: Đầm váy bé gái\r\n\r\n- Phù hợp với bé gái cân nặng từ 11-30kg, từ 2-10 tuổi\r\n\r\n- Đầm thô ngắn tay họa tiết hoa đáng yêu, màu sắc nổi bật, thời trang cho bé diện thật nổi bật.', 1500000.00, '2024-11-24 15:13:08', 50, 50, NULL, NULL),
-(4, '004', 'Bé gái', 'Áo', 'Chia sẻ Áo thun ngắn tay bé gái', '../uploads/Screenshot 2024-11-24 221346.png', 'Áo thun là một outfits tiện lợi cho mẹ và bé, với kiểu dáng áo thun cá tính, năng động sẽ giúp bé thoải mái vận động. Ba mẹ có thể phối cho bé áo thun với những quần khác nhau như quần nỉ, quần dài, quần thun,... cho bé mặc nhiều dịp đi học, đi chơi, đi học, đi tiệc,...\r\n\r\n1. Đặc điểm nổi bật Áo thun ngắn tay bé gái 900.076\r\n- Chất liệu 100% vải cotton xước thông thoáng, mát mẻ và an toàn cho làn da của bé Cotton\r\n\r\n- Loại sản phẩm: Áo bé gái, Áo thun bé gái\r\n\r\n- Phù hợp với bé gái cân nặng từ 11 - 35kg, từ 2 - 12 tuổi\r\n\r\n- Áo thun ngắn tay in hình trái dưa hấu dễ thương, năng động và sắc nét.\r\n\r\n2. Thông tin chi tiết Áo thun ngắn tay bé gái 900.076\r\nÁo thun ngắn tay bé gái form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.', 1510325.00, '2024-11-24 15:14:17', 0, 49, NULL, NULL),
-(5, '005', 'Bé gái', 'Đồ bộ', 'Đồ bộ thun tăm dài tay bé gái Rabity', '../uploads/Screenshot 2024-11-24 221446.png', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất thun tăm được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.\r\n\r\n1. Đặc điểm nổi bật Đồ bộ thun tăm dài tay bé gái Rabity 961.001\r\nChất liệu: Với thiết kế 100% vải cotton nhẹ thoáng, êm mịn và an toàn cho làn da bé.\r\nĐộ tuổi, cân nặng: phù hợp cho bé từ 2 - 6 tuổi, từ 11-21kg.\r\nLoại sản phẩm: Đồ bộ bé gái, đồ bộ dài tay bé gái.\r\nÁo tay dài quần dài, họa tiết bông hoa nhỏ xinh xắn.\r\n2. Thông tin chi tiết Đồ bộ thun tăm dài tay bé gái Rabity 961.001\r\nBộ thun tăm dài tay bé gái kiểu dáng điệu đà, màu sắc hồng nhạt, vàng nhạt dịu dàng cho các bé gái. Sản phẩm thích hợp cho bé mặc trong mùa thu đông hoặc khi thời tiết lạnh, mang đến cảm giác ấm áp và thoải mái khi mặc.', 99999999.99, '2024-11-24 15:15:08', 0, 50, NULL, NULL),
-(6, '006', 'Bé trai', 'Phụ kiện', 'Mũ lưỡi trai bé trai', '../uploads/Screenshot 2024-11-24 221544.png', 'Freesize', 99999999.99, '2024-11-24 15:16:11', 0, 49, NULL, NULL),
-(7, '007', 'Bé gái', 'Áo', 'Áo thun dài tay bé gái Rabity', '../uploads/Screenshot 2024-11-26 125423.png', 'Nội dung đang được cập nhật', 123123.00, '2024-11-26 05:54:53', 0, 50, NULL, NULL),
-(9, '011', 'Bé trai', 'Quần', 'quần', 'Screenshot 2024-11-23 000410.png', '2ewrgthgth', 100000.00, '2024-12-05 07:06:40', 10, 44, 10000.00, NULL),
-(10, '014', 'Bé gái,BST Thu Đông', 'Đồ bộ', 'Quần nỉ dài bé trai', 'Screenshot 2024-12-05 171612.png', 'Quần nỉ là sự kết hợp hoàn hảo giữa phong cách năng động và tiện dụng. Quần nỉ không chỉ phù hợp cho những buổi dạo phố, mà còn là lựa chọn lý tưởng cho các bé khi tham gia các hoạt động ngoại khóa, vui chơi thể thao. Hơn nữa, với kiểu dáng thời trang và màu sắc phong phú, quần nỉ chắc chắn sẽ giúp các bé tự tin và nổi bật trong mọi hoàn cảnh\r\n\r\n1. Đặc điểm nổi bật Quần nỉ dài bé trai \r\nNhóm sản phẩm: Quần bé trai; Quần dài bé trai\r\nChất liệu: 95% cotton 5% spandex an toàn và thoáng mát cho da của bé\r\nSize: Phù hợp với bé trai cân nặng từ 14 - 35kg, từ 4 - 12 tuổi\r\n \r\n\r\n2. Chất liệu Quần nỉ dài bé trai \r\nQuần dài bé trai form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.\r\n\r\n', 100000.00, '2024-12-05 10:17:27', 5, 14, 10000.00, NULL);
+INSERT INTO `products` (`id`, `product_code`, `category`, `category_name`, `name`, `image`, `description`, `price`, `created_at`, `sale_percentage`, `stock`, `cost_price`, `sale_price`, `sold_quantity`) VALUES
+(1, '001', 'Bé trai,BST Đồ Bộ Mặc Nhà', 'Áo', 'Áo thun tay dài', 'Screenshot 2024-12-12 211557.png', 'Nội dung đang được cập nhật', 100000.00, '2024-11-24 14:56:38', -10, 34, 10000.00, NULL, 15),
+(2, '002', 'Bé trai', 'Đồ bộ', 'Bộ đồ thun ngắn tay', '../uploads/Screenshot 2024-11-23 182601.png', 'Mô tả sản phẩm\r\nĐồ bộ thun bé trai sẽ là outfits tiện lợi cho mẹ và bé, với kiểu dáng áo thun, quần short cá tính, năng động giúp bé thoải mái vận động. Với những mẫu đồ bộ tính dụng cao bé có thể mặc mặc ở nhà, đi học, đi chơi,... \r\n\r\n1. Thông tin Bộ thun ngắn tay Mickey bé trai Rabity 560.001\r\n- Chất liệu 95% vải cotton và 5% spandex thoáng mát, co giãn và an toàn cho làn da của bé\r\n\r\n- Loại sản phẩm: Đồ bộ bé trai\r\n\r\n- Phù hợp với bé trai cân nặng từ 11-21kg, từ 2-6 tuổi\r\n\r\n- Bộ thun ngắn tay in hình Mickey bản quyền Disney, hình in sắc nét và màu sắc hài hòa\r\n\r\n \r\n\r\n2. Thông tin chi tiết Bộ thun ngắn tay Mickey bé trai Rabity 560.001\r\nBộ thun ngắn tay bé trai form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.', 120000.00, '2024-11-24 15:11:40', 0, 50, NULL, NULL, 0),
+(3, '003', 'Bé gái', 'Đầm váy', 'Đầm váy thô cổ sen ngắn tay bé gái', '../uploads/Screenshot 2024-11-23 183607.png', 'Đầm váy thô cổ sen ngắn tay bé gái Rabity 93113\r\n1. Thông tin Đầm váy thô cổ sen ngắn tay bé gái Rabity 93113\r\n- Chất liệu 100% thoáng mát, mềm mịn dễ chịu\r\n\r\n- Loại sản phẩm: Đầm váy bé gái\r\n\r\n- Phù hợp với bé gái cân nặng từ 11-30kg, từ 2-10 tuổi\r\n\r\n- Đầm thô ngắn tay họa tiết hoa đáng yêu, màu sắc nổi bật, thời trang cho bé diện thật nổi bật.', 1500000.00, '2024-11-24 15:13:08', 50, 50, NULL, NULL, 0),
+(4, '004', 'Bé gái', 'Áo', 'Chia sẻ Áo thun ngắn tay bé gái', '../uploads/Screenshot 2024-11-24 221346.png', 'Áo thun là một outfits tiện lợi cho mẹ và bé, với kiểu dáng áo thun cá tính, năng động sẽ giúp bé thoải mái vận động. Ba mẹ có thể phối cho bé áo thun với những quần khác nhau như quần nỉ, quần dài, quần thun,... cho bé mặc nhiều dịp đi học, đi chơi, đi học, đi tiệc,...\r\n\r\n1. Đặc điểm nổi bật Áo thun ngắn tay bé gái 900.076\r\n- Chất liệu 100% vải cotton xước thông thoáng, mát mẻ và an toàn cho làn da của bé Cotton\r\n\r\n- Loại sản phẩm: Áo bé gái, Áo thun bé gái\r\n\r\n- Phù hợp với bé gái cân nặng từ 11 - 35kg, từ 2 - 12 tuổi\r\n\r\n- Áo thun ngắn tay in hình trái dưa hấu dễ thương, năng động và sắc nét.\r\n\r\n2. Thông tin chi tiết Áo thun ngắn tay bé gái 900.076\r\nÁo thun ngắn tay bé gái form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.', 1510325.00, '2024-11-24 15:14:17', 0, 49, NULL, NULL, 0),
+(5, '005', 'Bé gái', 'Đồ bộ', 'Đồ bộ thun tăm dài tay bé gái Rabity', '../uploads/Screenshot 2024-11-24 221446.png', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất thun tăm được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.\r\n\r\n1. Đặc điểm nổi bật Đồ bộ thun tăm dài tay bé gái Rabity 961.001\r\nChất liệu: Với thiết kế 100% vải cotton nhẹ thoáng, êm mịn và an toàn cho làn da bé.\r\nĐộ tuổi, cân nặng: phù hợp cho bé từ 2 - 6 tuổi, từ 11-21kg.\r\nLoại sản phẩm: Đồ bộ bé gái, đồ bộ dài tay bé gái.\r\nÁo tay dài quần dài, họa tiết bông hoa nhỏ xinh xắn.\r\n2. Thông tin chi tiết Đồ bộ thun tăm dài tay bé gái Rabity 961.001\r\nBộ thun tăm dài tay bé gái kiểu dáng điệu đà, màu sắc hồng nhạt, vàng nhạt dịu dàng cho các bé gái. Sản phẩm thích hợp cho bé mặc trong mùa thu đông hoặc khi thời tiết lạnh, mang đến cảm giác ấm áp và thoải mái khi mặc.', 99999999.99, '2024-11-24 15:15:08', 0, 50, NULL, NULL, 0),
+(6, '006', 'Bé trai', 'Phụ kiện', 'Mũ lưỡi trai bé trai', '../uploads/Screenshot 2024-11-24 221544.png', 'Freesize', 99999999.99, '2024-11-24 15:16:11', 0, 49, NULL, NULL, 0),
+(7, '007', 'Bé gái', 'Áo', 'Áo thun dài tay bé gái Rabity', '../uploads/Screenshot 2024-11-26 125423.png', 'Nội dung đang được cập nhật', 123123.00, '2024-11-26 05:54:53', 0, 50, NULL, NULL, 0),
+(9, '011', 'Bé trai', 'Quần', 'quần', 'Screenshot 2024-11-23 000410.png', '2ewrgthgth', 100000.00, '2024-12-05 07:06:40', 10, 44, 10000.00, NULL, 0),
+(10, '014', 'Bé gái,BST Thu Đông', 'Đồ bộ', 'Quần nỉ dài bé trai', 'Screenshot 2024-12-05 171612.png', 'Quần nỉ là sự kết hợp hoàn hảo giữa phong cách năng động và tiện dụng. Quần nỉ không chỉ phù hợp cho những buổi dạo phố, mà còn là lựa chọn lý tưởng cho các bé khi tham gia các hoạt động ngoại khóa, vui chơi thể thao. Hơn nữa, với kiểu dáng thời trang và màu sắc phong phú, quần nỉ chắc chắn sẽ giúp các bé tự tin và nổi bật trong mọi hoàn cảnh\r\n\r\n1. Đặc điểm nổi bật Quần nỉ dài bé trai \r\nNhóm sản phẩm: Quần bé trai; Quần dài bé trai\r\nChất liệu: 95% cotton 5% spandex an toàn và thoáng mát cho da của bé\r\nSize: Phù hợp với bé trai cân nặng từ 14 - 35kg, từ 4 - 12 tuổi\r\n \r\n\r\n2. Chất liệu Quần nỉ dài bé trai \r\nQuần dài bé trai form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.\r\n\r\n', 100000.00, '2024-12-05 10:17:27', 5, 14, 10000.00, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -264,13 +275,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `products`
