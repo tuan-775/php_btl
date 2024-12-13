@@ -77,13 +77,13 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <td align="center"><?php echo htmlspecialchars($item['name']); ?></td>
                                 <td align="center"><?php echo htmlspecialchars($item['size']); ?></td>
                                 <td align="center"><?php echo $item['quantity']; ?></td>
-                                <td align="center"><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
+                                <td align="center"><?php echo number_format($item['price'], 0, ',', '.'); ?> </td>
                                 <td align="center">
                                     <?php echo $item['sale_percentage'] > 0
                                         ? number_format($sale_price, 0, ',', '.') . ' VND'
                                         : '---'; ?>
                                 </td>
-                                <td align="center"><?php echo number_format($subtotal, 0, ',', '.'); ?> VND</td>
+                                <td align="center"><?php echo number_format($subtotal, 0, ',', '.'); ?> </td>
                                 <td align="center">
                                     <!-- Xóa sản phẩm khỏi giỏ hàng (thêm size vào GET nếu cần) -->
                                     <a href="remove_from_cart.php?id=<?php echo $item['product_id']; ?>&size=<?php echo urlencode($item['size']); ?>" class="btn-remove">Xóa</a>
@@ -93,7 +93,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tbody>
                 </table>
                 <div class="cart-total">
-                    <p><strong>Tổng cộng:</strong> <?php echo number_format($total, 0, ',', '.'); ?> VND</p>
+                    <p><strong>Tổng cộng:</strong> <?php echo number_format($total, 0, ',', '.'); ?> </p>
                     <a href="checkout.php" class="btn-checkout">Tiến hành thanh toán</a>
                 </div>
             <?php endif; ?>
