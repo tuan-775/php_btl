@@ -12,7 +12,6 @@
     height: 100px;
 }
 
-/* Thanh trên cùng (header-top) */
 .header-top {
     display: flex;
     width: 100%;
@@ -21,12 +20,10 @@
     gap: 10px;
 }
 
-/* Logo */
 .logo img {
     max-height: 80px;
 }
 
-/* Thanh tìm kiếm */
 .search-bar {
     display: flex;
     align-items: center;
@@ -65,14 +62,12 @@
     font-size: 18px;
 }
 
-/* Các icon bên phải */
 .header-icons {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* Phần Xin chào */
 .user-welcome {
     position: relative;
     display: inline-block;
@@ -112,7 +107,6 @@
     color: #e63946;
 }
 
-/* Dropdown Menu cho Đăng nhập/Đăng ký */
 .user-icon {
     position: relative;
     font-size: 24px;
@@ -120,7 +114,6 @@
     cursor: pointer;
 }
 
-/* Menu hiển thị */
 .user-icon .dropdown-menu {
     position: absolute;
     top: 25px;
@@ -137,7 +130,6 @@
     min-width: 120px;
 }
 
-/* Khi hover vào icon hoặc menu thì hiển thị menu */
 .user-icon {
     position: relative;
     display: inline-block;

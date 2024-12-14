@@ -22,6 +22,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include 'header.php'; ?>
     <main>
+        <?php include 'banner.php' ?>
         <!-- Danh sách sản phẩm -->
         <div class="product">
             <div class="product-container">

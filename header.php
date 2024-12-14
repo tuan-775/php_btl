@@ -50,7 +50,6 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
             <!-- Logo -->
             <div class="logo">
                 <a href="./index.php">
-                    <!-- <img src="/BTL_PHP/logo.png" alt="Rabity Logo"> -->
                     <img src="./logo.png" />
                 </a>
             </div>
@@ -96,9 +95,9 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 <?php endif; ?>
                 <div class="icon cart-icon">
-                    <a href="./cart/cart.php">
+                    <a href="/php_btl/cart/cart.php">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count"><?php echo $cart_count; ?></span>
+                        <span class="cart-count"><?php echo isset($cart_count) ? $cart_count : 0; ?></span>
                     </a>
                 </div>
             </div>

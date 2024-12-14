@@ -1,0 +1,72 @@
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* font-family: 'Montserrat', sans-serif; */
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+/* Main Content Styles */
+main {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Style */
+a.menu-btn,
+a.back-btn {
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    transition: background-color 0.3s ease;
+    font-family: monospace;
+}
+
+a.menu-btn:hover,
+a.back-btn:hover {
+    background-color: #0056b3;
+
+}
+
+/* Back Button Styles */
+a.back-btn {
+    background-color: #6c757d;
+}
+
+a.back-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Additional Styles */
+div {
+    margin-bottom: 20px;
+}
