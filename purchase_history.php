@@ -29,7 +29,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch sử mua hàng</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/purchase_history.css">
 </head>
 
 <body>
@@ -70,7 +70,9 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </table>
             <?php endif; ?>
 
-            <a href="index.php" class="back-btn">Quay lại Trang chủ</a>
+            <div class="btn-backhome">
+                <a href="index.php" class="back-btn">Quay lại Trang chủ</a>
+            </div>
         </div>
     </main>
 

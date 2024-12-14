@@ -12,8 +12,8 @@ $user_id = $_SESSION['user_id'];
 
 // Lấy thông tin người dùng từ bảng users và user_profiles
 $stmt = $pdo->prepare(
-    "SELECT users.username, users.email, users.created_at,
-            user_profiles.gender, user_profiles.birthdate, 
+    "SELECT users.fullname, users.username, users.email, users.created_at,
+            users.gender, user_profiles.birthdate, 
             user_profiles.phone, user_profiles.address 
      FROM users 
      LEFT JOIN user_profiles ON users.id = user_profiles.user_id 
@@ -45,8 +45,9 @@ if (!$user) {
         <div class="profile-container">
             <h1>Hồ sơ của bạn</h1>
             <div class="profile-info">
+                <p><strong>Họ và tên:</strong> <?php echo htmlspecialchars($user['fullname']); ?></p>
                 <p><strong>Tên người dùng:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
-                <p><strong>Giới tính:</strong> <?php echo htmlspecialchars($user['gender'] ?: 'Chưa cập nhật'); ?></p>
+                <p><strong>Giới tính:</strong> <?php echo htmlspecialchars($user['gender']); ?></p>
                 <p><strong>Ngày sinh:</strong> <?php echo htmlspecialchars($user['birthdate'] ?: 'Chưa cập nhật'); ?></p>
                 <p><strong>Số điện thoại:</strong> <?php echo htmlspecialchars($user['phone'] ?: 'Chưa cập nhật'); ?></p>
                 <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($user['address'] ?: 'Chưa cập nhật'); ?></p>
