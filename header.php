@@ -67,19 +67,21 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                     <?php if ($_SESSION['role'] === 'admin'): ?>
                         <!-- Menu cho Admin -->
                         <div class="user-welcome">
-                            Quản trị, <?php echo htmlspecialchars($_SESSION['username']); ?>!
+                            AD-<?php echo htmlspecialchars($_SESSION['username']); ?>!
                             <div class="dropdown-menu">
                                 <a href="./admin/dashboard.php">Quản trị</a>
+                                <a href="./change_password.php">Đổi mật khẩu</a>
                                 <a href="./login/logout.php">Đăng xuất</a>
                             </div>
                         </div>
                     <?php else: ?>
                         <!-- Menu cho Người dùng -->
                         <div class="user-welcome">
-                            Xin chào, <?php echo htmlspecialchars($_SESSION['username']); ?>!
+                            <?php echo htmlspecialchars($_SESSION['username']); ?>!
                             <div class="dropdown-menu">
                                 <a href="./profile.php">Hồ sơ</a>
                                 <a href="./purchase_history.php">Lịch sử mua hàng</a>
+                                <a href="./change_password.php">Đổi mật khẩu</a>
                                 <a href="./login/logout.php">Đăng xuất</a>
                             </div>
                         </div>
@@ -97,7 +99,7 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                 <div class="icon cart-icon">
                     <a href="/php_btl/cart/cart.php">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count"><?php echo isset($cart_count) ? $cart_count : 0; ?></span>
+                        <span class="cart-count"><?php echo $cart_count; ?></span>
                     </a>
                 </div>
             </div>

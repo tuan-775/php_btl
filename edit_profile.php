@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa hồ sơ</title>
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="./css/edit_profile.css">
 </head>
 
 <body>
@@ -110,12 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-
-                <label for="password">Mật khẩu mới (nếu muốn thay đổi):</label>
-                <input type="password" id="password" name="password" placeholder="Để trống nếu không muốn thay đổi">
-
-                <label for="confirm_password">Nhập lại mật khẩu:</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Nhập lại mật khẩu mới">
 
                 <label for="gender">Giới tính:</label>
                 <select id="gender" name="gender">

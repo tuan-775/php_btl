@@ -12,13 +12,14 @@ html {
 
 .main {
     background: #f1f1f1;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
 }
 
 .form {
     width: 360px;
+    min-height: 100px;
     padding: 32px 24px;
     text-align: center;
     background: #fff;
@@ -105,12 +106,63 @@ html {
     background-color: #1ac7b6;
 }
 
+.form-group_sex {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: medium;
+}
+
 .spacer {
     margin-top: 36px;
 }
 
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-control {
+    margin-right: 10px;
+}
+
+.form-group div {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.form-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.form-group input[type="radio"]:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+input[type="radio"] {
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+    accent-color: #007bff;
+}
+
+input[type="radio"]:checked {
+    background-color: #007bff;
+}
+
 .popup {
-    display: flex;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -122,52 +174,40 @@ html {
     align-items: center;
 }
 
+/* Nội dung của Popup */
 .popup-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
+    width: 50%;
     text-align: center;
-    width: 90%;
-    max-width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.popup-content h2 {
-    font-size: 22px;
-    color: #e74c3c;
-    margin-bottom: 10px;
-}
-
-.popup-content p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.popup-content .close-btn {
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.popup-content .close-btn:hover {
-    background-color: #c0392b;
-}
-
+/* Đóng Popup */
 .popup-close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
     position: absolute;
     top: 10px;
-    right: 15px;
-    font-size: 24px;
-    color: #aaa;
+    right: 10px;
+}
+
+.popup-close:hover,
+.popup-close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.popup-close:hover {
+/* Thông báo */
+#popup-message {
+    font-size: 18px;
     color: #333;
+}
+
+#popup-message a {
+    color: #007bff;
+    text-decoration: none;
 }

@@ -14,18 +14,14 @@ body {
 
 /* Đặt lại cấu trúc main */
 main {
-    /* flex: 1; */
-    /* Chiếm không gian còn lại giữa header và footer */
     padding: 20px;
     background-color: #fff;
     margin: 20px auto;
-    /* Căn giữa nội dung */
     width: 90%;
     max-width: 1200px;
-    /* Đảm bảo chiều rộng tối đa */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    margin-top: 130px;
+    margin-top: 120px;
 }
 
 

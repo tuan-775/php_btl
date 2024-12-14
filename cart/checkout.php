@@ -67,8 +67,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($cartItems as $item) {
                 $stmt = $pdo->prepare("INSERT INTO orders (user_id, user_name, phone, address, product_id, product_name, price, quantity, payment_method, shipping_method, bank, total_price, shipping_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->execute([
-                    $user_id, $name, $phone, $address, $item['product_id'], $item['product_name'], $item['price'], $item['quantity'],
-                    $payment_method, $shipping_method, $bank, $total_price, $shipping_cost
+                    $user_id,
+                    $name,
+                    $phone,
+                    $address,
+                    $item['product_id'],
+                    $item['product_name'],
+                    $item['price'],
+                    $item['quantity'],
+                    $payment_method,
+                    $shipping_method,
+                    $bank,
+                    $total_price,
+                    $shipping_cost
                 ]);
 
                 // Cập nhật số lượng tồn kho và số lượng đã bán
@@ -108,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/checkout.css">
 </head>
 
 <body>
@@ -126,9 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="../index.php" class="btn-back-to-shop">Quay lại mua sắm</a>
         <?php else: ?>
             <div class="checkout-container">
-                <div class="order-summary">
-                    <h2 id="total-price-display">Tổng tiền: <?php echo number_format($total, 0, ',', '.'); ?> VND</h2>
-                </div>
+                <h2 align='center'>Thanh toán </h2>
                 <form method="POST" class="checkout-form">
                     <div class="form-group">
                         <label for="name">Họ và tên:</label>
@@ -159,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <option value="Agribank">Ngân hàng Agribank</option>
                         </select>
                         <div id="qr-codes" style="margin-top: 10px;">
-                            <img id="mb-qr" src="../images/image.png" alt="QR MB" style="display: none; width: 200px;">
+                            <img id="mb-qr" src="../image/image.png" alt="QR MB" style="display: none; width: 200px;">
                             <img id="vcb-qr" src="../images/vcb-qr.png" alt="QR VCB" style="display: none; width: 200px;">
                             <img id="agr-qr" src="../images/agr-qr.png" alt="QR Agribank" style="display: none; width: 200px;">
                         </div>
@@ -171,6 +181,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <option value="standard" data-cost="30000">Giao hàng tiêu chuẩn - 30,000 VND</option>
                             <option value="express" data-cost="50000">Giao hàng nhanh - 50,000 VND</option>
                         </select>
+                    </div>
+                    <div class="order-summary">
+                        <h2 id="total-price-display">Tổng tiền: <?php echo number_format($total, 0, ',', '.'); ?> VND</h2>
                     </div>
                     <button type="submit" class="btn-checkout">Hoàn thành</button>
                 </form>
@@ -203,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             totalPriceDisplay.innerText = `Tổng tiền: ${finalTotal.toLocaleString('vi-VN')} VND`;
         }
 
-        document.getElementById('bank').addEventListener('change', function () {
+        document.getElementById('bank').addEventListener('change', function() {
             const qrImages = {
                 MB: document.getElementById('mb-qr'),
                 VCB: document.getElementById('vcb-qr'),

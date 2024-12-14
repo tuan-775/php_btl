@@ -1,0 +1,119 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    margin-top: 120px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Main container for order history page */
+.order-history-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.order-history-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Empty orders message */
+.order-history-container p {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+.order-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.order-history-table th,
+.order-history-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.order-history-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.order-history-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.order-history-table td {
+    font-size: 1rem;
+    color: #333;
+}
+
+.order-history-table td:last-child {
+    font-style: italic;
+}
+
+/* Back button */
+.back-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid #007BFF;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #007BFF;
+    color: white;
+    border-color: #007BFF;
+}
+
+.btn-backhome {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .order-history-container {
+        padding: 15px;
+    }
+
+    .order-history-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .order-history-table {
+        font-size: 0.9rem;
+    }
+
+    .order-history-table th,
+    .order-history-table td {
+        padding: 10px;
+    }
+
+    .back-btn {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
