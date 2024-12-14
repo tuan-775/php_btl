@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: dashboard.php?message=Product updated successfully");
+    header("Location: product_list.php?message=Product updated successfully");
     exit;
 }
 ?>

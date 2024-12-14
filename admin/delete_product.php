@@ -19,6 +19,6 @@ $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
 $stmt->execute([$id]);
 
 echo "Xóa sản phẩm thành công!";
-header("Location: dashboard.php");
+header("Location: product_list.php");
 exit;
 ?>

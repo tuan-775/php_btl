@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: dashboard.php?message=Product added successfully");
+    header("Location: productlist.php?message=Product added successfully");
     exit;
 }
 ?>
