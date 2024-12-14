@@ -29,6 +29,7 @@ require '../db.php';
         <a href="product_list.php" class="menu-btn">Danh sách sản phẩm</a>
         <a href="inventory.php" class="menu-btn">Thống kê tồn kho</a>
         <a href="revenue.php" class="menu-btn">Quản lý doanh thu</a>
+        <a href="manage_users.php" class="menu-btn">Quản lý doanh thu</a>
     </main>
 </body>
 
