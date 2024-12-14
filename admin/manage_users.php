@@ -41,15 +41,20 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý người dùng</title>
+    <link rel="stylesheet" href="./css/manage_users.css">
 </head>
+
 <body>
     <h1>Quản lý người dùng</h1>
-    <a href="dashboard.php">Quay lại trang quản lý</a>
-    <a href="add_user.php">Thêm người dùng</a>
+    <div class="func-admin">
+        <a href="dashboard.php">Quay lại trang quản lý</a>
+        <a href="add_user.php">Thêm người dùng</a>
+    </div>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -76,11 +81,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo htmlspecialchars($user['updated_at']); ?></td>
                 <td>
                     <a href="edit_user.php?id=<?php echo $user['user_id']; ?>" class="btn-edit">Sửa</a>
-                    <a href="delete_user.php?delete_user_id=<?php echo $user['user_id']; ?>" class="btn-delete" 
-                       onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">Xóa</a>
+                    <a href="delete_user.php?delete_user_id=<?php echo $user['user_id']; ?>" class="btn-delete"
+                        onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">Xóa</a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
 </body>
+
 </html>
