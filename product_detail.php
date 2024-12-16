@@ -90,7 +90,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                         <br><br>
 
                         <?php if (isset($_SESSION['user_id'])): ?>
-                            <button type="submit" name="add_to_cart">Thêm vào giỏ hàng</button>
+                            <button type="submit" id='add-to-cart' name="add_to_cart">Thêm vào giỏ hàng</button>
                         <?php else: ?>
                             <div>
                                 <i class="fas fa-exclamation-circle"></i>
