@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             banner.style.backgroundImage = `url(${bannerImages[currentIndex]})`;
             banner.style.opacity = 1;
-            slideTimeout = setTimeout(nextImage, 3000);
+            slideTimeout = setTimeout(nextImage, 5000);
         }, 1000);
     };
 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const startSlideShow = () => {
-        slideTimeout = setTimeout(nextImage, 3000);
+        slideTimeout = setTimeout(nextImage, 5000);
     };
 
     const stopSlideShow = () => {
