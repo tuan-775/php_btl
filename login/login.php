@@ -81,6 +81,7 @@ $message = isset($_GET['message']) && $_GET['message'] === 'login_required' ? "V
 
             <div class="btn-backhome">
                 <a href="../index.php">Quay lại trang chủ</a>
+                <a href="forgot_password.php">Quên mật khẩu</a>
             </div>
         </form>
 
