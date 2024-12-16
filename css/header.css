@@ -10,6 +10,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     height: 100px;
+    font-family: monospace;
 }
 
 .header-top {
@@ -25,7 +26,9 @@
 }
 
 .search-bar {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 20px;
@@ -44,6 +47,7 @@
     font-size: 14px;
     border-radius: 8px;
     margin-right: 10px;
+    margin-bottom: 0 !important;
 }
 
 .search-bar input::placeholder {
@@ -74,6 +78,7 @@
     font-size: 16px;
     color: #333;
     cursor: pointer;
+    font-family: monospace !important;
 }
 
 .user-welcome .dropdown-menu {
@@ -193,7 +198,7 @@
 
 /* Thanh menu */
 .header-nav div {
-    font-family: "Montserrat", sans-serif;
+    font-family: monospace;
     font-weight: 600;
 
     a {
@@ -221,7 +226,7 @@ ul .dropdown {
     text-decoration: none;
     color: #e64a19;
     font-weight: 600;
-    font-family: "Montserrat", sans-serif;
+    font-family: monospace;
 }
 
 .dropdown .dropdown-menu a {
