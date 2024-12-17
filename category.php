@@ -2,23 +2,62 @@
 require 'db.php';
 session_start();
 
+// Số sản phẩm mỗi trang
+$items_per_page = 6;
+
 // Lấy danh mục từ URL
 $category_name = isset($_GET['category_name']) ? trim($_GET['category_name']) : '';
 $category = isset($_GET['category']) ? trim($_GET['category']) : '';
 
-// Truy vấn sản phẩm
+// Truy vấn tổng số sản phẩm trong danh mục
 if (!empty($category_name) && !empty($category)) {
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE category LIKE CONCAT('%', ?, '%') AND category_name = ?");
-    $stmt->execute([$category, $category_name]);
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE category LIKE CONCAT('%', :category, '%') AND category_name = :category_name");
+    $stmt->execute([':category' => $category, ':category_name' => $category_name]);
 } elseif (!empty($category)) {
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE category LIKE CONCAT('%', ?, '%')");
-    $stmt->execute([$category]);
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE category LIKE CONCAT('%', :category, '%')");
+    $stmt->execute([':category' => $category]);
 } else {
     die("Vui lòng chọn danh mục hợp lệ.");
 }
 
+// Lấy tổng số sản phẩm
+$total_items = $stmt->fetchColumn();
+
+// Tính số trang
+$total_pages = ceil($total_items / $items_per_page);
+
+// Lấy số trang hiện tại từ URL, mặc định là trang 1
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Kiểm tra số trang hợp lệ
+if ($current_page < 1) {
+    $current_page = 1;
+} elseif ($current_page > $total_pages) {
+    $current_page = $total_pages;
+}
+
+// Tính toán offset (vị trí bắt đầu lấy dữ liệu)
+$offset = ($current_page - 1) * $items_per_page;
+
+// Truy vấn sản phẩm cho trang hiện tại (bổ sung LIMIT và OFFSET)
+if (!empty($category_name) && !empty($category)) {
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE category LIKE CONCAT('%', :category, '%') AND category_name = :category_name LIMIT :offset, :limit");
+    $stmt->bindValue(':category', $category);
+    $stmt->bindValue(':category_name', $category_name);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
+    $stmt->execute();
+} elseif (!empty($category)) {
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE category LIKE CONCAT('%', :category, '%') LIMIT :offset, :limit");
+    $stmt->bindValue(':category', $category);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
+    $stmt->execute();
+} else {
+    die("Vui lòng chọn danh mục hợp lệ.");
+}
+
+$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +105,28 @@ if (!empty($category_name) && !empty($category)) {
                 </div>
             </div>
         <?php endif; ?>
+
+        <!-- Phân trang -->
+        <div class="pagination">
+            <ul>
+                <?php if ($current_page > 1): ?>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&page=1">Đầu</a></li>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $current_page - 1; ?>">«</a></li>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <li class="<?php echo $i == $current_page ? 'active' : ''; ?>">
+                        <a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <?php if ($current_page < $total_pages): ?>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $current_page + 1; ?>">»</a></li>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $total_pages; ?>">Cuối</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+
     </main>
 
     <?php include 'footer.php'; ?>

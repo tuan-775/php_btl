@@ -21,12 +21,12 @@ main {
         cursor: pointer;
     }
 
-        span {
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    span {
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+    }
 }
 
 .product {
@@ -119,4 +119,40 @@ main {
     flex-direction: row;
     align-items: center;
     gap: 10px;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .disabled a {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

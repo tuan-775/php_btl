@@ -6,6 +6,9 @@ session_start();
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 $sale_range = isset($_GET['sale_range']) ? $_GET['sale_range'] : '';
 
+// Số sản phẩm mỗi trang
+$items_per_page = 20;
+
 // Tạo câu query cơ bản
 $query = "SELECT * FROM products WHERE sale_percentage > 0";
 $params = [];
@@ -25,11 +28,39 @@ if ($sale_range) {
     }
 }
 
-// Thực thi câu query
+// Truy vấn tổng số sản phẩm để tính số trang
+$count_query = $query; // Sử dụng lại query ban đầu (không có LIMIT)
+$count_stmt = $pdo->prepare($count_query);
+$count_stmt->execute($params);
+$total_items = $count_stmt->fetchColumn();
+
+// Tính số trang
+$total_pages = ceil($total_items / $items_per_page);
+
+// Lấy số trang hiện tại từ URL, mặc định là trang 1
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Kiểm tra số trang hợp lệ
+if ($current_page < 1) {
+    $current_page = 1;
+} elseif ($current_page > $total_pages) {
+    $current_page = $total_pages;
+}
+
+// Tính toán offset (vị trí bắt đầu lấy dữ liệu)
+$offset = ($current_page - 1) * $items_per_page;
+
+// Cập nhật query để lấy sản phẩm với LIMIT và OFFSET
+$query .= " LIMIT $offset, $items_per_page";  // Thay thế :offset và :limit bằng giá trị trực tiếp
+
+// Thực thi câu query với LIMIT và OFFSET
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
+
+// Lấy các sản phẩm từ cơ sở dữ liệu
 $sale_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,13 +80,13 @@ $sale_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="index.php">Trang chủ</a> /
             <span>
                 <?php
-                if (isset($_GET['sale_percentage']) && $_GET['sale_percentage'] === 'Sale 10%-25%') {
+                if (isset($_GET['sale_range']) && $_GET['sale_range'] === '10-25') {
                     echo "Sale 10%-25%";
-                } elseif (isset($_GET['sale_percentage']) && $_GET['sale_percentage'] == '25-50') {
+                } elseif (isset($_GET['sale_range']) && $_GET['sale_range'] == '25-50') {
                     echo "Sale 25%-50%";
-                } elseif (isset($_GET['sale']) && $_GET['sale'] == 'girls') {
+                } elseif (isset($_GET['category']) && $_GET['category'] == 'girls') {
                     echo "Sale Bé Gái";
-                } elseif (isset($_GET['sale']) && $_GET['sale'] == 'boys') {
+                } elseif (isset($_GET['category']) && $_GET['category'] == 'boys') {
                     echo "Sale Bé Trai";
                 } else {
                     echo "Sale";
@@ -93,6 +124,31 @@ $sale_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
             </div>
         </div>
+
+        <!-- Hiển thị phân trang -->
+        <div class="pagination">
+            <ul>
+                <!-- Liên kết đến trang đầu -->
+                <?php if ($current_page > 1): ?>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&sale_range=<?php echo urlencode($sale_range); ?>&page=1">Đầu</a></li>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&sale_range=<?php echo urlencode($sale_range); ?>&page=<?php echo $current_page - 1; ?>">«</a></li>
+                <?php endif; ?>
+
+                <!-- Liên kết đến các trang giữa -->
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <li class="<?php echo $i == $current_page ? 'active' : ''; ?>">
+                        <a href="?category=<?php echo urlencode($category); ?>&sale_range=<?php echo urlencode($sale_range); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <!-- Liên kết đến trang tiếp theo -->
+                <?php if ($current_page < $total_pages): ?>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&sale_range=<?php echo urlencode($sale_range); ?>&page=<?php echo $current_page + 1; ?>">»</a></li>
+                    <li><a href="?category=<?php echo urlencode($category); ?>&sale_range=<?php echo urlencode($sale_range); ?>&page=<?php echo $total_pages; ?>">Cuối</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+
     </main>
 
     <?php include 'footer.php'; ?>

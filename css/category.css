@@ -11,7 +11,7 @@
         cursor: pointer;
     }
 
-    span{
+    span {
         font-size: 16px;
         font-weight: 500;
         text-decoration: none;
@@ -81,10 +81,10 @@
     color: #000;
     font-weight: 500;
     display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        -webkit-line-clamp: 2;
-        text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
 }
 
 .product-card .sold-quantity {
@@ -99,4 +99,40 @@
     margin-top: 5px;
     font-size: 1rem;
     font-weight: 500;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .disabled a {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
