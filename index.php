@@ -2,8 +2,33 @@
 session_start();
 require 'db.php';
 
-// Lấy danh sách sản phẩm, bao gồm cột sold_quantity
-$stmt = $pdo->query("SELECT * FROM products ORDER BY created_at DESC");
+// Số sản phẩm mỗi trang
+$items_per_page = 12;
+
+// Lấy tổng số sản phẩm
+$stmt = $pdo->query("SELECT COUNT(*) FROM products");
+$total_items = $stmt->fetchColumn();
+
+// Lấy số trang hiện tại từ URL, mặc định là trang 1
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// Tính số trang
+$total_pages = ceil($total_items / $items_per_page);
+
+// Kiểm tra số trang hợp lệ
+if ($current_page < 1) {
+    $current_page = 1;
+} elseif ($current_page > $total_pages) {
+    $current_page = $total_pages;
+}
+
+// Tính toán offset (vị trí bắt đầu lấy dữ liệu)
+$offset = ($current_page - 1) * $items_per_page;
+
+// Lấy danh sách sản phẩm cho trang hiện tại
+$stmt = $pdo->prepare("SELECT * FROM products ORDER BY created_at DESC LIMIT :offset, :limit");
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
+$stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -47,6 +72,27 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 <?php endforeach; ?>
             </div>
+        </div>
+
+        <!-- Phân trang -->
+        <div class="pagination">
+            <ul>
+                <?php if ($current_page > 1): ?>
+                    <li><a href="?page=1">Đầu</a></li>
+                    <li><a href="?page=<?php echo $current_page - 1; ?>">«</a></li>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                    <li class="<?php echo $i == $current_page ? 'active' : ''; ?>">
+                        <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <?php if ($current_page < $total_pages): ?>
+                    <li><a href="?page=<?php echo $current_page + 1; ?>">»</a></li>
+                    <li><a href="?page=<?php echo $total_pages; ?>">Cuối</a></li>
+                <?php endif; ?>
+            </ul>
         </div>
     </main>
     <?php include 'footer.php'; ?>
