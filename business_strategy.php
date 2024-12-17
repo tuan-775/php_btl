@@ -11,7 +11,7 @@
 
 <body>
     <?php include 'header.php'; ?>
-
+ 
     <main class="business_strategy">
         <div class="content" style="padding: 20px; max-width: 1200px; margin: auto; background-color: #fff; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <h1 style="text-align: center; color: #333; margin-bottom: 20px;">Giới thiệu chiến lược kinh doanh</h1>
