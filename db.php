@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost'; // Tên máy chủ
-$dbname = 'rabitydb'; // Tên cơ sở dữ liệu của bạn
+$dbname = 'rabitydb1'; // Tên cơ sở dữ liệu của bạn
 $username = 'root'; // Tên người dùng cơ sở dữ liệu
 $password = ''; // Mật khẩu cơ sở dữ liệu
 

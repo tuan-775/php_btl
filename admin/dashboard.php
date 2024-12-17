@@ -38,6 +38,9 @@ require '../db.php';
             <div>
                 <a href="manage_users.php" class="menu-btn">Quản lý người dùng</a>
             </div>
+            <div>
+                <a href="manage_orders.php" class="menu-btn">Quản lý đơn hàng</a>
+            </div>
         </main>
     </header>
 </body>
