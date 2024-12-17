@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         $pdo->beginTransaction(); // Bắt đầu transaction
-
+    
         // Kiểm tra tên đăng nhập hoặc email đã tồn tại
         $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
@@ -46,20 +46,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Tên đăng nhập hoặc email đã tồn tại!";
             exit;
         }
-
-        // Thêm tài khoản vào bảng users
-        $stmt = $pdo->prepare("INSERT INTO users (fullname, username, email, password, gender, role) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$fullname, $username, $email, $hashed_password, $gender, $role]);
-
+    
+        // Thêm tài khoản vào bảng users (không có gender)
+        $stmt = $pdo->prepare("INSERT INTO users (fullname, username, email, password, role) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$fullname, $username, $email, $hashed_password, $role]);
+    
         // Lấy ID của người dùng vừa tạo
         $user_id = $pdo->lastInsertId();
-
+    
+        // Thêm gender vào bảng user_profiles
+        $stmt = $pdo->prepare("INSERT INTO user_profiles (user_id, gender) VALUES (?, ?)");
+        $stmt->execute([$user_id, $gender]);
+    
         // Thêm câu hỏi bảo mật vào bảng security_questions
         $stmt = $pdo->prepare("INSERT INTO security_questions (user_id, question, answer) VALUES (?, ?, ?)");
         $stmt->execute([$user_id, $security_question, $hashed_answer]);
-
+    
         $pdo->commit(); // Xác nhận transaction
-
+    
         echo "<script>
                 window.onload = function() {
                     showSuccessMessage('Đăng ký thành công! <a href=\"login.php\">Đăng nhập</a>');

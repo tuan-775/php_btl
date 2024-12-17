@@ -12,7 +12,7 @@ $user_id = $_SESSION['user_id'];
 
 // Lấy thông tin người dùng từ cơ sở dữ liệu
 $stmt = $pdo->prepare(
-    "SELECT users.fullname, users.username, users.email, users.gender, 
+    "SELECT users.fullname, users.username, users.email, user_profiles.gender, 
             user_profiles.birthdate, user_profiles.phone, user_profiles.address 
      FROM users 
      LEFT JOIN user_profiles ON users.id = user_profiles.user_id 
@@ -29,18 +29,21 @@ if (!$user) {
 // Xử lý cập nhật thông tin
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Lấy thông tin từ form
-    $username = $_POST['username'];
-    $email = $_POST['email'];
+    $fullname = trim($_POST['fullname']);
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $gender = $_POST['gender'];
     $birthdate = $_POST['birthdate'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
+    $phone = trim($_POST['phone']);
+    $address = trim($_POST['address']);
 
     // Kiểm tra dữ liệu hợp lệ
-    if (empty($username) || empty($email)) {
-        $error = "Vui lòng điền đầy đủ thông tin.";
+    if (empty($fullname) || empty($username) || empty($email)) {
+        $error = "Vui lòng điền đầy đủ họ tên, tên đăng nhập và email.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Địa chỉ email không hợp lệ.";
     } elseif (!empty($password) && $password !== $confirm_password) {
         $error = "Mật khẩu nhập lại không khớp.";
     } else {
@@ -51,14 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($password)) {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $stmt = $pdo->prepare(
-                    "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?"
+                    "UPDATE users SET fullname = ?, username = ?, email = ?, password = ? WHERE id = ?"
                 );
-                $stmt->execute([$username, $email, $hashedPassword, $user_id]);
+                $stmt->execute([$fullname, $username, $email, $hashedPassword, $user_id]);
             } else {
                 $stmt = $pdo->prepare(
-                    "UPDATE users SET username = ?, email = ? WHERE id = ?"
+                    "UPDATE users SET fullname = ?, username = ?, email = ? WHERE id = ?"
                 );
-                $stmt->execute([$username, $email, $user_id]);
+                $stmt->execute([$fullname, $username, $email, $user_id]);
             }
 
             // Cập nhật bảng user_profiles (chỉnh sửa giới tính, ngày sinh, điện thoại và địa chỉ)
@@ -67,20 +70,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  VALUES (?, ?, ?, ?, ?) 
                  ON DUPLICATE KEY UPDATE 
                  gender = VALUES(gender), 
-                 birthdate = VALUES(birthdate), phone = VALUES(phone), address = VALUES(address)"
+                 birthdate = VALUES(birthdate), 
+                 phone = VALUES(phone), 
+                 address = VALUES(address)"
             );
             $stmt->execute([$user_id, $gender, $birthdate, $phone, $address]);
 
             $pdo->commit();
 
-            // Cập nhật thông tin session
+            // Cập nhật thông tin session nếu cần (ví dụ: nếu bạn lưu fullname trong session)
             $_SESSION['username'] = $username;
+            // Nếu bạn lưu fullname trong session, hãy cập nhật nó ở đây
+            // $_SESSION['fullname'] = $fullname;
 
             // Chuyển hướng về trang hồ sơ
             header("Location: profile.php");
             exit;
         } catch (Exception $e) {
             $pdo->rollBack();
+            // Ghi log lỗi để dễ dàng theo dõi
+            // error_log($e->getMessage());
             $error = "Đã xảy ra lỗi khi cập nhật thông tin.";
         }
     }

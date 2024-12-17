@@ -23,6 +23,7 @@ $stmt_be_gai = $pdo->prepare("SELECT DISTINCT category_name FROM products WHERE 
 $stmt_be_gai->execute(['Bé gái']);
 $subcategories_be_gai = $stmt_be_gai->fetchAll(PDO::FETCH_ASSOC);
 
+
 // Lấy danh mục con cho Bé trai
 $stmt_be_trai = $pdo->prepare("SELECT DISTINCT category_name FROM products WHERE category = ?");
 $stmt_be_trai->execute(['Bé trai']);
