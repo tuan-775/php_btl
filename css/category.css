@@ -10,6 +10,13 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+    span{
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+    }
 }
 
 .product {
@@ -27,7 +34,7 @@
 
 .product-card {
     width: 190px;
-    height: 300px;
+    height: 330px;
     box-sizing: border-box;
     flex: 0 0 calc(16.66% - 10px);
     display: flex;
@@ -70,8 +77,20 @@
     font-size: .875rem;
     line-height: 1.25rem;
     font-family: "Montserrat", sans-serif;
+    height: 40px;
     color: #000;
     font-weight: 500;
+    display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+}
+
+.product-card .sold-quantity {
+    font-size: 12px;
+    color: #e64a19;
+    margin-top: 8px;
 }
 
 .price-sale,

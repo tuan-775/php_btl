@@ -20,6 +20,13 @@ main {
         text-decoration: none;
         cursor: pointer;
     }
+
+        span {
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
 }
 
 .product {
@@ -30,7 +37,7 @@ main {
 
 .product-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 10px;
     width: 1280px;

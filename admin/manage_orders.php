@@ -23,6 +23,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <h1>Quản lý Đơn Hàng</h1>
+    <a href="./dashboard.php">Quản trị</a>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>ID</th>

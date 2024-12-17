@@ -10,7 +10,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     height: 100px;
-    font-family: monospace;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .header-top {
@@ -78,7 +79,7 @@
     font-size: 16px;
     color: #333;
     cursor: pointer;
-    font-family: monospace !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .user-welcome .dropdown-menu {
@@ -198,7 +199,8 @@
 
 /* Thanh menu */
 .header-nav div {
-    font-family: monospace;
+    font-family: 'Montserrat', sans-serif;
+
     font-weight: 600;
 
     a {
@@ -226,7 +228,8 @@ ul .dropdown {
     text-decoration: none;
     color: #e64a19;
     font-weight: 600;
-    font-family: monospace;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
 .dropdown .dropdown-menu a {

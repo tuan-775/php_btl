@@ -15,8 +15,7 @@ if (!empty($category_name) && !empty($category)) {
     $stmt = $pdo->prepare("SELECT * FROM products WHERE category LIKE CONCAT('%', ?, '%')");
     $stmt->execute([$category]);
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
- else {
+} else {
     die("Vui lòng chọn danh mục hợp lệ.");
 }
 
@@ -60,6 +59,7 @@ if (!empty($category_name) && !empty($category)) {
                                 <p class="price">
                                     ₫<?php echo number_format($product['price'], 0, ',', '.'); ?>
                                 </p>
+                                <div class="sold-quantity">Đã bán: <?php echo number_format($product['sold_quantity'], 0, ',', '.'); ?></div>
                             </a>
                         </div>
                     <?php endforeach; ?>

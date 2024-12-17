@@ -59,12 +59,14 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <img id='main-product-image' src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="300"><br><br>
 
                     <!-- Ảnh chính trong thumbnail -->
-                    <img id='thumbnail-image' src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Ảnh chính" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
+                    <div class="thumbnail">
+                        <img id='thumbnail-image' src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Ảnh chính" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
 
-                    <!-- Ảnh phụ -->
-                    <?php foreach ($productImages as $img): ?>
-                        <img src="uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="Ảnh phụ" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
-                    <?php endforeach; ?>
+                        <!-- Ảnh phụ -->
+                        <?php foreach ($productImages as $img): ?>
+                            <img id='thumbnail-image' src="uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="Ảnh phụ" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
+                        <?php endforeach; ?>
+                    </div>
                 </div>
 
                 <div class="infomation">
@@ -100,7 +102,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php endif; ?>
                         </form>
                     <?php else: ?>
-                        
+
                         <form action="cart/add_to_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                             <label id='quantity'>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
@@ -130,15 +132,17 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <img src="uploads/<?php echo htmlspecialchars($related['image']); ?>" alt="<?php echo htmlspecialchars($related['name']); ?>">
                                 <h3><?php echo htmlspecialchars($related['name']); ?></h3>
                                 <?php if ($related['sale_percentage'] > 0): ?>
-                                    <span class="sale-percentage">Giảm <?php echo htmlspecialchars($related['sale_percentage']); ?>%</span>
+
                                     <p class="price-sale">
                                         ₫<?php
                                             $sale_price = $related['price'] * (1 - $related['sale_percentage'] / 100);
-                                            echo number_format($sale_price, 0, ',', '.'); ?>
+                                            echo number_format($sale_price, 0, ',', '.'); ?> <span class="sale-percentage">Giảm <?php echo htmlspecialchars($related['sale_percentage']); ?>%</span>
                                     </p>
                                 <?php else: ?>
                                     <p class="price">₫<?php echo number_format($related['price'], 0, ',', '.'); ?></p>
                                 <?php endif; ?>
+
+                                <div class="sold-quantity">Đã bán: <?php echo number_format($product['sold_quantity'], 0, ',', '.'); ?></div>
                             </a>
                         </div>
                     <?php endforeach; ?>
@@ -152,6 +156,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
         function changeMainImage(src) {
             document.getElementById('main-product-image').src = src;
         }
+    </script>
 </body>
 
 </html>
