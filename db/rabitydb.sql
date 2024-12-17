@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2024 at 07:01 AM
+-- Generation Time: Dec 17, 2024 at 12:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rabitydb`
+-- Database: `rabitydb1`
 --
 
 -- --------------------------------------------------------
@@ -65,73 +65,75 @@ CREATE TABLE `orders` (
   `shipping_method` varchar(50) DEFAULT NULL,
   `shipping_cost` float DEFAULT NULL,
   `bank` varchar(255) DEFAULT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `status` varchar(50) DEFAULT 'Chưa giao',
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_name`, `phone`, `address`, `product_id`, `product_name`, `price`, `quantity`, `total_price`, `created_at`, `payment_method`, `shipping_method`, `shipping_cost`, `bank`, `user_id`) VALUES
-(1, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, NULL, '2024-11-24 16:51:38', '', NULL, NULL, NULL, 1),
-(2, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 5, 'Đồ bộ thun tăm dài tay bé gái Rabity', 99999999.99, 1, NULL, '2024-11-24 17:55:23', '', NULL, NULL, NULL, 1),
-(3, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-11-24 17:55:59', '', NULL, NULL, NULL, 1),
-(4, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, NULL, '2024-11-26 16:54:54', '', NULL, NULL, NULL, 1),
-(5, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-11-26 16:54:54', '', NULL, NULL, NULL, 1),
-(6, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-03 17:59:47', '', NULL, NULL, NULL, 1),
-(7, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:12:21', 'cash', NULL, NULL, NULL, 1),
-(8, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:12:45', 'qr', NULL, NULL, NULL, 1),
-(9, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:13:27', 'qr', NULL, NULL, NULL, 1),
-(10, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:18:30', 'qr', NULL, NULL, NULL, 1),
-(11, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:26:12', 'qr', NULL, NULL, NULL, 1),
-(12, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:32:02', 'qr', NULL, NULL, NULL, 1),
-(13, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 3, 'Đầm váy thô cổ sen ngắn tay bé gái', 1500000.00, 1, NULL, '2024-12-05 05:35:23', 'qr', NULL, NULL, NULL, 1),
-(14, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:35:45', 'qr', NULL, NULL, NULL, 1),
-(15, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:39:12', 'qr', NULL, NULL, NULL, 1),
-(16, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:40:39', 'cash', NULL, NULL, NULL, 1),
-(17, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:41:00', 'qr', NULL, NULL, NULL, 1),
-(18, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:44:26', 'qr', NULL, NULL, NULL, 1),
-(19, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:45:25', 'qr', NULL, NULL, NULL, 1),
-(20, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:49:42', 'qr', NULL, NULL, NULL, 1),
-(21, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:50:30', 'qr', NULL, NULL, NULL, 1),
-(22, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 3, 'Đầm váy thô cổ sen ngắn tay bé gái', 1500000.00, 1, NULL, '2024-12-05 06:36:24', 'qr', NULL, NULL, NULL, 1),
-(23, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-05 06:36:24', 'qr', NULL, NULL, NULL, 1),
-(24, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 1, NULL, '2024-12-05 07:08:51', 'cash', NULL, NULL, NULL, 1),
-(25, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 5, NULL, '2024-12-05 07:10:28', 'cash', NULL, NULL, NULL, 1),
-(26, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 1, 111111.00, '2024-12-05 07:15:31', 'cash', NULL, NULL, NULL, 1),
-(27, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 100000.00, '2024-12-05 08:58:59', 'cash', 'postal', 30000, NULL, 1),
-(28, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:32:41', 'cash', NULL, NULL, NULL, 1),
-(29, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:33:07', 'cash', NULL, NULL, NULL, 1),
-(30, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:37:23', 'cash', NULL, NULL, NULL, 1),
-(31, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, 99999999.99, '2024-12-05 09:38:32', 'qr', NULL, NULL, NULL, 1),
-(32, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, 1510325.00, '2024-12-05 09:39:30', 'qr', NULL, NULL, NULL, 1),
-(33, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 17:26:38', 'qr', NULL, NULL, NULL, 1),
-(34, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 17:29:14', '', NULL, NULL, NULL, 1),
-(35, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 90000.00, '2024-12-05 17:32:21', 'cash', NULL, NULL, NULL, 1),
-(36, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, 95000.00, '2024-12-05 17:32:21', 'cash', NULL, NULL, NULL, 1),
-(37, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-09 16:19:40', '', NULL, NULL, NULL, 1),
-(38, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-10 07:07:43', 'Bank Transfer', 'Standard', 20000, 'MBBank', 1),
-(39, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, NULL, '2024-12-10 07:11:51', 'COD', 'Standard', 20000, '', 1),
-(40, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, NULL, '2024-12-10 07:13:50', 'Bank Transfer', 'Standard', 20000, 'MBBank', 1),
-(41, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-12-10 07:15:58', 'Bank Transfer', 'Standard', 20000, 'Vietcombank', 1),
-(42, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-11 17:55:07', '', NULL, NULL, NULL, 1),
-(43, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-12 10:08:46', '', NULL, NULL, NULL, 1),
-(44, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 14:48:52', '', NULL, NULL, NULL, 1),
-(45, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 5, NULL, '2024-12-12 15:44:05', '', NULL, NULL, NULL, 1),
-(46, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 15:48:39', '', NULL, NULL, NULL, 1),
-(47, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-13 05:44:36', 'bank_transfer', 'express', NULL, 'MB', 1),
-(48, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 150000.00, '2024-12-13 05:59:26', 'bank_transfer', 'express', 50000, 'MB', 1),
-(49, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:06:42', 'bank_transfer', 'standard', 30000, 'MB', 1),
-(50, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:08:24', 'bank_transfer', 'standard', 30000, 'VCB', 1),
-(51, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:12:34', 'bank_transfer', 'standard', 30000, 'VCB', 1),
-(52, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:13:12', 'bank_transfer', 'standard', 30000, 'MB', 1),
-(53, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 2, 250000.00, '2024-12-13 06:23:24', 'bank_transfer', 'express', 50000, 'MB', 1),
-(54, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:25:50', 'bank_transfer', 'standard', 30000, 'VCB', 1),
-(55, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 2, 250000.00, '2024-12-13 07:38:47', 'bank_transfer', 'express', 50000, 'VCB', 1),
-(61, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 2, 'Bộ đồ thun ngắn tay', 120000.00, 1, 150000.00, '2024-12-13 07:58:23', 'bank_transfer', 'standard', 30000, 'MB', 3),
-(62, 'test1', '0369585104', 'Hà Nội', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 10, 1281230.00, '2024-12-13 16:16:18', 'bank_transfer', 'express', 50000, 'Agribank', 1),
-(63, 'tuan test', '0123456789', 'Hà Nội', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 10, 99999999.99, '2024-12-13 18:20:53', 'bank_transfer', 'standard', 30000, 'MB', 1),
-(64, 'tuan test', '0123456789', 'Hà Nội', 2, 'Bộ đồ thun ngắn tay', 120000.00, 8, 1010000.00, '2024-12-14 10:27:18', 'COD', 'express', 50000, '', 5);
+INSERT INTO `orders` (`id`, `user_name`, `phone`, `address`, `product_id`, `product_name`, `price`, `quantity`, `total_price`, `created_at`, `payment_method`, `shipping_method`, `shipping_cost`, `bank`, `user_id`, `status`, `updated_at`) VALUES
+(1, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, NULL, '2024-11-24 16:51:38', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(2, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 5, 'Đồ bộ thun tăm dài tay bé gái Rabity', 99999999.99, 1, NULL, '2024-11-24 17:55:23', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(3, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-11-24 17:55:59', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(4, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, NULL, '2024-11-26 16:54:54', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(5, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-11-26 16:54:54', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(6, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-03 17:59:47', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(7, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:12:21', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(8, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:12:45', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(9, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:13:27', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(10, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:18:30', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(11, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:26:12', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(12, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:32:02', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(13, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 3, 'Đầm váy thô cổ sen ngắn tay bé gái', 1500000.00, 1, NULL, '2024-12-05 05:35:23', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(14, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:35:45', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(15, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:39:12', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(16, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:40:39', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(17, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:41:00', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(18, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:44:26', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(19, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:45:25', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(20, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:49:42', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(21, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:50:30', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(22, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 3, 'Đầm váy thô cổ sen ngắn tay bé gái', 1500000.00, 1, NULL, '2024-12-05 06:36:24', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(23, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-05 06:36:24', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(24, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 1, NULL, '2024-12-05 07:08:51', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(25, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 5, NULL, '2024-12-05 07:10:28', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(26, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 1, 111111.00, '2024-12-05 07:15:31', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(27, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 100000.00, '2024-12-05 08:58:59', 'cash', 'postal', 30000, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(28, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:32:41', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(29, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:33:07', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(30, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:37:23', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(31, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, 99999999.99, '2024-12-05 09:38:32', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(32, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, 1510325.00, '2024-12-05 09:39:30', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(33, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 17:26:38', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(34, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 17:29:14', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(35, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 90000.00, '2024-12-05 17:32:21', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(36, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, 95000.00, '2024-12-05 17:32:21', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(37, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-09 16:19:40', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(38, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-10 07:07:43', 'Bank Transfer', 'Standard', 20000, 'MBBank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(39, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, NULL, '2024-12-10 07:11:51', 'COD', 'Standard', 20000, '', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(40, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, NULL, '2024-12-10 07:13:50', 'Bank Transfer', 'Standard', 20000, 'MBBank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(41, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-12-10 07:15:58', 'Bank Transfer', 'Standard', 20000, 'Vietcombank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(42, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-11 17:55:07', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(43, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-12 10:08:46', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(44, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 14:48:52', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(45, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 5, NULL, '2024-12-12 15:44:05', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(46, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 15:48:39', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(47, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-13 05:44:36', 'bank_transfer', 'express', NULL, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(48, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 150000.00, '2024-12-13 05:59:26', 'bank_transfer', 'express', 50000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(49, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:06:42', 'bank_transfer', 'standard', 30000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(50, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:08:24', 'bank_transfer', 'standard', 30000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(51, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:12:34', 'bank_transfer', 'standard', 30000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(52, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:13:12', 'bank_transfer', 'standard', 30000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(53, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 2, 250000.00, '2024-12-13 06:23:24', 'bank_transfer', 'express', 50000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(54, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:25:50', 'bank_transfer', 'standard', 30000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(55, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 2, 250000.00, '2024-12-13 07:38:47', 'bank_transfer', 'express', 50000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(61, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 2, 'Bộ đồ thun ngắn tay', 120000.00, 1, 150000.00, '2024-12-13 07:58:23', 'bank_transfer', 'standard', 30000, 'MB', 3, 'Chưa giao', '2024-12-17 11:08:23'),
+(62, 'test1', '0369585104', 'Hà Nội', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 10, 1281230.00, '2024-12-13 16:16:18', 'bank_transfer', 'express', 50000, 'Agribank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
+(63, 'tuan test', '0123456789', 'Hà Nội', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 10, 99999999.99, '2024-12-13 18:20:53', 'bank_transfer', 'standard', 30000, 'MB', 1, 'Đã nhận', '2024-12-17 11:08:52'),
+(64, 'tuan test', '0123456789', 'Hà Nội', 2, 'Bộ đồ thun ngắn tay', 120000.00, 8, 1010000.00, '2024-12-14 10:27:18', 'COD', 'express', 50000, '', 5, 'Đang xử lý', '2024-12-17 11:08:28');
 
 -- --------------------------------------------------------
 
