@@ -1,0 +1,97 @@
+/* Reset một số thuộc tính mặc định */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Thiết lập font chữ và màu sắc chung */
+html {
+    font-size: 62.5%;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* Căn chỉnh các phần tử trong body */
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+    font-size: 1.6rem;
+}
+
+/* Tiêu đề chính */
+h1 {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Form */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Các label trong form */
+label {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Các input trong form */
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.4rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Hiệu ứng focus khi người dùng click vào các input */
+input:focus,
+select:focus {
+    border-color: #1dbfaf;
+    outline: none;
+}
+
+/* Nút submit */
+button[type="submit"] {
+    background-color: #1dbfaf;
+    color: #fff;
+    font-size: 1.6rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hiệu ứng hover khi người dùng di chuột qua nút submit */
+button[type="submit"]:hover {
+    background-color: #17a689;
+}
+
+/* Các input có lỗi */
+input:invalid {
+    border-color: #f33a58;
+}
+
+input:invalid:focus {
+    border-color: #f33a58;
+}
+
+/* Tạo khoảng cách giữa các form-group */
+form>div {
+    margin-bottom: 20px;
+}

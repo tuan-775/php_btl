@@ -70,9 +70,9 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <div class="user-welcome">
                             AD-<?php echo htmlspecialchars($_SESSION['username']); ?>!
                             <div class="dropdown-menu">
-                                <a href="./admin/dashboard.php">Quản trị</a>
-                                <a href="./change_password.php">Đổi mật khẩu</a>
-                                <a href="./login/logout.php">Đăng xuất</a>
+                                <a href="/php_btl/admin/dashboard.php">Quản trị</a>
+                                <a href="/php_btl/change_password.php">Đổi mật khẩu</a>
+                                <a href="/php_btl/login/logout.php">Đăng xuất</a>
                             </div>
                         </div>
                     <?php else: ?>

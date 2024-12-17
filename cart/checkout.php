@@ -2,6 +2,8 @@
 session_start();
 require '../db.php';
 
+session_start();
+
 // Kiểm tra xem người dùng đã đăng nhập chưa
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 

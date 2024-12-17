@@ -52,9 +52,9 @@ if (!$user) {
                 <p><strong>Họ và tên:</strong> <?php echo htmlspecialchars($user['fullname']); ?></p>
                 <p><strong>Tên người dùng:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
                 <p><strong>Giới tính:</strong> <?php echo htmlspecialchars($user['gender']); ?></p>
-                <p><strong>Ngày sinh:</strong> <?php echo htmlspecialchars($user['birthdate'] ?: 'Chưa cập nhật'); ?></p>
-                <p><strong>Số điện thoại:</strong> <?php echo htmlspecialchars($user['phone'] ?: 'Chưa cập nhật'); ?></p>
-                <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($user['address'] ?: 'Chưa cập nhật'); ?></p>
+                <p><strong>Ngày sinh:</strong> <?php echo htmlspecialchars($user['birthdate']); ?></p>
+                <p><strong>Số điện thoại:</strong> <?php echo htmlspecialchars($user['phone']); ?></p>
+                <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($user['address']); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
                 <p><strong>Ngày đăng ký:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
             </div>

@@ -75,15 +75,16 @@ $sale_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                                 <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                                 <?php if ($product['sale_percentage'] > 0): ?>
-                                    <span class="sale-percentage">Giảm <?php echo htmlspecialchars($product['sale_percentage']); ?>%</span>
+
                                     <p class="price-sale">
                                         ₫<?php
                                             $sale_price = $product['price'] * (1 - $product['sale_percentage'] / 100);
-                                            echo number_format($sale_price, 0, ',', '.'); ?>
+                                            echo number_format($sale_price, 0, ',', '.'); ?> <span class="sale-percentage">Giảm <?php echo htmlspecialchars($product['sale_percentage']); ?>%</span>
                                     </p>
                                 <?php else: ?>
                                     <p class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?></p>
                                 <?php endif; ?>
+                                <div class="sold-quantity">Đã bán: <?php echo number_format($product['sold_quantity'], 0, ',', '.'); ?></div>
                             </a>
                         </div>
                     <?php endforeach; ?>

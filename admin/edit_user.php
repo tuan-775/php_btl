@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh Sửa Người Dùng</title>
+    <link rel="stylesheet" href="./css/edit_user.css">
 </head>
 <body>
     <h1>Chỉnh Sửa Người Dùng</h1>
@@ -103,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($user['address']); ?>"><br>
         
         <button type="submit">Cập Nhật</button>
+        <a href="./manage_users.php">Quản lí người dùng</a>
     </form>
 </body>
 </html>

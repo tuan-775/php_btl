@@ -48,6 +48,7 @@ $new_arrivals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                             <p class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?></p>
+                            <div class="sold-quantity">Đã bán: <?php echo number_format($product['sold_quantity'], 0, ',', '.'); ?></div>
                         </a>
                     </div>
                 <?php endforeach; ?>

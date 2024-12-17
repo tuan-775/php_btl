@@ -9,6 +9,7 @@ if ($_SESSION['role'] !== 'admin') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fullname = $_POST['fullname'];
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Mã hóa mật khẩu
@@ -23,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pdo->beginTransaction();
 
         // Thêm thông tin vào bảng `users`
-        $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role, created_at) 
+        $stmt = $pdo->prepare("INSERT INTO users (fullname, username, email, password, role, created_at) 
                                VALUES (?, ?, ?, ?, NOW())");
-        $stmt->execute([$username, $email, $password, $role]);
+        $stmt->execute([$fullname, $username, $email, $password, $role]);
 
         // Lấy `user_id` vừa được thêm vào
         $user_id = $pdo->lastInsertId();
@@ -53,39 +54,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Người Dùng</title>
+    <link rel="stylesheet" href="./css/add_user.css">
 </head>
+
 <body>
     <h1>Thêm Người Dùng</h1>
     <form method="POST">
+        <label for="fullname">Họ và tên</label>
+        <input type="text" id="fullname" name="fullname" required><br>
+
         <label for="username">Tên đăng nhập:</label>
         <input type="text" id="username" name="username" required><br>
-        
+
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
-        
+
         <label for="password">Mật khẩu:</label>
         <input type="password" id="password" name="password" required><br>
-        
+
         <label for="gender">Giới tính:</label>
         <select id="gender" name="gender" required>
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
         </select><br>
-        
+
         <label for="birthdate">Ngày sinh:</label>
         <input type="date" id="birthdate" name="birthdate"><br>
-        
+
         <label for="phone">Số điện thoại:</label>
         <input type="tel" id="phone" name="phone"><br>
-        
+
         <label for="address">Địa chỉ:</label>
         <input type="text" id="address" name="address"><br>
-        
+
         <button type="submit">Thêm Người Dùng</button>
+        <a href="./manage_users.php">Quản lý người dùng</a>
     </form>
 </body>
+
 </html>
