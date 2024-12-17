@@ -73,31 +73,49 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p><strong>Mã sản phẩm:</strong> <?php echo htmlspecialchars($product['product_code']); ?></p>
                     <p><strong>Mô tả:</strong> <?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
 
-                    <!-- Chọn kích thước: radio button -->
-                    <p><strong>Kích thước:</strong></p>
-                    <form action="cart/add_to_cart.php" method="POST">
-                        <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                    <!-- Chỉ hiển thị chọn kích thước nếu category_name không phải là "Phụ kiện" -->
+                    <?php if ($product['category_name'] !== 'Phụ kiện'): ?>
+                        <p><strong>Kích thước:</strong></p>
+                        <form action="cart/add_to_cart.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
 
-                        <?php foreach ($sizeOptions as $opt): ?>
-                            <label id='size' style="display:inline-block; margin-right:10px;margin-bottom:10px; border:1px solid #ccc; padding:5px;">
-                                <input type="radio" name="selected_size" value="<?php echo htmlspecialchars($opt['value']); ?>">
-                                <?php echo htmlspecialchars($opt['label']); ?>
-                            </label>
-                        <?php endforeach; ?>
+                            <?php foreach ($sizeOptions as $opt): ?>
+                                <label id='size' style="display:inline-block; margin-right:10px;margin-bottom:10px; border:1px solid #ccc; padding:5px;">
+                                    <input type="radio" name="selected_size" value="<?php echo htmlspecialchars($opt['value']); ?>">
+                                    <?php echo htmlspecialchars($opt['label']); ?>
+                                </label>
+                            <?php endforeach; ?>
 
-                        <br><br>
-                        <label id='quantity'>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
-                        <br><br>
+                            <br><br>
+                            <label id='quantity'>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
+                            <br><br>
 
-                        <?php if (isset($_SESSION['user_id'])): ?>
-                            <button type="submit" id='add-to-cart' name="add_to_cart">Thêm vào giỏ hàng</button>
-                        <?php else: ?>
-                            <div>
-                                <i class="fas fa-exclamation-circle"></i>
-                                Vui lòng <a href="login/login.php">đăng nhập</a> để thêm sản phẩm vào giỏ hàng!
-                            </div>
-                        <?php endif; ?>
-                    </form>
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <button type="submit" id='add-to-cart' name="add_to_cart">Thêm vào giỏ hàng</button>
+                            <?php else: ?>
+                                <div>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Vui lòng <a href="login/login.php">đăng nhập</a> để thêm sản phẩm vào giỏ hàng!
+                                </div>
+                            <?php endif; ?>
+                        </form>
+                    <?php else: ?>
+                        
+                        <form action="cart/add_to_cart.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                            <label id='quantity'>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
+                            <br><br>
+
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <button type="submit" id='add-to-cart' name="add_to_cart">Thêm vào giỏ hàng</button>
+                            <?php else: ?>
+                                <div>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Vui lòng <a href="login/login.php">đăng nhập</a> để thêm sản phẩm vào giỏ hàng!
+                                </div>
+                            <?php endif; ?>
+                        </form>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
@@ -134,7 +152,6 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
         function changeMainImage(src) {
             document.getElementById('main-product-image').src = src;
         }
-    </script>
 </body>
 
 </html>

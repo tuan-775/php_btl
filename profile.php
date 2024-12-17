@@ -10,16 +10,20 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Lấy thông tin người dùng từ bảng users và user_profiles
+// Lấy thông tin người dùng hiện tại
 $stmt = $pdo->prepare(
     "SELECT users.fullname, users.username, users.email, users.created_at,
-            users.gender, user_profiles.birthdate, 
-            user_profiles.phone, user_profiles.address 
+            up.gender, up.birthdate, up.phone, up.address 
      FROM users 
-     LEFT JOIN user_profiles ON users.id = user_profiles.user_id 
-     WHERE users.id = ?"
+     LEFT JOIN (
+         SELECT * FROM user_profiles 
+         WHERE user_id = :user_id 
+         ORDER BY updated_at DESC 
+         LIMIT 1
+     ) AS up ON users.id = up.user_id 
+     WHERE users.id = :user_id"
 );
-$stmt->execute([$user_id]);
+$stmt->execute(['user_id' => $user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
@@ -54,7 +58,7 @@ if (!$user) {
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
                 <p><strong>Ngày đăng ký:</strong> <?php echo htmlspecialchars($user['created_at']); ?></p>
             </div>
-            <a href="edit_profile.php" class="edit-btn">Chỉnh sửa hồ sơ</a>
+            <a href="edit_profile.php" class="edit-btn">Cập nhật hồ sơ</a>
             <a href="login/logout.php" class="logout-btn">Đăng xuất</a>
         </div>
     </main>

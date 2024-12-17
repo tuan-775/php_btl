@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 12:42 PM
+-- Generation Time: Dec 17, 2024 at 03:34 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rabitydb1`
+-- Database: `rabitydb`
 --
 
 -- --------------------------------------------------------
@@ -41,8 +41,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `size`) VALUES
-(9, 0, 5, 1, '2024-11-24 17:57:28', NULL),
-(89, 5, 2, 1, '2024-12-14 10:27:35', '');
+(91, 14, 28, 1, '2024-12-17 13:30:29', '10Y'),
+(92, 14, 22, 1, '2024-12-17 13:30:34', '');
 
 -- --------------------------------------------------------
 
@@ -75,65 +75,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_name`, `phone`, `address`, `product_id`, `product_name`, `price`, `quantity`, `total_price`, `created_at`, `payment_method`, `shipping_method`, `shipping_cost`, `bank`, `user_id`, `status`, `updated_at`) VALUES
-(1, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, NULL, '2024-11-24 16:51:38', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(2, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 5, 'Đồ bộ thun tăm dài tay bé gái Rabity', 99999999.99, 1, NULL, '2024-11-24 17:55:23', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(3, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-11-24 17:55:59', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(4, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, NULL, '2024-11-26 16:54:54', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(5, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-11-26 16:54:54', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(6, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-03 17:59:47', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(7, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:12:21', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(8, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:12:45', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(9, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:13:27', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(10, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:18:30', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(11, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:26:12', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(12, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:32:02', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(13, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 3, 'Đầm váy thô cổ sen ngắn tay bé gái', 1500000.00, 1, NULL, '2024-12-05 05:35:23', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(14, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:35:45', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(15, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:39:12', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(16, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:40:39', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(17, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:41:00', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(18, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:44:26', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(19, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:45:25', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(20, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:49:42', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(21, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 05:50:30', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(22, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 3, 'Đầm váy thô cổ sen ngắn tay bé gái', 1500000.00, 1, NULL, '2024-12-05 06:36:24', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(23, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-05 06:36:24', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(24, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 1, NULL, '2024-12-05 07:08:51', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(25, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 5, NULL, '2024-12-05 07:10:28', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(26, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 111111.00, 1, 111111.00, '2024-12-05 07:15:31', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(27, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 100000.00, '2024-12-05 08:58:59', 'cash', 'postal', 30000, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(28, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:32:41', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(29, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:33:07', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(30, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 09:37:23', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(31, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, 99999999.99, '2024-12-05 09:38:32', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(32, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 4, 'Chia sẻ Áo thun ngắn tay bé gái', 1510325.00, 1, 1510325.00, '2024-12-05 09:39:30', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(33, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 9, 'quần', 100000.00, 1, 90000.00, '2024-12-05 17:26:38', 'qr', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(34, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-05 17:29:14', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(35, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 90000.00, '2024-12-05 17:32:21', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(36, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, 95000.00, '2024-12-05 17:32:21', 'cash', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(37, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-09 16:19:40', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(38, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 2, NULL, '2024-12-10 07:07:43', 'Bank Transfer', 'Standard', 20000, 'MBBank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(39, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, NULL, '2024-12-10 07:11:51', 'COD', 'Standard', 20000, '', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(40, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 10, 'Quần nỉ dài bé trai', 100000.00, 1, NULL, '2024-12-10 07:13:50', 'Bank Transfer', 'Standard', 20000, 'MBBank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(41, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 1, NULL, '2024-12-10 07:15:58', 'Bank Transfer', 'Standard', 20000, 'Vietcombank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(42, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-11 17:55:07', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(43, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 1, NULL, '2024-12-12 10:08:46', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(44, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 14:48:52', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(45, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 5, NULL, '2024-12-12 15:44:05', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(46, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-12 15:48:39', '', NULL, NULL, NULL, 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(47, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, NULL, '2024-12-13 05:44:36', 'bank_transfer', 'express', NULL, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(48, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 150000.00, '2024-12-13 05:59:26', 'bank_transfer', 'express', 50000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(49, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:06:42', 'bank_transfer', 'standard', 30000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(50, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:08:24', 'bank_transfer', 'standard', 30000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(51, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:12:34', 'bank_transfer', 'standard', 30000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(52, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:13:12', 'bank_transfer', 'standard', 30000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(53, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 2, 250000.00, '2024-12-13 06:23:24', 'bank_transfer', 'express', 50000, 'MB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(54, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 1, 130000.00, '2024-12-13 06:25:50', 'bank_transfer', 'standard', 30000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(55, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 1, 'Áo thun tay dài', 100000.00, 2, 250000.00, '2024-12-13 07:38:47', 'bank_transfer', 'express', 50000, 'VCB', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(61, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 2, 'Bộ đồ thun ngắn tay', 120000.00, 1, 150000.00, '2024-12-13 07:58:23', 'bank_transfer', 'standard', 30000, 'MB', 3, 'Chưa giao', '2024-12-17 11:08:23'),
-(62, 'test1', '0369585104', 'Hà Nội', 7, 'Áo thun dài tay bé gái Rabity', 123123.00, 10, 1281230.00, '2024-12-13 16:16:18', 'bank_transfer', 'express', 50000, 'Agribank', 1, 'Chưa giao', '2024-12-17 11:08:23'),
-(63, 'tuan test', '0123456789', 'Hà Nội', 6, 'Mũ lưỡi trai bé trai', 99999999.99, 10, 99999999.99, '2024-12-13 18:20:53', 'bank_transfer', 'standard', 30000, 'MB', 1, 'Đã nhận', '2024-12-17 11:08:52'),
-(64, 'tuan test', '0123456789', 'Hà Nội', 2, 'Bộ đồ thun ngắn tay', 120000.00, 8, 1010000.00, '2024-12-14 10:27:18', 'COD', 'express', 50000, '', 5, 'Đang xử lý', '2024-12-17 11:08:28');
+(65, 'Nguyễn Đình Tuấn', '0836 998 775', '12344', 30, 'Mũ lưỡi trai Spider-Man bé trai Rabity', 129000.00, 1, 159000.00, '2024-12-17 13:23:17', 'bank_transfer', 'standard', 30000, 'MB', 14, 'Chưa giao', '2024-12-17 13:23:17');
 
 -- --------------------------------------------------------
 
@@ -163,27 +105,22 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_code`, `category`, `category_name`, `name`, `image`, `description`, `price`, `created_at`, `sale_percentage`, `stock`, `cost_price`, `sale_price`, `sold_quantity`) VALUES
-(1, '001', 'Bé trai,BST Đồ Bộ Mặc Nhà', 'Áo', 'Áo thun tay dài', 'Screenshot 2024-12-12 211557.png', 'Nội dung đang được cập nhật', 100000.00, '2024-11-24 14:56:38', -10, 32, 10000.00, NULL, 17),
-(2, '002', 'Bé trai', 'Đồ bộ', 'Bộ đồ thun ngắn tay', '../uploads/Screenshot 2024-11-23 182601.png', 'Mô tả sản phẩm\r\nĐồ bộ thun bé trai sẽ là outfits tiện lợi cho mẹ và bé, với kiểu dáng áo thun, quần short cá tính, năng động giúp bé thoải mái vận động. Với những mẫu đồ bộ tính dụng cao bé có thể mặc mặc ở nhà, đi học, đi chơi,... \r\n\r\n1. Thông tin Bộ thun ngắn tay Mickey bé trai Rabity 560.001\r\n- Chất liệu 95% vải cotton và 5% spandex thoáng mát, co giãn và an toàn cho làn da của bé\r\n\r\n- Loại sản phẩm: Đồ bộ bé trai\r\n\r\n- Phù hợp với bé trai cân nặng từ 11-21kg, từ 2-6 tuổi\r\n\r\n- Bộ thun ngắn tay in hình Mickey bản quyền Disney, hình in sắc nét và màu sắc hài hòa\r\n\r\n \r\n\r\n2. Thông tin chi tiết Bộ thun ngắn tay Mickey bé trai Rabity 560.001\r\nBộ thun ngắn tay bé trai form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.', 120000.00, '2024-11-24 15:11:40', 0, 41, NULL, NULL, 9),
-(3, '003', 'Bé gái', 'Đầm váy', 'Đầm váy thô cổ sen ngắn tay bé gái', '../uploads/Screenshot 2024-11-23 183607.png', 'Đầm váy thô cổ sen ngắn tay bé gái Rabity 93113\r\n1. Thông tin Đầm váy thô cổ sen ngắn tay bé gái Rabity 93113\r\n- Chất liệu 100% thoáng mát, mềm mịn dễ chịu\r\n\r\n- Loại sản phẩm: Đầm váy bé gái\r\n\r\n- Phù hợp với bé gái cân nặng từ 11-30kg, từ 2-10 tuổi\r\n\r\n- Đầm thô ngắn tay họa tiết hoa đáng yêu, màu sắc nổi bật, thời trang cho bé diện thật nổi bật.', 1500000.00, '2024-11-24 15:13:08', 50, 50, NULL, NULL, 0),
-(4, '004', 'Bé gái', 'Áo', 'Chia sẻ Áo thun ngắn tay bé gái', '../uploads/Screenshot 2024-11-24 221346.png', 'Áo thun là một outfits tiện lợi cho mẹ và bé, với kiểu dáng áo thun cá tính, năng động sẽ giúp bé thoải mái vận động. Ba mẹ có thể phối cho bé áo thun với những quần khác nhau như quần nỉ, quần dài, quần thun,... cho bé mặc nhiều dịp đi học, đi chơi, đi học, đi tiệc,...\r\n\r\n1. Đặc điểm nổi bật Áo thun ngắn tay bé gái 900.076\r\n- Chất liệu 100% vải cotton xước thông thoáng, mát mẻ và an toàn cho làn da của bé Cotton\r\n\r\n- Loại sản phẩm: Áo bé gái, Áo thun bé gái\r\n\r\n- Phù hợp với bé gái cân nặng từ 11 - 35kg, từ 2 - 12 tuổi\r\n\r\n- Áo thun ngắn tay in hình trái dưa hấu dễ thương, năng động và sắc nét.\r\n\r\n2. Thông tin chi tiết Áo thun ngắn tay bé gái 900.076\r\nÁo thun ngắn tay bé gái form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.', 1510325.00, '2024-11-24 15:14:17', 0, 49, NULL, NULL, 0),
-(5, '005', 'Bé gái', 'Đồ bộ', 'Đồ bộ thun tăm dài tay bé gái Rabity', '../uploads/Screenshot 2024-11-24 221446.png', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất thun tăm được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.\r\n\r\n1. Đặc điểm nổi bật Đồ bộ thun tăm dài tay bé gái Rabity 961.001\r\nChất liệu: Với thiết kế 100% vải cotton nhẹ thoáng, êm mịn và an toàn cho làn da bé.\r\nĐộ tuổi, cân nặng: phù hợp cho bé từ 2 - 6 tuổi, từ 11-21kg.\r\nLoại sản phẩm: Đồ bộ bé gái, đồ bộ dài tay bé gái.\r\nÁo tay dài quần dài, họa tiết bông hoa nhỏ xinh xắn.\r\n2. Thông tin chi tiết Đồ bộ thun tăm dài tay bé gái Rabity 961.001\r\nBộ thun tăm dài tay bé gái kiểu dáng điệu đà, màu sắc hồng nhạt, vàng nhạt dịu dàng cho các bé gái. Sản phẩm thích hợp cho bé mặc trong mùa thu đông hoặc khi thời tiết lạnh, mang đến cảm giác ấm áp và thoải mái khi mặc.', 99999999.99, '2024-11-24 15:15:08', 0, 50, NULL, NULL, 0),
-(6, '006', 'Bé trai', 'Phụ kiện', 'Mũ lưỡi trai bé trai', '../uploads/Screenshot 2024-11-24 221544.png', 'Freesize', 99999999.99, '2024-11-24 15:16:11', 0, 39, NULL, NULL, 10),
-(7, '007', 'Bé gái', 'Áo', 'Áo thun dài tay bé gái Rabity', '../uploads/Screenshot 2024-11-26 125423.png', 'Nội dung đang được cập nhật', 123123.00, '2024-11-26 05:54:53', 0, 40, NULL, NULL, 10),
-(9, '011', 'Bé trai', 'Quần', 'quần', 'Screenshot 2024-11-23 000410.png', '2ewrgthgth', 100000.00, '2024-12-05 07:06:40', 10, 44, 10000.00, NULL, 0),
-(10, '014', 'Bé gái,BST Thu Đông', 'Đồ bộ', 'Quần nỉ dài bé trai', 'Screenshot 2024-12-05 171612.png', 'Quần nỉ là sự kết hợp hoàn hảo giữa phong cách năng động và tiện dụng. Quần nỉ không chỉ phù hợp cho những buổi dạo phố, mà còn là lựa chọn lý tưởng cho các bé khi tham gia các hoạt động ngoại khóa, vui chơi thể thao. Hơn nữa, với kiểu dáng thời trang và màu sắc phong phú, quần nỉ chắc chắn sẽ giúp các bé tự tin và nổi bật trong mọi hoàn cảnh\r\n\r\n1. Đặc điểm nổi bật Quần nỉ dài bé trai \r\nNhóm sản phẩm: Quần bé trai; Quần dài bé trai\r\nChất liệu: 95% cotton 5% spandex an toàn và thoáng mát cho da của bé\r\nSize: Phù hợp với bé trai cân nặng từ 14 - 35kg, từ 4 - 12 tuổi\r\n \r\n\r\n2. Chất liệu Quần nỉ dài bé trai \r\nQuần dài bé trai form vừa vặn thoải mái. Kiểu dáng dễ phối nhiều outfit lịch sự cho bé diện đi học, đi tiệc hay xuống phố. Sản phẩm đạt chứng nhận Oeko-Tex 100 an toàn cho da trẻ em.\r\n\r\n', 100000.00, '2024-12-05 10:17:27', 5, 14, 10000.00, NULL, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_categories`
---
-
-CREATE TABLE `product_categories` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(12, '001', 'Bé gái', 'Áo', 'Áo thun ngắn tay Ngoan xinh yêu cho bé gái', '900083-3_ba2d1c4ab2254e97b2c6af9ccd94cfcb.webp', 'Áo thun ngắn tay luôn là một loại trang phục được rất nhiều ba mẹ lựa chọn khi mua sắm quần áo cho con bởi sự thoải mái và tiện lợi mà chúng mang lại. Với nhưng mẫu áo thun ba mẹ có thể kết hợp được với nhiều kiểu quần, kiểu váy khác nhau để tạo nên những outfits mặc ở nhà, đi chơi, đi học,...\r\n- Nhóm sản phẩm: Áo thun bé gái, áo bé gái\r\n- Chất liệu 95% cotton 5% spandex thoáng mát, co giãn và an toàn cho làn da của bé\r\n- Phù hợp với bé gái cân nặng từ 11 - 35kg, từ 2 - 12 tuổi\r\n- Áo thun bé gái form basic in chữ Ngoan xinh yêu đáng yêu, hình in to sắc nét và màu sắc phối hài hòa, nổi bật.', 179000.00, '2024-12-17 12:01:24', 30, 100, 150000.00, NULL, 0),
+(16, '002', 'Bé gái', 'Áo', 'Áo nỉ dài tay bé gái Rabity x ELLE Kids - designed in Paris', 'dsc09592_copy_7d0ac79c66334423b097ee552c5aa446.webp', 'Nội dung đang được cập nhật', 269000.00, '2024-12-17 12:09:00', 0, 100, 175000.00, NULL, 0),
+(17, '003', 'Bé gái', 'Áo', 'Áo thun ngắn tay bé gái Rabity x ELLE Kids - designed in Paris', 'dsc09679_copy_bb10069dde2d4f1883485baa6ff378cb.webp', 'Nội dung đang được cập nhật', 169000.00, '2024-12-17 12:12:05', 0, 100, 130000.00, NULL, 0),
+(18, '004', 'Bé gái,BST Thu Đông', 'Quần', 'Quần kaki dài bé gái Rabity x ELLE Kids - designed in Paris', '842001-0_f1b8d77d8bb04fc9b0f6bf1ab3e7e2f3.webp', 'Quần kaki là một kiểu quần rất tiện lợi nên thường được ba mẹ lựa chọn khi mua sắm quần áo cho bé gái, với những chiếc quần kaki bạn có thể phối với đa dạng mẫu áo khác nhau như áo thun tay ngắn, áo sát nách, áo sơ mi,... để mặc đi học, đi chơi hoặc đi tiệc.', 279000.00, '2024-12-17 12:14:51', 0, 100, 200000.00, NULL, 0),
+(19, '005', 'Bé gái', 'Quần', 'Quần jean dài bé gái Rabity x ELLE Kids - designed in Paris', '841001241-0_506b5e2cd79a4fbf864338a4be6075c4.webp', 'Nội dung đang được cập nhật', 369000.00, '2024-12-17 12:17:16', 0, 100, 300000.00, NULL, 0),
+(20, '006', 'Bé gái,BST Đồ Bộ Mặc Nhà,BST Đồ Đi Chơi Noel', 'Đồ bộ', 'Bộ nỉ dài tay bé gái Rabity x ELLE Kids - designed in Paris', 'dsc09474_copy_2_45d4855d20c14cec8dd4c50be3893c78.webp', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất nỉ được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.', 369000.00, '2024-12-17 12:20:36', 0, 100, 290000.00, NULL, 0),
+(21, '007', 'Bé gái', 'Phụ kiện', 'Set 2 bím tóc bé gái Rabity', '97103424-1_aa52940edcd84a87864e2fa172573246.webp', 'Nội dung đang được cập nhật', 89000.00, '2024-12-17 12:23:52', 10, 100, 50000.00, NULL, 0),
+(22, '008', 'Bé gái', 'Phụ kiện', 'Hộp phụ kiện bé gái Rabity', '97102824-2_5c575c69b3764194833aa075ba686300.webp', 'Nội dung đang được cập nhật', 99000.00, '2024-12-17 12:26:14', 10, 100, 40000.00, NULL, 0),
+(23, '009', 'Bé gái', 'Phụ kiện', 'Mũ cói bé gái Rabity', '2_1_23709589d1fb407b87e09b389502d0f6.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 12:28:41', 25, 100, 99999.00, NULL, 0),
+(24, '010', 'Bé gái', 'Đầm váy', 'Đầm váy thô ngắn tay bé gái Rabity x ELLE Kids - designed in Paris', '2_copy_3b31e5b2ae184e8fb53cd786a6390a2b.webp', 'Đầm váy là là một outfits không thể thiếu trong tủ đồ của các cô công chúa nhỏ giúp ba mẹ tiết kiệm thời gian trong việc lựa chọn cho bé mỗi ngày mà bé có thể mặc trong nhiều dịp khác nhau như như đi chơi, đi học, đi tiệc,...', 569000.00, '2024-12-17 12:54:30', 10, 100, 350000.00, NULL, 0),
+(25, '011', 'Bé trai', 'Áo', '[Độc quyền Online] Áo thun ngắn tay in chữ Việt Nam bé trai/bé gái Rabity', '900081-1_2408deff07e148a2a3e1a480e3c3f83e.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 12:57:17', 10, 100, 100000.00, NULL, 0),
+(26, '012', 'Bé trai', 'Áo', '[Độc quyền Online] Áo thun ngắn tay bé trai/bé gái Capybara', '900080243-0_56b8193299984f72a7354eca24d3dc22.webp', 'Nội dung đang được cập nhật', 125000.00, '2024-12-17 12:59:59', 15, 100, 75000.00, NULL, 0),
+(27, '013', 'Bé trai', 'Quần', 'Quần short kaki bé trai Rabity x ELLE Kids - designed in Paris', '12_copy_40e4cabb91894d6cb087798f8b7d45ad.webp', 'Quần short kaki là một trong những sản phẩm luôn được ba mẹ ưa chuộng khi phối đồ cho bé trai bởi sự tiện lợi và thoải mái mà chúng mang lại cho bé. Bạn có thể phối nhiều outfits khác nhau cho bé từ những chiếc quần short từ năng động đến lịch sự, mặc đi học, đi chơi, đi tiệc,...đều phù hợp.', 269000.00, '2024-12-17 13:02:38', 5, 100, 150000.00, NULL, 0),
+(28, '014', 'Bé trai', 'Quần', 'Quần kaki dài Marvel Avengers bé trai Rabity', '542001240-1_d6f47fa0a54f4905a67eabf790559e88.jpg', 'Quần kaki là sự kết hợp hoàn hảo giữa phong cách năng động và tiện dụng. Quần kaki không chỉ phù hợp cho những buổi dạo phố, mà còn là lựa chọn lý tưởng cho các bé khi tham gia các hoạt động ngoại khóa, vui chơi thể thao. Hơn nữa, với kiểu dáng thời trang và màu sắc phong phú, quần kaki chắc chắn sẽ giúp các bé tự tin và nổi bật trong mọi hoàn cảnh', 305000.00, '2024-12-17 13:05:36', 8, 100, 255000.00, NULL, 0),
+(29, '015', 'Bé trai,BST Đồ Đi Chơi Noel', 'Đồ bộ', 'Đồ bộ thun Spider-Man dài tay bé trai Rabity', '561001240-3_d0cabd4ade3e44348b7face22fd02285.webp', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất nỉ được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.', 296000.00, '2024-12-17 13:08:44', 30, 100, 189000.00, NULL, 0),
+(30, '016', 'Bé trai', 'Phụ kiện', 'Mũ lưỡi trai Spider-Man bé trai Rabity', '9710042400005_c5577a1c716b4e12ade596f90b9ef691.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 13:20:05', 5, 99, 55000.00, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -202,10 +139,56 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image_path`) VALUES
-(11, 1, 'Screenshot 2024-12-12 211616.png'),
-(12, 1, 'Screenshot 2024-12-12 211611.png'),
-(13, 1, 'Screenshot 2024-12-12 211606.png'),
-(14, 1, 'Screenshot 2024-12-12 211602.png');
+(21, 12, '900083-1_3f456f0b9b1b460bb4dc62cba27f7c61.webp'),
+(22, 12, '900083-2_f676510a34064b79b5045c7c142c1833.webp'),
+(23, 16, '20_copy_d47e753a01824893ac2ba6e9dd212487.webp'),
+(24, 16, '20-3_efa29bc4d967494fad17c88c8b6b016c.webp'),
+(25, 16, 'dsc09563_copy_9de59a5b94b64c4295ced9bc1344d0d3.webp'),
+(26, 16, 'dsc09916_copy_ab851af594454a1d84229c51354c3221.webp'),
+(27, 17, '24_copy_08e3cbf6a64d424188661bc950b040ee.webp'),
+(28, 17, '25_copy_2fa4e03adc3d412e97e590c7613d1f99.webp'),
+(29, 17, '25-3_f20f08c9b8a143759896c7bbc024f6fd.webp'),
+(30, 17, 'dsc09627_copy_b29e3f26682e4872bf9b44e618659391.webp'),
+(31, 18, '842001-4_3a42949a6e72460f85899f68a04cca96.webp'),
+(32, 18, '842001-5_49b94e33b7474ca3b1f2a14a46547b31.webp'),
+(33, 18, 'dsc09913_copy_2eca5e577c7e4752a6cb25032ca4556c.webp'),
+(34, 19, '841001241-1_ebfac57210d0449c92af9abe750d234b.webp'),
+(35, 19, '841001241-2_53f2c95fdfe44f76ac9a83e790405ef0.jpg'),
+(36, 19, '841001241-3_3dfefc0946ec4ac29f9032dd5291a0b4.jpg'),
+(37, 20, '866001_2574bdfa1c704bceb5e0645f24f65201.webp'),
+(38, 20, '866001-2_de9fba8d24d94a20b76cb6d9eece235f.webp'),
+(39, 20, '866001-3_76783c4b20934da7bdd6df6c0d533c4e.webp'),
+(40, 20, 'dsc09466_copy_2_9220c91fe3a1460a849fc71ea6890e16.webp'),
+(41, 21, '97103424-2_a9f7a6067097479cbcc5f3b79f399b2c.webp'),
+(42, 21, '97103424-4_99860972dc6d47afb1ae30d8663d8d50.webp'),
+(43, 21, '97103424-6_008c8864711b4a9aa24ca609f92db8c4.webp'),
+(44, 22, '97102824-1_0dae3895e4144607a02faccbee612199.webp'),
+(45, 22, '97102824-4_827473af48aa408891a3ee6ce128ee7c.webp'),
+(46, 22, '97102824-5_eb9d014b54ab42e59bed6c82264bb18b.webp'),
+(47, 23, '2_0_e2f3e674e0a54bd4897c1fef73c0b0f3.webp'),
+(48, 23, '2_2_a4afb5573f3141478d31f7b8e61ff4a7.webp'),
+(49, 23, 'dsc03740_copy_71ade21c60d24816b9f6e2d2a68c8b8b.webp'),
+(50, 24, '2_4_f2760e2465e745989f501d25b10d6477.webp'),
+(51, 24, '3.webp'),
+(52, 24, 'dsc00001_copy_fe82929405934053b1818a29c750c189.webp'),
+(53, 24, 'gfg_13450e3da6c4488580171dad6e7e6638.webp'),
+(54, 25, '900081-2_8936cd3e540645cd8eec1638dd92e4eb.webp'),
+(55, 25, '900081-3_d987ec0e043d4d6aaa6122b782e713aa.webp'),
+(56, 26, '900080243-3_dff2eaf2213b42369f9ca6f322dbf4be.webp'),
+(57, 26, '900080243-4_f5de8d0fa4da40619db9e2a82d56b0d9.webp'),
+(58, 26, '900080243-6_a7203dacfd3048ddae6b3df628426d40.webp'),
+(59, 27, '11_4_3ce11ebfec1440fc9f2c9fe264ea8ebd.webp'),
+(60, 27, '11_copy_55fd10ce2e614e0698d6b0b2b695ee94.webp'),
+(61, 27, '12-2_0af1cf20079f4dd6864404a20d5901d1.webp'),
+(62, 28, '542001240-6_f8e256889c194942932bc65ad99d3a08.jpg'),
+(63, 28, '542001240-7_4cc3b175748947e0b67e0d7f3e9e25fe.webp'),
+(64, 28, 'dsc01210_copy_ead4aeeee7224dbfb07ca6ce262d1476.webp'),
+(65, 28, 'dsc01286_copy_4393983e15da4d679da096041b93a977.webp'),
+(66, 29, '561001240-6_4ee64494936641fdb52e31ce337541a8.webp'),
+(67, 29, 'dsc01120_copy_50ddce35cbe44a598893fe825cf45a07.webp'),
+(68, 29, 'dsc01123_copy_55756ae2c80d42388b88931bb8bd19e2.webp'),
+(69, 30, '9710042400005-1_04090cae29914854bbeeffbc1a34132e.webp'),
+(70, 30, '9710042400005-2_1f7602c85c7e45378b450cde747ccba0.webp');
 
 -- --------------------------------------------------------
 
@@ -225,8 +208,9 @@ CREATE TABLE `security_questions` (
 --
 
 INSERT INTO `security_questions` (`id`, `user_id`, `question`, `answer`) VALUES
-(1, 11, 'Tên thú cưng đầu tiên của bạn là gì?', '$2y$10$1NBDuXSrCUZ8mvlW0jD5WO/GiyFj43iSlK4EKggr7VUmWtu1KNnMS'),
-(2, 12, 'Phúc béo có béo không?', '$2y$10$mTY9uh9QmlOAo4c1IioczeqVrgI99kksKUnD.Wiu9vmLU6lU6kQGW');
+(3, 13, 'Tên tôi là gì?', '$2y$10$EtOIYMA8by4ychNE6ML5BOsbHKtEOGs02tXxCfn1WhCYzVYXko8GC'),
+(4, 14, '123?', '$2y$10$QFMXcak/RepLQpA.eUEgaefwpuYvY.W5fYyGFloVaDz74.Yp9JTkq'),
+(5, 15, '1234?', '$2y$10$mqdcR2nnop30BfUwEJJepOZoyJKSde9rRus3XEwzJzFYR9nOuTgVO');
 
 -- --------------------------------------------------------
 
@@ -240,7 +224,6 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `gender` varchar(10) NOT NULL,
   `role` enum('admin','user') DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -249,17 +232,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `password`, `gender`, `role`, `created_at`) VALUES
-(1, '', 'tuan1', 'xmeosadx@gmail.com', '$2y$10$..qwYnX8sNPFB5/CjcPMMO1UxCnYy3udkvKAT8zDuXY2c4PldG.Dq', '', 'user', '2024-11-24 13:34:32'),
-(2, '', 'admin', 'xmeo2612x@gmail.com', '$2y$10$.STfEayHecZFksdKU.OAIup92zbneMWwJ1goW.r0DetqvFxLVJ1fG', '', 'admin', '2024-11-24 13:56:47'),
-(3, '', 'tuan2', 'Farmx12@zz.zz', '$2y$10$.0afaOuXOA066qrwu/QjgOnKVC5PvzCPNXvmhuUoy8Af0aenzt1.m', '', 'user', '2024-12-03 10:47:36'),
-(4, 'Phạm Quang Tuấn', 'quangtuan', 'quangtuan@gmail.com', '$2y$10$6tDmsLa7oLK.phCaocDC/uHZowoBKxZBc74Vymk6XeWZOe39.wZsq', 'Nam', 'user', '2024-12-14 10:00:46'),
-(5, 'Trần Phương Ly', 'phuonglyxinhgai', 'may_lily@gmail.com', '$2y$10$NyJ5MIYMgC/boQKce4zk0evQCm/Zh6HQ/S2kSeAuOBNoDcNxdxtry', 'Nữ', 'user', '2024-12-14 10:14:51'),
-(6, 'Phạm Quang Tuấn1', 'quangtuanxautrai', 'ptuan2594@gmail.com', '$2y$10$fz/96XXY/qB3swrJgnKxQ.4QqygfTSyfBgr1f36n/ywakC6tlM37S', 'Nam', 'user', '2024-12-14 16:41:25'),
-(8, 'Nguyễn Đình Tuấn', 'tuan7', 'Farmx111@zz.zz', '$2y$10$vbNHMeJK6pRYCV28VWs0ruFqUjGsnOmccPl2b9.SMRn2tKvkXFbJC', 'Nam', 'user', '2024-12-15 18:04:46'),
-(9, '4', 'tuan10', 'Farmx112143@zz.zz', '$2y$10$djlOFs2icvpKnD33t7MnGec8YwlQQtgnuumphTc6qujt3c3VRV3Vi', 'Nam', 'user', '2024-12-16 04:41:24'),
-(11, '56', 'tuan1111', 'Farmx1112435465@zz.zz', '$2y$10$hH6Iqhukp2.7mbjWiKk.O.N0dOGYwvmGz4YPvqqeiAnwLN.pGY.y.', 'Nam', 'user', '2024-12-16 04:53:28'),
-(12, '5678', 'tuan11111', 'Farmx12451211@zz.zz', '$2y$10$VHubjsaBKTqNxVSGBuo3RefVwEaTBUwx69C6xCLnQYzxPU6sfvAk6', 'Nam', 'user', '2024-12-16 05:38:01');
+INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `password`, `role`, `created_at`) VALUES
+(13, 'Nguyễn Đình Tuấn', 'admin', 'tuan1@zz.zz', '$2y$10$7H9i7CLqWwPSzoY4Rge82.K6nOTdm.g3mCuyCwz8lSAVyIcxCOJ6a', 'admin', '2024-12-17 11:55:18'),
+(14, 'abc', 'tuan1', 'Farmx12@zz.zz', '$2y$10$TZ3BN9EXxP7S1viGpjLT0ei5vLGaIYU41buu0Y0d2h8axWMdcqHOW', 'user', '2024-12-17 13:22:03'),
+(15, 'asd', 'tuan2', '123@zz.zz', '$2y$10$E4dvutvkMXyP2oxBQ/UeZO.QNBV1bWkgj88LZ8tWNf8cb4m7Whoh2', 'user', '2024-12-17 14:09:19');
 
 -- --------------------------------------------------------
 
@@ -270,7 +246,7 @@ INSERT INTO `users` (`id`, `fullname`, `username`, `email`, `password`, `gender`
 CREATE TABLE `user_profiles` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `gender` enum('Nam','Nữ','Khác') DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `phone` varchar(15) DEFAULT NULL,
   `address` text DEFAULT NULL,
@@ -283,17 +259,15 @@ CREATE TABLE `user_profiles` (
 --
 
 INSERT INTO `user_profiles` (`id`, `user_id`, `gender`, `birthdate`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-13 06:57:59', '2024-12-13 06:57:59'),
-(2, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-13 06:59:13', '2024-12-13 06:59:13'),
-(3, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-13 07:01:03', '2024-12-13 07:01:03'),
-(4, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-13 07:07:53', '2024-12-13 07:07:53'),
-(5, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-13 07:11:00', '2024-12-13 07:11:00'),
-(6, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-13 07:15:37', '2024-12-13 07:15:37'),
-(7, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-13 07:24:45', '2024-12-13 07:24:45'),
-(8, 1, 'Nam', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-15 18:03:28', '2024-12-15 18:03:28'),
-(9, 1, 'Nữ', '2004-06-26', '0836 998 775', 'Vũ Thư, Thái Bình', '2024-12-15 18:03:35', '2024-12-15 18:03:35'),
-(10, 8, 'Nữ', '0000-00-00', '', '', '2024-12-15 18:05:18', '2024-12-15 18:05:18'),
-(11, 8, 'Nữ', '0000-00-00', '', '', '2024-12-15 18:05:25', '2024-12-15 18:05:25');
+(12, 14, 'Nữ', '0000-00-00', '', '', '2024-12-17 13:50:28', '2024-12-17 13:51:24'),
+(13, 14, 'Nữ', '0000-00-00', '', '', '2024-12-17 13:50:52', '2024-12-17 13:51:24'),
+(14, 14, '', '0000-00-00', '', '', '2024-12-17 13:51:45', '2024-12-17 13:51:45'),
+(15, 15, 'Nữ', '2222-02-22', '', '', '2024-12-17 14:09:19', '2024-12-17 14:15:20'),
+(16, 15, 'Nữ', '2222-02-22', '', '', '2024-12-17 14:11:43', '2024-12-17 14:15:20'),
+(17, 15, 'Nữ', '2222-02-22', '', '', '2024-12-17 14:12:59', '2024-12-17 14:15:20'),
+(18, 15, 'Nam', '2222-02-22', '', '', '2024-12-17 14:15:38', '2024-12-17 14:15:38'),
+(19, 15, 'Nam', '1111-11-11', '', '', '2024-12-17 14:25:27', '2024-12-17 14:25:27'),
+(20, 15, 'Nữ', '2222-02-22', '', '', '2024-12-17 14:27:58', '2024-12-17 14:27:58');
 
 --
 -- Indexes for dumped tables
@@ -318,13 +292,6 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `product_categories`
---
-ALTER TABLE `product_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `product_images`
@@ -363,49 +330,43 @@ ALTER TABLE `user_profiles`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `product_categories`
---
-ALTER TABLE `product_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `security_questions`
 --
 ALTER TABLE `security_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user_profiles`
 --
 ALTER TABLE `user_profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -422,12 +383,6 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `product_categories`
---
-ALTER TABLE `product_categories`
-  ADD CONSTRAINT `product_categories_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Constraints for table `product_images`
