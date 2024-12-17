@@ -49,15 +49,15 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
         <div class="header-top">
             <!-- Logo -->
             <div class="logo">
-                <a href="./index.php">
-                    <img src="./logo.png" />
+                <a href="/php_btl/index.php">
+                    <img src="/php_btl/logo.png" />
                 </a>
             </div>
 
             <!-- Thanh tìm kiếm ở giữa -->
             <form class="search-bar" action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Bạn cần tìm gì?" required>
-                <button type="submit"><i class="fas fa-search"></i></button>
+                <button type="search"><i class="fas fa-search"></i></button>
                 </input>
             </form>
 

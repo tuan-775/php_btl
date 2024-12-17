@@ -12,7 +12,7 @@ $user_id = $_SESSION['user_id'];
 
 // Lấy thông tin người dùng từ cơ sở dữ liệu
 $stmt = $pdo->prepare(
-    "SELECT users.username, users.email, user_profiles.gender, 
+    "SELECT users.fullname, users.username, users.email, users.gender, 
             user_profiles.birthdate, user_profiles.phone, user_profiles.address 
      FROM users 
      LEFT JOIN user_profiles ON users.id = user_profiles.user_id 
@@ -28,6 +28,7 @@ if (!$user) {
 
 // Xử lý cập nhật thông tin
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Lấy thông tin từ form
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -37,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
     $address = $_POST['address'];
 
+    // Kiểm tra dữ liệu hợp lệ
     if (empty($username) || empty($email)) {
         $error = "Vui lòng điền đầy đủ thông tin.";
     } elseif (!empty($password) && $password !== $confirm_password) {
@@ -59,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([$username, $email, $user_id]);
             }
 
-            // Cập nhật bảng user_profiles
+            // Cập nhật bảng user_profiles (chỉnh sửa giới tính, ngày sinh, điện thoại và địa chỉ)
             $stmt = $pdo->prepare(
                 "INSERT INTO user_profiles (user_id, gender, birthdate, phone, address) 
                  VALUES (?, ?, ?, ?, ?) 
@@ -97,7 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include 'header.php'; ?>
-
     <main>
         <div class="edit-profile-container">
             <h1>Chỉnh sửa hồ sơ</h1>
@@ -105,6 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="error"><?php echo $error; ?></p>
             <?php endif; ?>
             <form method="POST">
+                <label for="fullname">Họ và tên:</label>
+                <input type="text" id="fullname" name="fullname" value="<?php echo htmlspecialchars($user['fullname']); ?>" required>
+
                 <label for="username">Tên người dùng:</label>
                 <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
 
@@ -130,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="button-container">
                     <a href="profile.php" class="back-btn">Quay lại hồ sơ</a>
-                    <button type="submit" class="btn-submit">Lưu thay đổi</button>
+                    <button type="submit" id='save-submit' class="btn-submit">Lưu thay đổi</button>
                 </div>
             </form>
         </div>

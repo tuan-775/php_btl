@@ -99,7 +99,7 @@ textarea {
 }
 
 /* Submit button */
-.btn-submit {
+.btn-submit[id='save-submit'] {
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
