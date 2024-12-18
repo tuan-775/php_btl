@@ -126,6 +126,7 @@ $categories = $category_stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th>Tồn kho</th>
                         <th>Ngày thêm</th>
                         <th>Thao tác</th>
+
                     </tr>
                 </thead>
                 <tbody>
