@@ -80,11 +80,11 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <div class="user-welcome">
                             <?php echo htmlspecialchars($_SESSION['username']); ?>!
                             <div class="dropdown-menu">
-                                <a href="./profile.php">Hồ sơ</a>
-                                <a href="./user_orders.php">Đơn hàng</a>
-                                <a href="./purchase_history.php">Lịch sử mua hàng</a>
-                                <a href="./change_password.php">Đổi mật khẩu</a>
-                                <a href="./login/logout.php">Đăng xuất</a>
+                                <a href="/php_btl/profile.php">Hồ sơ</a>
+                                <a href="/php_btl/user_orders.php">Đơn hàng</a>
+                                <a href="/php_btl/purchase_history.php">Lịch sử mua hàng</a>
+                                <a href="/php_btl/change_password.php">Đổi mật khẩu</a>
+                                <a href="/php_btl/login/logout.php">Đăng xuất</a>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -93,8 +93,8 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                     <div class="user-icon">
                         <i class="fas fa-user"></i>
                         <div class="dropdown-menu">
-                            <a href="./login/login.php">Đăng nhập</a>
-                            <a href="./login/register.php">Đăng ký</a>
+                            <a href="/php_btl/login/login.php">Đăng nhập</a>
+                            <a href="/php_btl/login/register.php">Đăng ký</a>
                         </div>
                     </div>
                 <?php endif; ?>
