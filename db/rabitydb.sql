@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2024 at 06:41 PM
+-- Generation Time: Dec 18, 2024 at 07:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,6 +43,32 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `size`) VALUES
 (91, 14, 28, 1, '2024-12-17 13:30:29', '10Y'),
 (92, 14, 22, 1, '2024-12-17 13:30:34', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedbacks`
+--
+
+CREATE TABLE `feedbacks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` enum('pending','resolved','deleted') DEFAULT 'pending',
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `feedbacks`
+--
+
+INSERT INTO `feedbacks` (`id`, `name`, `email`, `message`, `created_at`, `status`, `user_id`) VALUES
+(1, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngu', '2024-12-18 17:54:02', 'deleted', 0),
+(2, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngu', '2024-12-18 17:55:05', 'deleted', 0),
+(3, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngu', '2024-12-18 17:55:23', 'deleted', 0),
+(4, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngo', '2024-12-18 18:00:36', 'resolved', 14);
 
 -- --------------------------------------------------------
 
@@ -304,6 +330,12 @@ ALTER TABLE `cart`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `news`
 --
 ALTER TABLE `news`
@@ -360,6 +392,12 @@ ALTER TABLE `user_profiles`
 --
 ALTER TABLE `cart`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `news`
