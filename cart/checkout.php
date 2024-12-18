@@ -2,10 +2,14 @@
 session_start();
 require '../db.php';
 
-session_start();
-
 // Kiểm tra xem người dùng đã đăng nhập chưa
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+if (!isset($_SESSION['user_id'])) {
+    // Bạn có thể thay đổi đường dẫn đến trang đăng nhập của mình
+    header("Location: /php_btl/login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
 
 // Lấy danh sách sản phẩm trong giỏ hàng
 $stmt = $pdo->prepare("SELECT cart.id AS cart_id, products.id AS product_id, products.name AS product_name, 
@@ -110,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
