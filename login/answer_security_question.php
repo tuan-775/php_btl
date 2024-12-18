@@ -35,9 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Trả lời câu hỏi bảo mật</title>
+    <link rel="stylesheet" href="../css/answer_question_sec.css">
     <script>
         // Hiển thị hộp thoại xác nhận khi trả lời đúng
         function confirmResetPassword() {
@@ -48,23 +50,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </script>
 </head>
-<body>
-    <h1>Trả lời câu hỏi bảo mật</h1>
-    <form method="POST" action="answer_security_question.php">
-        <p><strong>Câu hỏi bảo mật:</strong> <?php echo htmlspecialchars($security_question); ?></p>
-        <label for="security_answer">Câu trả lời:</label>
-        <input type="text" id="security_answer" name="security_answer" required>
-        <button type="submit">Xác nhận</button>
-        <?php if (!empty($error_message)): ?>
-            <p style="color: red;"><?php echo $error_message; ?></p>
-        <?php endif; ?>
-    </form>
 
-    <!-- Xử lý khi câu trả lời đúng -->
-    <?php if ($correct_answer): ?>
-        <script>
-            confirmResetPassword();
-        </script>
-    <?php endif; ?>
+<body>
+    <main>
+        <h1>Trả lời câu hỏi bảo mật</h1>
+        <form method="POST" action="answer_security_question.php">
+            <p><strong>Câu hỏi bảo mật:</strong> <?php echo htmlspecialchars($security_question); ?></p>
+            <label for="security_answer">Câu trả lời:</label>
+            <input type="text" id="security_answer" name="security_answer" required>
+            <button type="submit">Xác nhận</button>
+            <?php if (!empty($error_message)): ?>
+                <p style="color: red;"><?php echo $error_message; ?></p>
+            <?php endif; ?>
+            <a href="./forgot_password.php">Quay lại Quên mật khẩu</a>
+        </form>
+
+        <!-- Xử lý khi câu trả lời đúng -->
+        <?php if ($correct_answer): ?>
+            <script>
+                confirmResetPassword();
+            </script>
+        <?php endif; ?>
+    </main>
 </body>
+
 </html>
