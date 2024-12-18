@@ -42,7 +42,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php if (empty($cart_items)): ?>
                 <div class="empty-cart">
                     <p>Giỏ hàng của bạn đang trống!</p>
-                    <a href="../index.php" class="btn-return">Quay lại Trang chủ</a>
+                    <a href="../index.php" class="btn-return">Tiếp tục mua sắm</a>
                 </div>
             <?php else: ?>
                 <table>
@@ -70,9 +70,9 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         ?>
                             <tr>
                                 <td>
-                                    <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>" 
-                                         alt="<?php echo htmlspecialchars($item['name']); ?>" 
-                                         style="width:50px; height:50px; object-fit:cover;">
+                                    <img src="../uploads/<?php echo htmlspecialchars($item['image']); ?>"
+                                        alt="<?php echo htmlspecialchars($item['name']); ?>"
+                                        style="width:50px; height:50px; object-fit:cover;">
                                 </td>
                                 <td align="center"><?php echo htmlspecialchars($item['name']); ?></td>
                                 <td align="center"><?php echo htmlspecialchars($item['size']); ?></td>
