@@ -71,7 +71,8 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="infomation">
                     <h1><?php echo htmlspecialchars($product['name']); ?></h1>
-                    <div class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?> </div>
+                    <div class="price">₫
+                        <?php echo number_format($product['price'], 0, ',', '.'); ?> </div>
                     <p><strong>Mã sản phẩm:</strong> <?php echo htmlspecialchars($product['product_code']); ?></p>
                     <p><strong>Mô tả:</strong> <?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
 
@@ -83,7 +84,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <?php foreach ($sizeOptions as $opt): ?>
                                 <label id='size' style="display:inline-block; margin-right:10px;margin-bottom:10px; border:1px solid #ccc; padding:5px;">
-                                    <input type="radio" name="selected_size" value="<?php echo htmlspecialchars($opt['value']); ?>">
+                                    <input type="radio" name="selected_size" required value="<?php echo htmlspecialchars($opt['value']); ?>">
                                     <?php echo htmlspecialchars($opt['label']); ?>
                                 </label>
                             <?php endforeach; ?>

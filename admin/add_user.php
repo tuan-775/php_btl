@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Thêm thông tin vào bảng `users`
         $stmt = $pdo->prepare("INSERT INTO users (fullname, username, email, password, role, created_at) 
-                               VALUES (?, ?, ?, ?, NOW())");
+                               VALUES (?, ?, ?, ?, ?, NOW())");
         $stmt->execute([$fullname, $username, $email, $password, $role]);
 
         // Lấy `user_id` vừa được thêm vào
