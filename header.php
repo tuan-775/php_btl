@@ -158,6 +158,7 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <li><a href="/php_btl/sale.php?category=Bé trai">Sale Bé trai</a></li>
                     </ul>
                 </li>
+                <a href="/php_btl/Pages/News/new_list.php">Tin tức</a>
             </ul>
         </nav>
     </header>
