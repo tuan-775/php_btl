@@ -44,6 +44,9 @@ require '../db.php';
             <div>
                 <a href="News/manage_news.php" class="menu-btn">Quản lý tin tức</a>
             </div>
+            <div>
+                <a href="feedback/manage_feedback.php" class="menu-btn">Quản lý góp ý</a>
+            </div>
         </main>
     </header>
 </body>
