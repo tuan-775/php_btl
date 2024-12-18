@@ -13,7 +13,14 @@ $product = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$product) {
     die("Sản phẩm không tồn tại.");
 }
-
+// Truy vấn các đánh giá sản phẩm cùng với thông tin người dùng
+$stmt_reviews = $pdo->prepare("
+    SELECT product_reviews.*, users.fullname AS user_name 
+    FROM product_reviews 
+    JOIN users ON product_reviews.user_id = users.id 
+    WHERE product_reviews.product_id = ?");
+$stmt_reviews->execute([$product_id]);
+$reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
 // Lấy ảnh phụ
 $img_stmt = $pdo->prepare("SELECT image_path FROM product_images WHERE product_id = ?");
 $img_stmt->execute([$product_id]);
@@ -102,8 +109,9 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             <?php endif; ?>
                         </form>
-                    <?php else: ?>
 
+                    <?php else: ?>
+                        
                         <form action="cart/add_to_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                             <label id='quantity'>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
@@ -119,6 +127,25 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php endif; ?>
                         </form>
                     <?php endif; ?>
+                    <!-- Hiển thị đánh giá sản phẩm -->
+                    <h2>Đánh giá sản phẩm</h2>
+
+                    <button id="toggleReviewsBtn">Xem tất cả đánh giá</button>
+
+                    <div class="reviews-container" id="reviewsContainer">
+                        <?php foreach ($reviews as $review): ?>
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <span class="review-user"><?php echo htmlspecialchars($review['user_name']); ?></span> 
+                                    <span class="review-rating">Đánh giá: <?php echo $review['rating']; ?>/5 sao</span>
+                                    <span class="review-date"><?php echo date("d/m/Y", strtotime($review['created_at'])); ?></span>
+                                </div>
+                                <div class="review-body">
+                                    <p class="review-text"><?php echo nl2br(htmlspecialchars($review['review'])); ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </section>
@@ -148,6 +175,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     <?php endforeach; ?>
                 </div>
+                
             </div>
         </section>
     </main>
@@ -157,6 +185,24 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
         function changeMainImage(src) {
             document.getElementById('main-product-image').src = src;
         }
+    </script>
+    <script>
+        // Hiển thị hoặc ẩn tất cả các đánh giá
+        let reviewsContainer = document.getElementById('reviewsContainer');
+        let toggleBtn = document.getElementById('toggleReviewsBtn');
+
+        // Mặc định ẩn các đánh giá
+        reviewsContainer.style.display = 'none';
+
+        toggleBtn.addEventListener('click', function() {
+            if (reviewsContainer.style.display === 'none') {
+                reviewsContainer.style.display = 'block'; // Hiển thị tất cả đánh giá
+                toggleBtn.textContent = 'Ẩn tất cả đánh giá'; // Đổi văn bản nút thành "Ẩn tất cả đánh giá"
+            } else {
+                reviewsContainer.style.display = 'none'; // Ẩn tất cả đánh giá
+                toggleBtn.textContent = 'Xem tất cả đánh giá'; // Đổi văn bản nút thành "Xem tất cả đánh giá"
+            }
+        });
     </script>
 </body>
 
