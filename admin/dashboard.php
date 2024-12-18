@@ -41,6 +41,9 @@ require '../db.php';
             <div>
                 <a href="manage_orders.php" class="menu-btn">Quản lý đơn hàng</a>
             </div>
+            <div>
+                <a href="News/manage_news.php" class="menu-btn">Quản lý tin tức</a>
+            </div>
         </main>
     </header>
 </body>
