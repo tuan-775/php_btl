@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2024 at 07:19 PM
+-- Generation Time: Dec 18, 2024 at 08:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,14 +36,6 @@ CREATE TABLE `cart` (
   `size` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `size`) VALUES
-(91, 14, 28, 1, '2024-12-17 13:30:29', '10Y'),
-(92, 14, 22, 1, '2024-12-17 13:30:34', '');
-
 -- --------------------------------------------------------
 
 --
@@ -59,16 +51,6 @@ CREATE TABLE `feedbacks` (
   `status` enum('pending','resolved','deleted') DEFAULT 'pending',
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `feedbacks`
---
-
-INSERT INTO `feedbacks` (`id`, `name`, `email`, `message`, `created_at`, `status`, `user_id`) VALUES
-(1, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngu', '2024-12-18 17:54:02', 'deleted', 0),
-(2, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngu', '2024-12-18 17:55:05', 'deleted', 0),
-(3, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngu', '2024-12-18 17:55:23', 'deleted', 0),
-(4, 'Nguyễn Đình Tuấn', 'tuan1@zz.zz', 'ngo', '2024-12-18 18:00:36', 'resolved', 14);
 
 -- --------------------------------------------------------
 
@@ -124,7 +106,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_name`, `phone`, `address`, `product_id`, `product_name`, `price`, `quantity`, `total_price`, `created_at`, `payment_method`, `shipping_method`, `shipping_cost`, `bank`, `user_id`, `status`, `updated_at`) VALUES
-(65, 'Nguyễn Đình Tuấn', '0836 998 775', '12344', 30, 'Mũ lưỡi trai Spider-Man bé trai Rabity', 129000.00, 1, 159000.00, '2024-12-17 13:23:17', 'bank_transfer', 'standard', 30000, 'MB', 14, 'Chưa giao', '2024-12-17 13:23:17');
+(65, 'Nguyễn Đình Tuấn', '0836 998 775', '12344', 30, 'Mũ lưỡi trai Spider-Man bé trai Rabity', 129000.00, 1, 159000.00, '2024-12-17 13:23:17', 'bank_transfer', 'standard', 30000, 'MB', 14, 'Đã nhận', '2024-12-18 19:24:00'),
+(66, 'Áo thun ngắn tay Ngoan xinh yêu cho bé gái', '12345', 'Thái Bình', 28, 'Quần kaki dài Marvel Avengers bé trai Rabity', 305000.00, 4, 1270000.00, '2024-12-18 18:30:18', 'COD', 'express', 50000, '', 13, 'Đã giao', '2024-12-18 18:40:29');
 
 -- --------------------------------------------------------
 
@@ -167,8 +150,8 @@ INSERT INTO `products` (`id`, `product_code`, `category`, `category_name`, `name
 (25, '011', 'Bé trai', 'Áo', '[Độc quyền Online] Áo thun ngắn tay in chữ Việt Nam bé trai/bé gái Rabity', '900081-1_2408deff07e148a2a3e1a480e3c3f83e.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 12:57:17', 10, 100, 100000.00, NULL, 0),
 (26, '012', 'Bé trai', 'Áo', '[Độc quyền Online] Áo thun ngắn tay bé trai/bé gái Capybara', '900080243-0_56b8193299984f72a7354eca24d3dc22.webp', 'Nội dung đang được cập nhật', 125000.00, '2024-12-17 12:59:59', 15, 100, 75000.00, NULL, 0),
 (27, '013', 'Bé trai', 'Quần', 'Quần short kaki bé trai Rabity x ELLE Kids - designed in Paris', '12_copy_40e4cabb91894d6cb087798f8b7d45ad.webp', 'Quần short kaki là một trong những sản phẩm luôn được ba mẹ ưa chuộng khi phối đồ cho bé trai bởi sự tiện lợi và thoải mái mà chúng mang lại cho bé. Bạn có thể phối nhiều outfits khác nhau cho bé từ những chiếc quần short từ năng động đến lịch sự, mặc đi học, đi chơi, đi tiệc,...đều phù hợp.', 269000.00, '2024-12-17 13:02:38', 5, 100, 150000.00, NULL, 0),
-(28, '014', 'Bé trai', 'Quần', 'Quần kaki dài Marvel Avengers bé trai Rabity', '542001240-1_d6f47fa0a54f4905a67eabf790559e88.jpg', 'Quần kaki là sự kết hợp hoàn hảo giữa phong cách năng động và tiện dụng. Quần kaki không chỉ phù hợp cho những buổi dạo phố, mà còn là lựa chọn lý tưởng cho các bé khi tham gia các hoạt động ngoại khóa, vui chơi thể thao. Hơn nữa, với kiểu dáng thời trang và màu sắc phong phú, quần kaki chắc chắn sẽ giúp các bé tự tin và nổi bật trong mọi hoàn cảnh', 305000.00, '2024-12-17 13:05:36', 8, 100, 255000.00, NULL, 0),
-(29, '015', 'Bé trai,BST Đồ Đi Chơi Noel', 'Đồ bộ', 'Đồ bộ thun Spider-Man dài tay bé trai Rabity', '561001240-3_d0cabd4ade3e44348b7face22fd02285.webp', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất nỉ được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.', 296000.00, '2024-12-17 13:08:44', 30, 100, 189000.00, NULL, 0),
+(28, '014', 'Bé trai', 'Quần', 'Quần kaki dài Marvel Avengers bé trai Rabity', '542001240-1_d6f47fa0a54f4905a67eabf790559e88.jpg', 'Quần kaki là sự kết hợp hoàn hảo giữa phong cách năng động và tiện dụng. Quần kaki không chỉ phù hợp cho những buổi dạo phố, mà còn là lựa chọn lý tưởng cho các bé khi tham gia các hoạt động ngoại khóa, vui chơi thể thao. Hơn nữa, với kiểu dáng thời trang và màu sắc phong phú, quần kaki chắc chắn sẽ giúp các bé tự tin và nổi bật trong mọi hoàn cảnh', 305000.00, '2024-12-17 13:05:36', 8, 96, 255000.00, NULL, 4),
+(29, '015', 'Bé trai,BST Đồ Đi Chơi Noel,BST Disney - Friends', 'Đồ bộ', 'Đồ bộ thun Spider-Man dài tay bé trai Rabity', '561001240-3_d0cabd4ade3e44348b7face22fd02285.webp', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất nỉ được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.', 296000.00, '2024-12-17 13:08:44', 30, 100, 189000.00, NULL, 0),
 (30, '016', 'Bé trai', 'Phụ kiện', 'Mũ lưỡi trai Spider-Man bé trai Rabity', '9710042400005_c5577a1c716b4e12ade596f90b9ef691.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 13:20:05', 5, 99, 55000.00, NULL, 1);
 
 -- --------------------------------------------------------
@@ -238,6 +221,29 @@ INSERT INTO `product_images` (`id`, `product_id`, `image_path`) VALUES
 (68, 29, 'dsc01123_copy_55756ae2c80d42388b88931bb8bd19e2.webp'),
 (69, 30, '9710042400005-1_04090cae29914854bbeeffbc1a34132e.webp'),
 (70, 30, '9710042400005-2_1f7602c85c7e45378b450cde747ccba0.webp');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_reviews`
+--
+
+CREATE TABLE `product_reviews` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `review` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `product_reviews`
+--
+
+INSERT INTO `product_reviews` (`id`, `order_id`, `product_id`, `user_id`, `rating`, `review`, `created_at`) VALUES
+(1, 65, 30, 14, 5, 'Đẹp', '2024-12-18 19:27:43');
 
 -- --------------------------------------------------------
 
@@ -362,6 +368,15 @@ ALTER TABLE `product_images`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `security_questions`
 --
 ALTER TABLE `security_questions`
@@ -391,7 +406,7 @@ ALTER TABLE `user_profiles`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `feedbacks`
@@ -409,7 +424,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -422,6 +437,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+
+--
+-- AUTO_INCREMENT for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `security_questions`
@@ -462,6 +483,14 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD CONSTRAINT `product_reviews_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `product_reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  ADD CONSTRAINT `product_reviews_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `security_questions`
