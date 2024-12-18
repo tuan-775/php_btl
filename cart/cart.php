@@ -74,7 +74,9 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         alt="<?php echo htmlspecialchars($item['name']); ?>"
                                         style="width:50px; height:50px; object-fit:cover;">
                                 </td>
-                                <td align="center"><?php echo htmlspecialchars($item['name']); ?></td>
+                                <td align="center"><a href="/php_btl/product_detail.php?id=<?php echo urlencode($item['product_id']); ?>">
+                                        <?php echo htmlspecialchars($item['name']); ?>
+                                    </a></a></td>
                                 <td align="center"><?php echo htmlspecialchars($item['size']); ?></td>
                                 <td align="center"><?php echo $item['quantity']; ?></td>
                                 <td align="center"><?php echo number_format($item['price'], 0, ',', '.'); ?> </td>
