@@ -76,6 +76,69 @@ table img {
     object-fit: cover;
 }
 
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.filter_products {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input {
+    flex: 1 1 calc(50% - 10px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+form input:hover,
+form input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+form button {
+    flex: 1 1 100%;
+    width: 400px;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    form input {
+        flex: 1 1 100%;
+    }
+}
+
 /* Responsive Thiết Kế */
 @media (max-width: 768px) {
     main {
