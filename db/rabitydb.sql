@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 03:34 PM
+-- Generation Time: Dec 18, 2024 at 06:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,6 +43,29 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `size`) VALUES
 (91, 14, 28, 1, '2024-12-17 13:30:29', '10Y'),
 (92, 14, 22, 1, '2024-12-17 13:30:34', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `image` varchar(255) DEFAULT NULL,
+  `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `category` varchar(255) NOT NULL DEFAULT 'Khác'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `content`, `created_at`, `image`, `post_date`, `category`) VALUES
+(3, 'Top 5 địa điểm bán áo dài trẻ em đẹp nhất', 'Áo dài trẻ em không chỉ là trang phục truyền thống mà còn giúp bé thêm phần rạng rỡ trong các dịp lễ hội. Từ các mẫu áo dài cách tân trẻ em hiện đại đến áo dài trẻ em cao cấp mang vẻ đẹp truyền thống, việc chọn áo dài trẻ em chất lượng luôn là ưu tiên hàng đầu của các bậc phụ huynh. Nếu bạn đang tìm kiếm cửa hàng bán áo dài trẻ em uy tín hoặc muốn biết nơi mua áo dài cho bé trai và bé gái với đa dạng mẫu mã, bài viết này sẽ gợi ý những địa điểm tốt nhất để bạn dễ dàng lựa chọn.\r\n\r\n1. Áo dài trẻ em tại Rabity Kids Fashion\r\nRabity Kids Fashion từ lâu đã trở thành cái tên quen thuộc với ba mẹ đang tìm kiếm áo dài trẻ em đẹp và chất lượng. Với hệ thống trải dài khắp cả nước, Rabity sở hữu hơn 50 cửa hàng, trong đó có khoảng 20 shop bán áo dài trẻ em tại TP.HCM. Rabity có 2 cửa hàng flagship tọa lạc tại các tuyến phố trung tâm là Nguyễn Đình Chiểu và Hai Bà Trưng.\r\n\r\nNgoài ra, Rabity còn mở rộng bán hàng trên các kênh Online như website rabity.vn, Fanpage Rabity Kids Fashion và các sàn thương mại điện tử như Shopee, Tik Tok Shop, với nhiều ưu đãi siêu tốt. Đây là địa chỉ đáng tin cậy để phụ huynh dễ dàng mua áo dài cho bé trai hoặc bé gái với nhiều ưu đãi hấp dẫn.\r\n\r\nRabity luôn cung cấp các mẫu áo dài trẻ em cao cấp, sử dụng chất liệu đạt tiêu chuẩn quốc tế. \r\n\r\nCác thiết kế áo dài trẻ em của Rabity không chỉ mang vẻ đẹp thời thượng mà còn đảm bảo sự thoải mái tối đa cho bé khi vận động. Những mẫu áo dài trẻ em Tết tại đây được cập nhật thường xuyên, phù hợp xu hướng mới nhất, giúp bé thêm phần tự tin và nổi bật trong những ngày lễ hội.\r\n\r\nBa mẹ có thể dễ dàng tìm kiếm địa chỉ bán áo dài trẻ em gần nhất bằng cách truy cập danh sách cửa hàng trên website chính thức.\r\n\r\nChế độ đổi trả hàng cũng rất tuyệt vời và là điểm cộng lớn cho ba mẹ khi mua áo dài trẻ em ở đây, vì có thể yên tâm đổi trả hàng khi hàng lỗi hoặc không vừa size.\r\n\r\nNếu bạn đang tìm kiếm thời trang áo dài trẻ em ngày Tết hoặc bất kỳ dịp đặc biệt nào, Rabity là nơi mang đến những sản phẩm chất lượng, đảm bảo sự hài lòng cho cả bé và ba mẹ.\r\n\r\n', '2024-12-18 17:30:38', 'top_5_dia_diem_ban_ao_dai_tre_em_dep_nhat_1296689f57ae4b6dae3dfb5233d29979.webp', '2024-12-18 17:30:38', 'Mới');
 
 -- --------------------------------------------------------
 
@@ -281,6 +304,12 @@ ALTER TABLE `cart`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -331,6 +360,12 @@ ALTER TABLE `user_profiles`
 --
 ALTER TABLE `cart`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orders`
