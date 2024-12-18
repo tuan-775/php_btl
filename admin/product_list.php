@@ -80,7 +80,7 @@ $categories = $category_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <label for="product_code">Mã sản phẩm:</label>
                     <input type="text" id="product_code" name="product_code" value="<?php echo htmlspecialchars($product_code); ?>">
                 </div>
-                <div class="filter-group">
+                <!-- <div class="filter-group">
                     <label for="category">Loại sản phẩm:</label>
                     <select id="category" name="category">
                         <option value="">Tất cả</option>
@@ -90,7 +90,7 @@ $categories = $category_stmt->fetchAll(PDO::FETCH_ASSOC);
                             </option>
                         <?php endforeach; ?>
                     </select>
-                </div>
+                </div> -->
                 <div class="filter-group">
                     <label for="product_name">Tên sản phẩm:</label>
                     <input type="text" id="product_name" name="product_name" value="<?php echo htmlspecialchars($product_name); ?>">

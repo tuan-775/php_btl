@@ -19,14 +19,16 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thống kê tồn kho</title>
-    <link rel="stylesheet" href="../css/product_list.css">
+    <!-- <link rel="stylesheet" href="../css/product_list.css"> -->
+    <link rel="stylesheet" href="./css/inventory.css">
 </head>
 
 <body>
-    <header>
-        <h1>Thống kê tồn kho</h1>
-    </header>
+
     <main>
+        <header>
+            <h1>Thống kê tồn kho</h1>
+        </header>
         <a href="dashboard.php" class="back-btn">Quay lại quản trị</a>
         <table>
             <thead>
