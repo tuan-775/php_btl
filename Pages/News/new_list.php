@@ -9,6 +9,7 @@ $news_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,40 +17,45 @@ $news_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../../css/new_list.css">
     <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/footer.css">
+    <!-- <link rel="stylesheet" href="../../css/style.css"> -->
 </head>
+
 <body>
-    <?php include "../../header.php";?>
-    <div class="container">
+    <?php include "../../header.php"; ?>
+    <main>
         <h1>Danh Sách Tin Tức</h1>
-        <?php if (count($news_list) > 0): ?>
-            <div class="news-grid">
-                <?php foreach ($news_list as $news): ?>
-                    <div class="news-item">
-                        <!-- Hình ảnh -->
-                        <?php if (!empty($news['image'])): ?>
-                            <img src="../../uploads/news/<?php echo htmlspecialchars($news['image']); ?>" alt="Hình ảnh tin tức" class="news-image">
-                        <?php else: ?>
-                            <img src="../../uploads/news/default.jpg" alt="Hình ảnh mặc định" class="news-image">
-                        <?php endif; ?>
+        <div>
+            <div class="container">
+                <?php if (count($news_list) > 0): ?>
+                    <div class="news-list">
+                        <?php foreach ($news_list as $news): ?>
+                            <div class="news-item">
+                                <!-- Hình ảnh -->
+                                <div class="news-image-container">
+                                    <?php if (!empty($news['image'])): ?>
+                                        <img src="../../uploads/news/<?php echo htmlspecialchars($news['image']); ?>" alt="Hình ảnh tin tức" class="news-image">
+                                    <?php else: ?>
+                                        <img src="../../uploads/news/default.jpg" alt="Hình ảnh mặc định" class="news-image">
+                                    <?php endif; ?>
+                                </div>
 
-                        <!-- Tiêu đề -->
-                        <h2 class="news-title"><?php echo htmlspecialchars($news['title']); ?></h2>
-
-                        <!-- Danh mục -->
-                        <p class="news-category">Danh mục: <?php echo htmlspecialchars($news['category']); ?></p>
-
-                        <!-- Ngày đăng -->
-                        <p class="news-date">Ngày đăng: <?php echo htmlspecialchars($news['post_date']); ?></p>
-
-                        <!-- Chi tiết tin tức -->
-                        <a href="news_detail.php?id=<?php echo $news['id']; ?>" class="news-link">Xem chi tiết</a>
+                                <!-- Nội dung tin tức -->
+                                <div class="news-content">
+                                    <h2 class="news-title"><?php echo htmlspecialchars($news['title']); ?></h2>
+                                    <p class="news-category">Danh mục: <?php echo htmlspecialchars($news['category']); ?></p>
+                                    <p class="news-date">Ngày đăng: <?php echo htmlspecialchars($news['post_date']); ?></p>
+                                    <a href="news_detail.php?id=<?php echo $news['id']; ?>" class="news-link">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Hiện tại không có tin tức nào để hiển thị.</p>
+                <?php endif; ?>
             </div>
-        <?php else: ?>
-            <p>Hiện tại không có tin tức nào để hiển thị.</p>
-        <?php endif; ?>
-    </div>
-    <?php include "../../footer.php";?>
+        </div>
+    </main>
+    <?php include "../../footer.php"; ?>
 </body>
+
 </html>
