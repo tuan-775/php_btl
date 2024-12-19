@@ -120,6 +120,6 @@ if (isset($_GET['delete_review_id'])) {
                 </tbody>
             </table>
         <?php endif; ?>
-    </div>>
+    </div>
 </body>
 </html>
