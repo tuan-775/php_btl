@@ -55,12 +55,28 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                 </a>
             </div>
 
+            <div class="dropdown">
+                <a href="/php_btl/business_strategy.php">Giới thiệu</a>
+            </div>
+
+            <div class="dropdown">
+                <a href="/php_btl/Pages/track_order/track_order.php">Tra cứu đơn hàng</a>
+            </div>
+
             <!-- Thanh tìm kiếm ở giữa -->
             <form class="search-bar" action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Bạn cần tìm gì?" required>
                 <button type="search"><i class="fas fa-search"></i></button>
                 </input>
             </form>
+
+            <div class="dropdown">
+                <a href="/php_btl/Pages/feedback/feedback.php">Góp ý</a>
+            </div>
+
+            <div class="dropdown">
+                <a href="/php_btl/Pages/News/new_list.php">Tin tức</a>
+            </div>
 
             <!-- Icon bên phải -->
             <div class="header-icons">
@@ -113,9 +129,7 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
         <nav class="header-nav">
             <ul>
                 <div><a href="/php_btl/index.php">Trang chủ</a></div>
-                <div class="business-strategy">
-                    <a href="/php_btl/business_strategy.php">Giới thiệu</a>
-                </div>
+
                 <li class="dropdown">
                     <a href="/php_btl/category.php?category=Bé gái" class="dropdown-toggle">Bé gái</a>
                     <ul class="dropdown-menu">
@@ -133,6 +147,7 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <li><a href="/php_btl/category.php?category=Bé trai&category_name=Quần">Quần</a></li>
                         <li><a href="/php_btl/category.php?category=Bé trai&category_name=Đồ bộ">Đồ bộ</a></li>
                         <li><a href="/php_btl/category.php?category=Bé trai&category_name=Phụ kiện">Phụ kiện</a></li>
+                        <!-- <li><a href="/php_btl/category.php?category=id&category_name={name}">{name}</a></li> -->
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -160,7 +175,7 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         <li><a href="/php_btl/sale.php?category=Bé trai">Sale Bé trai</a></li>
                     </ul>
                 </li>
-                <a href="/php_btl/Pages/News/new_list.php">Tin tức</a>
+
             </ul>
         </nav>
     </header>

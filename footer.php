@@ -11,8 +11,8 @@
         <div class="footer-section">
             <h3>Hỗ trợ khách hàng</h3>
             <ul>
-                <li><a href="./../feedback/feedback.php">Góp ý</a></li>
-                <li><a href="./../track_order/track_order.php">Tra cứu đơn hàng</a></li>
+                <li><a href="/php_btl/Pages/feedback/feedback.php">Góp ý</a></li>
+                <li><a href="/php_btl/Pages/track_order/track_order.php">Tra cứu đơn hàng</a></li>
                 <li><a href="#">Chính sách bảo mật</a></li>
             </ul>
         </div>
