@@ -47,6 +47,9 @@ require '../db.php';
             <div>
                 <a href="feedback/manage_feedback.php" class="menu-btn">Quản lý góp ý</a>
             </div>
+            <div>
+                <a href="Review/manage_reviews.php" class="menu-btn">Quản lý đánh giá</a>
+            </div>
         </main>
     </header>
 </body>
