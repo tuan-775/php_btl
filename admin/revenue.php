@@ -19,14 +19,15 @@ $sql = "
         products.product_code,
         products.name AS product_name,
         products.cost_price,
-        orders.quantity AS sold_quantity,
+        order_items.quantity AS sold_quantity,
         products.price AS sale_price,
         products.sale_percentage,
-        (orders.quantity * products.price * (1 - products.sale_percentage / 100)) AS total_revenue,
-        ((products.price * (1 - products.sale_percentage / 100) - products.cost_price) * orders.quantity) AS total_profit
-    FROM orders
-    JOIN products ON orders.product_id = products.id
-    WHERE 1=1
+        (order_items.quantity * products.price * (1 - products.sale_percentage / 100)) AS total_revenue,
+        ((products.price * (1 - products.sale_percentage / 100) - products.cost_price) * order_items.quantity) AS total_profit
+    FROM order_items
+    JOIN products ON order_items.product_id = products.id
+    JOIN orders ON order_items.order_id = orders.id
+    WHERE orders.status = 'Đã nhận'
 ";
 
 // Thêm điều kiện lọc vào câu truy vấn
@@ -121,7 +122,7 @@ foreach ($revenues as $revenue) {
             <tbody>
                 <?php if (empty($revenues)): ?>
                     <tr>
-                        <td colspan="7">Không có dữ liệu phù hợp.</td>
+                        <td colspan="8">Không có dữ liệu phù hợp.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($revenues as $revenue): ?>

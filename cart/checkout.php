@@ -4,7 +4,6 @@ require '../db.php';
 
 // Kiểm tra xem người dùng đã đăng nhập chưa
 if (!isset($_SESSION['user_id'])) {
-    // Bạn có thể thay đổi đường dẫn đến trang đăng nhập của mình
     header("Location: /php_btl/login.php");
     exit;
 }
@@ -12,8 +11,9 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Lấy danh sách sản phẩm trong giỏ hàng
-$stmt = $pdo->prepare("SELECT cart.id AS cart_id, products.id AS product_id, products.name AS product_name, 
-           products.price, cart.quantity, products.stock
+$stmt = $pdo->prepare("
+    SELECT cart.id AS cart_id, products.id AS product_id, products.name AS product_name, 
+           products.price, cart.quantity, products.stock, products.sale_percentage
     FROM cart
     JOIN products ON cart.product_id = products.id 
     WHERE cart.user_id = ?");
@@ -27,7 +27,9 @@ if (empty($cartItems)) {
 // Tính tổng tiền
 $total = 0;
 foreach ($cartItems as $item) {
-    $total += $item['price'] * $item['quantity'];
+    // Áp dụng giảm giá nếu có
+    $discounted_price = $item['price'] * (1 - $item['sale_percentage'] / 100);
+    $total += $discounted_price * $item['quantity'];
 }
 
 // Xử lý form đặt hàng
@@ -66,29 +68,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $shipping_cost = 50000; // 50,000 VND
             }
 
-            // Tính tổng tiền của đơn hàng
+            // Tính tổng tiền của đơn hàng sau giảm giá
             $total_price = $total + $shipping_cost;
 
-            // Lưu từng sản phẩm vào bảng orders và cập nhật kho
+            // Tạo một đơn hàng trong bảng `orders`
+            $stmt_order = $pdo->prepare("INSERT INTO orders (user_id, user_name, phone, address, payment_method, shipping_method, bank, total_price, shipping_cost, status, created_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Chờ xử lý', NOW())");
+            $stmt_order->execute([
+                $user_id,
+                $name,
+                $phone,
+                $address,
+                $payment_method,
+                $shipping_method,
+                $bank,
+                $total_price,
+                $shipping_cost
+            ]);
+
+            // Lấy ID của đơn hàng vừa tạo
+            $order_id = $pdo->lastInsertId();
+
+            // Lưu thông tin sản phẩm vào bảng `order_items`
             foreach ($cartItems as $item) {
-                $stmt = $pdo->prepare("INSERT INTO orders (user_id, user_name, phone, address, product_id, product_name, price, quantity, payment_method, shipping_method, bank, total_price, shipping_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->execute([
-                    $user_id,
-                    $name,
-                    $phone,
-                    $address,
+                // Tính giá sau giảm giá của sản phẩm
+                $discounted_price = $item['price'] * (1 - $item['sale_percentage'] / 100);
+
+                $stmt_item = $pdo->prepare("INSERT INTO order_items (order_id, product_id, product_name, price, quantity) 
+                    VALUES (?, ?, ?, ?, ?)");
+                $stmt_item->execute([
+                    $order_id,
                     $item['product_id'],
                     $item['product_name'],
-                    $item['price'],
-                    $item['quantity'],
-                    $payment_method,
-                    $shipping_method,
-                    $bank,
-                    $total_price,
-                    $shipping_cost
+                    $discounted_price, // Lưu giá đã giảm vào bảng order_items
+                    $item['quantity']
                 ]);
 
-                // Cập nhật số lượng tồn kho và số lượng đã bán
+                // Cập nhật số lượng tồn kho
                 $update_stock_stmt = $pdo->prepare("UPDATE products SET stock = stock - ?, sold_quantity = sold_quantity + ? WHERE id = ?");
                 $update_stock_stmt->execute([$item['quantity'], $item['quantity'], $item['product_id']]);
             }
@@ -102,19 +118,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Lưu tổng tiền và chuyển hướng đến trang cảm ơn
             $_SESSION['thank_you_total'] = $total_price; // Lưu tổng tiền vào session
             $_SESSION['shipping_cost'] = $shipping_cost; // Lưu phí vận chuyển vào session
-            // Chuyển hướng đến trang cảm ơn
             header("Location: thank_you.php");
             exit;
         } catch (Exception $e) {
             $pdo->rollBack();
-            if (empty($error)) {
-                $error = "Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại!";
-            }
+            $error = "Đã xảy ra lỗi khi đặt hàng: " . $e->getMessage(); // Hiển thị lỗi chi tiết
         }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

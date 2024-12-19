@@ -81,8 +81,8 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                             <?php echo htmlspecialchars($_SESSION['username']); ?>!
                             <div class="dropdown-menu">
                                 <a href="/php_btl/profile.php">Hồ sơ</a>
-                                <a href="/php_btl/user_orders.php">Đơn hàng</a>
-                                <a href="/php_btl/purchase_history.php">Lịch sử mua hàng</a>
+                                <a href="/php_btl/Pages/orders/user_orders.php">Đơn hàng</a>
+                                <a href="/php_btl/Pages/orders/purchase_history.php">Lịch sử mua hàng</a>
                                 <a href="/php_btl/Pages/History_review/history_reviews.php">Lịch sử đánh giá</a>
                                 <a href="/php_btl/Pages/feedback/feedback_history.php">Lịch sử góp ý</a>
                                 <a href="/php_btl/change_password.php">Đổi mật khẩu</a>
