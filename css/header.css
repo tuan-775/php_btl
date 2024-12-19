@@ -17,7 +17,7 @@
 .header-top {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     gap: 10px;
 }
@@ -36,7 +36,6 @@
     padding: 5px 10px;
     flex: 1;
     max-width: 500px;
-    margin: 0px 350px;
     background-color: coral;
 }
 
