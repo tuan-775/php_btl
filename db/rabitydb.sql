@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2024 at 10:36 AM
+-- Generation Time: Dec 20, 2024 at 04:22 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,35 @@ CREATE TABLE `cart` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `size` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `size`) VALUES
+(105, 14, 35, 1, '2024-12-20 03:14:35', '4Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Bé gái'),
+(2, 'Bé trai'),
+(3, 'Bộ sưu tập'),
+(4, 'New_arrival'),
+(5, 'Sale');
 
 -- --------------------------------------------------------
 
@@ -101,9 +130,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `user_name`, `phone`, `address`, `payment_method`, `shipping_method`, `bank`, `total_price`, `shipping_cost`, `status`, `created_at`) VALUES
-(1, 14, 'abc', '12345', 'Thái Bình', 'COD', 'express', '', 445000.00, 50000.00, 'Đã nhận', '2024-12-19 08:43:27'),
-(2, 14, 'Nguyễn Đình Tuấn', '12345', 'Thái Bình', 'bank_transfer', 'express', 'VCB', 624000.00, 50000.00, 'Đã nhận', '2024-12-19 09:08:20'),
-(3, 14, 'Nguyễn Đình Tuấn', '12345', 'Thái Bình', 'bank_transfer', 'express', 'MB', 346300.00, 50000.00, 'Chờ xử lý', '2024-12-19 09:28:44');
+(4, 13, 'Nguyễn Đình Tuấn', '0836 998 775', '11111', 'bank_transfer', 'standard', 'VCB', 39000.00, 30000.00, 'Chờ xử lý', '2024-12-19 21:12:09'),
+(5, 14, 'Nguyễn Đình Tuấn', '12345', 'Thái Bình', 'bank_transfer', 'express', 'VCB', 59000.00, 50000.00, 'Đã nhận', '2024-12-19 21:13:07');
 
 -- --------------------------------------------------------
 
@@ -120,18 +148,6 @@ CREATE TABLE `order_items` (
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `price`, `quantity`) VALUES
-(1, 1, 29, 'Đồ bộ thun Spider-Man dài tay bé trai Rabity', 296000.00, 1),
-(2, 1, 22, 'Hộp phụ kiện bé gái Rabity', 99000.00, 1),
-(3, 2, 28, 'Quần kaki dài Marvel Avengers bé trai Rabity', 305000.00, 1),
-(4, 2, 27, 'Quần short kaki bé trai Rabity x ELLE Kids - designed in Paris', 269000.00, 1),
-(5, 3, 29, 'Đồ bộ thun Spider-Man dài tay bé trai Rabity', 207200.00, 1),
-(6, 3, 22, 'Hộp phụ kiện bé gái Rabity', 89100.00, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -141,8 +157,6 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `pric
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `product_code` varchar(50) NOT NULL,
-  `category` varchar(50) NOT NULL,
-  `category_name` varchar(50) NOT NULL,
   `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -159,23 +173,9 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_code`, `category`, `category_name`, `name`, `image`, `description`, `price`, `created_at`, `sale_percentage`, `stock`, `cost_price`, `sale_price`, `sold_quantity`) VALUES
-(12, '001', 'Bé gái', 'Áo', 'Áo thun ngắn tay Ngoan xinh yêu cho bé gái', '900083-3_ba2d1c4ab2254e97b2c6af9ccd94cfcb.webp', 'Áo thun ngắn tay luôn là một loại trang phục được rất nhiều ba mẹ lựa chọn khi mua sắm quần áo cho con bởi sự thoải mái và tiện lợi mà chúng mang lại. Với nhưng mẫu áo thun ba mẹ có thể kết hợp được với nhiều kiểu quần, kiểu váy khác nhau để tạo nên những outfits mặc ở nhà, đi chơi, đi học,...\r\n- Nhóm sản phẩm: Áo thun bé gái, áo bé gái\r\n- Chất liệu 95% cotton 5% spandex thoáng mát, co giãn và an toàn cho làn da của bé\r\n- Phù hợp với bé gái cân nặng từ 11 - 35kg, từ 2 - 12 tuổi\r\n- Áo thun bé gái form basic in chữ Ngoan xinh yêu đáng yêu, hình in to sắc nét và màu sắc phối hài hòa, nổi bật.', 179000.00, '2024-12-17 12:01:24', 30, 100, 150000.00, NULL, 0),
-(16, '002', 'Bé gái', 'Áo', 'Áo nỉ dài tay bé gái Rabity x ELLE Kids - designed in Paris', 'dsc09592_copy_7d0ac79c66334423b097ee552c5aa446.webp', 'Nội dung đang được cập nhật', 269000.00, '2024-12-17 12:09:00', 0, 100, 175000.00, NULL, 0),
-(17, '003', 'Bé gái', 'Áo', 'Áo thun ngắn tay bé gái Rabity x ELLE Kids - designed in Paris', 'dsc09679_copy_bb10069dde2d4f1883485baa6ff378cb.webp', 'Nội dung đang được cập nhật', 169000.00, '2024-12-17 12:12:05', 0, 100, 130000.00, NULL, 0),
-(18, '004', 'Bé gái,BST Thu Đông', 'Quần', 'Quần kaki dài bé gái Rabity x ELLE Kids - designed in Paris', '842001-0_f1b8d77d8bb04fc9b0f6bf1ab3e7e2f3.webp', 'Quần kaki là một kiểu quần rất tiện lợi nên thường được ba mẹ lựa chọn khi mua sắm quần áo cho bé gái, với những chiếc quần kaki bạn có thể phối với đa dạng mẫu áo khác nhau như áo thun tay ngắn, áo sát nách, áo sơ mi,... để mặc đi học, đi chơi hoặc đi tiệc.', 279000.00, '2024-12-17 12:14:51', 0, 100, 200000.00, NULL, 0),
-(19, '005', 'Bé gái', 'Quần', 'Quần jean dài bé gái Rabity x ELLE Kids - designed in Paris', '841001241-0_506b5e2cd79a4fbf864338a4be6075c4.webp', 'Nội dung đang được cập nhật', 369000.00, '2024-12-17 12:17:16', 0, 100, 300000.00, NULL, 0),
-(20, '006', 'Bé gái,BST Đồ Bộ Mặc Nhà,BST Đồ Đi Chơi Noel', 'Đồ bộ', 'Bộ nỉ dài tay bé gái Rabity x ELLE Kids - designed in Paris', 'dsc09474_copy_2_45d4855d20c14cec8dd4c50be3893c78.webp', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất nỉ được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.', 369000.00, '2024-12-17 12:20:36', 0, 100, 290000.00, NULL, 0),
-(21, '007', 'Bé gái', 'Phụ kiện', 'Set 2 bím tóc bé gái Rabity', '97103424-1_aa52940edcd84a87864e2fa172573246.webp', 'Nội dung đang được cập nhật', 89000.00, '2024-12-17 12:23:52', 10, 100, 50000.00, NULL, 0),
-(22, '008', 'Bé gái', 'Phụ kiện', 'Hộp phụ kiện bé gái Rabity', '97102824-2_5c575c69b3764194833aa075ba686300.webp', 'Nội dung đang được cập nhật', 99000.00, '2024-12-17 12:26:14', 10, 97, 40000.00, NULL, 3),
-(23, '009', 'Bé gái', 'Phụ kiện', 'Mũ cói bé gái Rabity', '2_1_23709589d1fb407b87e09b389502d0f6.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 12:28:41', 25, 100, 99999.00, NULL, 0),
-(24, '010', 'Bé gái', 'Đầm váy', 'Đầm váy thô ngắn tay bé gái Rabity x ELLE Kids - designed in Paris', '2_copy_3b31e5b2ae184e8fb53cd786a6390a2b.webp', 'Đầm váy là là một outfits không thể thiếu trong tủ đồ của các cô công chúa nhỏ giúp ba mẹ tiết kiệm thời gian trong việc lựa chọn cho bé mỗi ngày mà bé có thể mặc trong nhiều dịp khác nhau như như đi chơi, đi học, đi tiệc,...', 569000.00, '2024-12-17 12:54:30', 10, 100, 350000.00, NULL, 0),
-(25, '011', 'Bé trai', 'Áo', '[Độc quyền Online] Áo thun ngắn tay in chữ Việt Nam bé trai/bé gái Rabity', '900081-1_2408deff07e148a2a3e1a480e3c3f83e.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 12:57:17', 10, 100, 100000.00, NULL, 0),
-(26, '012', 'Bé trai', 'Áo', '[Độc quyền Online] Áo thun ngắn tay bé trai/bé gái Capybara', '900080243-0_56b8193299984f72a7354eca24d3dc22.webp', 'Nội dung đang được cập nhật', 125000.00, '2024-12-17 12:59:59', 15, 100, 75000.00, NULL, 0),
-(27, '013', 'Bé trai', 'Quần', 'Quần short kaki bé trai Rabity x ELLE Kids - designed in Paris', '12_copy_40e4cabb91894d6cb087798f8b7d45ad.webp', 'Quần short kaki là một trong những sản phẩm luôn được ba mẹ ưa chuộng khi phối đồ cho bé trai bởi sự tiện lợi và thoải mái mà chúng mang lại cho bé. Bạn có thể phối nhiều outfits khác nhau cho bé từ những chiếc quần short từ năng động đến lịch sự, mặc đi học, đi chơi, đi tiệc,...đều phù hợp.', 269000.00, '2024-12-17 13:02:38', 5, 98, 150000.00, NULL, 2),
-(28, '014', 'Bé trai', 'Quần', 'Quần kaki dài Marvel Avengers bé trai Rabity', '542001240-1_d6f47fa0a54f4905a67eabf790559e88.jpg', 'Quần kaki là sự kết hợp hoàn hảo giữa phong cách năng động và tiện dụng. Quần kaki không chỉ phù hợp cho những buổi dạo phố, mà còn là lựa chọn lý tưởng cho các bé khi tham gia các hoạt động ngoại khóa, vui chơi thể thao. Hơn nữa, với kiểu dáng thời trang và màu sắc phong phú, quần kaki chắc chắn sẽ giúp các bé tự tin và nổi bật trong mọi hoàn cảnh', 305000.00, '2024-12-17 13:05:36', 8, 95, 255000.00, NULL, 5),
-(29, '015', 'Bé trai,BST Đồ Đi Chơi Noel,BST Disney - Friends', 'Đồ bộ', 'Đồ bộ thun Spider-Man dài tay bé trai Rabity', '561001240-3_d0cabd4ade3e44348b7face22fd02285.webp', 'Thời tiết thay đổi liên tục, những ngày lạnh hay nhiệt độ thấp vào ban đêm, đồ bộ dài tay cho bé là cứu tinh lúc này. Chất nỉ được dệt từ sợi cotton co giãn thoải mái, bé mặc thích thú cả ngày.', 296000.00, '2024-12-17 13:08:44', 30, 98, 189000.00, NULL, 2),
-(30, '016', 'Bé trai', 'Phụ kiện', 'Mũ lưỡi trai Spider-Man bé trai Rabity', '9710042400005_c5577a1c716b4e12ade596f90b9ef691.webp', 'Nội dung đang được cập nhật', 129000.00, '2024-12-17 13:20:05', 5, 99, 55000.00, NULL, 1);
+INSERT INTO `products` (`id`, `product_code`, `name`, `image`, `description`, `price`, `created_at`, `sale_percentage`, `stock`, `cost_price`, `sale_price`, `sold_quantity`) VALUES
+(34, '002', 'Đầm váy voan dài tay bé gái Rabity x ELLE Kids - designed in Paris', 'dsc09403_copy_358b2ff0fb154ed0a4277de72c7940bf.webp', 'Sản phẩm đến từ BST hợp tác quốc tế được thiết kế tại Paris​ với bản quyền từ ELLE – biểu tượng thời trang nước Pháp với phong cách thời thượng, thanh lịch, tinh tế với những kiểu dáng đang thịnh hành tại Paris.​ Chất liệu cao cấp được may đo tỉ mỉ từng đường kim mũi chỉ.​​ ', 399000.00, '2024-12-20 02:59:38', 10, 100, 300000.00, NULL, 0),
+(35, '001', 'Áo thun ngắn tay bé trai Rabity x ELLE Kids - designed in Paris', 'dsc09761_copy_63b38c87c3f34b65a51e8663c5f602be.webp', 'Sản phẩm đến từ BST hợp tác quốc tế được thiết kế tại Paris​ với bản quyền từ ELLE – biểu tượng thời trang nước Pháp với phong cách thời thượng, thanh lịch, tinh tế với những kiểu dáng đang thịnh hành tại Paris.​ Chất liệu cao cấp được may đo tỉ mỉ từng đường kim mũi chỉ.​​', 189000.00, '2024-12-20 03:06:06', 25, 100, 120000.00, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -194,56 +194,14 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image_path`) VALUES
-(21, 12, '900083-1_3f456f0b9b1b460bb4dc62cba27f7c61.webp'),
-(22, 12, '900083-2_f676510a34064b79b5045c7c142c1833.webp'),
-(23, 16, '20_copy_d47e753a01824893ac2ba6e9dd212487.webp'),
-(24, 16, '20-3_efa29bc4d967494fad17c88c8b6b016c.webp'),
-(25, 16, 'dsc09563_copy_9de59a5b94b64c4295ced9bc1344d0d3.webp'),
-(26, 16, 'dsc09916_copy_ab851af594454a1d84229c51354c3221.webp'),
-(27, 17, '24_copy_08e3cbf6a64d424188661bc950b040ee.webp'),
-(28, 17, '25_copy_2fa4e03adc3d412e97e590c7613d1f99.webp'),
-(29, 17, '25-3_f20f08c9b8a143759896c7bbc024f6fd.webp'),
-(30, 17, 'dsc09627_copy_b29e3f26682e4872bf9b44e618659391.webp'),
-(31, 18, '842001-4_3a42949a6e72460f85899f68a04cca96.webp'),
-(32, 18, '842001-5_49b94e33b7474ca3b1f2a14a46547b31.webp'),
-(33, 18, 'dsc09913_copy_2eca5e577c7e4752a6cb25032ca4556c.webp'),
-(34, 19, '841001241-1_ebfac57210d0449c92af9abe750d234b.webp'),
-(35, 19, '841001241-2_53f2c95fdfe44f76ac9a83e790405ef0.jpg'),
-(36, 19, '841001241-3_3dfefc0946ec4ac29f9032dd5291a0b4.jpg'),
-(37, 20, '866001_2574bdfa1c704bceb5e0645f24f65201.webp'),
-(38, 20, '866001-2_de9fba8d24d94a20b76cb6d9eece235f.webp'),
-(39, 20, '866001-3_76783c4b20934da7bdd6df6c0d533c4e.webp'),
-(40, 20, 'dsc09466_copy_2_9220c91fe3a1460a849fc71ea6890e16.webp'),
-(41, 21, '97103424-2_a9f7a6067097479cbcc5f3b79f399b2c.webp'),
-(42, 21, '97103424-4_99860972dc6d47afb1ae30d8663d8d50.webp'),
-(43, 21, '97103424-6_008c8864711b4a9aa24ca609f92db8c4.webp'),
-(44, 22, '97102824-1_0dae3895e4144607a02faccbee612199.webp'),
-(45, 22, '97102824-4_827473af48aa408891a3ee6ce128ee7c.webp'),
-(46, 22, '97102824-5_eb9d014b54ab42e59bed6c82264bb18b.webp'),
-(47, 23, '2_0_e2f3e674e0a54bd4897c1fef73c0b0f3.webp'),
-(48, 23, '2_2_a4afb5573f3141478d31f7b8e61ff4a7.webp'),
-(49, 23, 'dsc03740_copy_71ade21c60d24816b9f6e2d2a68c8b8b.webp'),
-(50, 24, '2_4_f2760e2465e745989f501d25b10d6477.webp'),
-(51, 24, '3.webp'),
-(52, 24, 'dsc00001_copy_fe82929405934053b1818a29c750c189.webp'),
-(53, 24, 'gfg_13450e3da6c4488580171dad6e7e6638.webp'),
-(54, 25, '900081-2_8936cd3e540645cd8eec1638dd92e4eb.webp'),
-(55, 25, '900081-3_d987ec0e043d4d6aaa6122b782e713aa.webp'),
-(56, 26, '900080243-3_dff2eaf2213b42369f9ca6f322dbf4be.webp'),
-(57, 26, '900080243-4_f5de8d0fa4da40619db9e2a82d56b0d9.webp'),
-(58, 26, '900080243-6_a7203dacfd3048ddae6b3df628426d40.webp'),
-(59, 27, '11_4_3ce11ebfec1440fc9f2c9fe264ea8ebd.webp'),
-(60, 27, '11_copy_55fd10ce2e614e0698d6b0b2b695ee94.webp'),
-(61, 27, '12-2_0af1cf20079f4dd6864404a20d5901d1.webp'),
-(62, 28, '542001240-6_f8e256889c194942932bc65ad99d3a08.jpg'),
-(63, 28, '542001240-7_4cc3b175748947e0b67e0d7f3e9e25fe.webp'),
-(64, 28, 'dsc01210_copy_ead4aeeee7224dbfb07ca6ce262d1476.webp'),
-(65, 28, 'dsc01286_copy_4393983e15da4d679da096041b93a977.webp'),
-(66, 29, '561001240-6_4ee64494936641fdb52e31ce337541a8.webp'),
-(67, 29, 'dsc01120_copy_50ddce35cbe44a598893fe825cf45a07.webp'),
-(68, 29, 'dsc01123_copy_55756ae2c80d42388b88931bb8bd19e2.webp'),
-(69, 30, '9710042400005-1_04090cae29914854bbeeffbc1a34132e.webp'),
-(70, 30, '9710042400005-2_1f7602c85c7e45378b450cde747ccba0.webp');
+(80, 34, '17_4_e501794695144cf097c7c90e5fd8e2a9.webp'),
+(81, 34, '17_copy_741005b7ddc744fd854c3f59c9625eae.webp'),
+(82, 34, '17-2_bb86c1368ce94f7f8cb5dac352eed20a.webp'),
+(83, 34, '17-3_1ce6f431a8d9478fba855f6994b9d91d_medium.webp'),
+(84, 35, '28_4_dbab82b738bc4ecba5afa811da751ddc.jpg'),
+(85, 35, '28_copy_7ee9076bfb354d5d8443dc095429d75a.webp'),
+(86, 35, '28-2_b9277719f8c64f91988ac4c7724fc424.webp'),
+(87, 35, '28-3_e386421cdb0d465ebf7e220938f841ce.webp');
 
 -- --------------------------------------------------------
 
@@ -261,15 +219,30 @@ CREATE TABLE `product_reviews` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `product_reviews`
+-- Table structure for table `product_subcategories`
 --
 
-INSERT INTO `product_reviews` (`id`, `order_id`, `product_id`, `user_id`, `rating`, `review`, `created_at`) VALUES
-(1, 1, 29, 14, 1, 'ngu', '2024-12-19 09:04:28'),
-(2, 1, 22, 14, 2, 'lor', '2024-12-19 09:04:34'),
-(3, 2, 28, 14, 2, 'ngu\r\n', '2024-12-19 09:09:34'),
-(4, 2, 27, 14, 2, '.', '2024-12-19 09:09:40');
+CREATE TABLE `product_subcategories` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `subcategory_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `product_subcategories`
+--
+
+INSERT INTO `product_subcategories` (`id`, `product_id`, `subcategory_id`) VALUES
+(23, 34, 11),
+(24, 34, 3),
+(25, 34, 4),
+(26, 35, 2),
+(27, 35, 3),
+(28, 35, 9),
+(29, 35, 10);
 
 -- --------------------------------------------------------
 
@@ -292,6 +265,43 @@ INSERT INTO `security_questions` (`id`, `user_id`, `question`, `answer`) VALUES
 (3, 13, 'Tên tôi là gì?', '$2y$10$EtOIYMA8by4ychNE6ML5BOsbHKtEOGs02tXxCfn1WhCYzVYXko8GC'),
 (4, 14, '123?', '$2y$10$QFMXcak/RepLQpA.eUEgaefwpuYvY.W5fYyGFloVaDz74.Yp9JTkq'),
 (5, 15, '1234?', '$2y$10$mqdcR2nnop30BfUwEJJepOZoyJKSde9rRus3XEwzJzFYR9nOuTgVO');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subcategories`
+--
+
+CREATE TABLE `subcategories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `subcategories`
+--
+
+INSERT INTO `subcategories` (`id`, `name`, `category_id`) VALUES
+(1, 'Áo', 1),
+(2, 'Áo', 2),
+(3, 'BST ELLE Kids x Rabity', 3),
+(4, 'New Arrival Bé gái', 4),
+(6, 'Quần', 1),
+(7, 'Quần', 2),
+(8, 'BST Đồ Đi Chơi Noel', 3),
+(9, 'New Arrival Bé trai', 4),
+(10, 'Sale bé trai', 5),
+(11, 'Đầm váy', 1),
+(12, 'BST Thu Đông 2024', 3),
+(14, 'Sale bé gái', 5),
+(15, 'Phụ kiện', 1),
+(16, 'Phụ kiện', 2),
+(17, 'BST Đồ Bộ Mặc Nhà', 3),
+(19, 'Flashsale đồ Tết mới', 5),
+(20, 'Đồ bộ', 1),
+(21, 'Đồ bộ', 2),
+(22, 'BST Disney - Friends', 3);
 
 -- --------------------------------------------------------
 
@@ -362,6 +372,12 @@ ALTER TABLE `cart`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
@@ -410,11 +426,26 @@ ALTER TABLE `product_reviews`
   ADD KEY `fk_reviews_users` (`user_id`);
 
 --
+-- Indexes for table `product_subcategories`
+--
+ALTER TABLE `product_subcategories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `subcategory_id` (`subcategory_id`);
+
+--
 -- Indexes for table `security_questions`
 --
 ALTER TABLE `security_questions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `subcategories`
+--
+ALTER TABLE `subcategories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `CategoryID` (`category_id`);
 
 --
 -- Indexes for table `users`
@@ -439,7 +470,13 @@ ALTER TABLE `user_profiles`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `feedbacks`
@@ -457,37 +494,49 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `product_reviews`
 --
 ALTER TABLE `product_reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `product_subcategories`
+--
+ALTER TABLE `product_subcategories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `security_questions`
 --
 ALTER TABLE `security_questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `subcategories`
+--
+ALTER TABLE `subcategories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -533,10 +582,23 @@ ALTER TABLE `product_reviews`
   ADD CONSTRAINT `fk_reviews_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `product_subcategories`
+--
+ALTER TABLE `product_subcategories`
+  ADD CONSTRAINT `product_subcategories_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_subcategories_ibfk_2` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `security_questions`
 --
 ALTER TABLE `security_questions`
   ADD CONSTRAINT `security_questions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `subcategories`
+--
+ALTER TABLE `subcategories`
+  ADD CONSTRAINT `subcategories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user_profiles`

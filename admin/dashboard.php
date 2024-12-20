@@ -27,6 +27,12 @@ require '../db.php';
                 <a href="../index.php" class="back-btn">Quay lại Trang chủ</a>
             </div>
             <div>
+                <a href="manage_categories.php" class="menu-btn">Quản lý danh mục sản phẩm</a>
+            </div>
+            <div>
+                <a href="manage_subcategories.php" class="menu-btn">Quản lý loại sản phẩm</a>
+            </div>
+            <div>
                 <a href="product_list.php" class="menu-btn">Danh sách sản phẩm</a>
             </div>
             <div>

@@ -22,11 +22,25 @@ $img_stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id = ?");
 $img_stmt->execute([$product_id]);
 $additional_images = $img_stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Lấy danh sách loại sản phẩm hiện có liên kết với sản phẩm
+$sub_stmt = $pdo->prepare("
+    SELECT subcategory_id FROM product_subcategories WHERE product_id = ?
+");
+$sub_stmt->execute([$product_id]);
+$linked_subcategories = $sub_stmt->fetchAll(PDO::FETCH_COLUMN);
+
+// Lấy danh sách tất cả các loại sản phẩm (subcategories) và danh mục cha (categories)
+$categories_stmt = $pdo->query("
+    SELECT sc.id AS subcategory_id, sc.name AS subcategory_name, c.name AS category_name
+    FROM subcategories sc
+    LEFT JOIN categories c ON sc.category_id = c.id
+    ORDER BY c.name, sc.name
+");
+$subcategories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
+
 // Xử lý cập nhật sản phẩm
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_code = $_POST['product_code'];
-    $category = isset($_POST['category']) ? implode(',', $_POST['category']) : ''; 
-    $category_name = $_POST['category_name'];
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
@@ -48,10 +62,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Cập nhật sản phẩm
     $stmt = $pdo->prepare("
         UPDATE products 
-        SET product_code = ?, category = ?, category_name = ?, name = ?, description = ?, price = ?, sale_percentage = ?, stock = ?, cost_price = ?, image = ?
+        SET product_code = ?, name = ?, description = ?, price = ?, sale_percentage = ?, stock = ?, cost_price = ?, image = ?
         WHERE id = ?
     ");
-    $stmt->execute([$product_code, $category, $category_name, $name, $description, $price, $sale_percentage, $stock, $cost_price, $image, $product_id]);
+    $stmt->execute([$product_code, $name, $description, $price, $sale_percentage, $stock, $cost_price, $image, $product_id]);
+
+    // Cập nhật loại sản phẩm liên kết
+    if (!empty($_POST['subcategories'])) {
+        // Xóa tất cả các liên kết cũ
+        $pdo->prepare("DELETE FROM product_subcategories WHERE product_id = ?")->execute([$product_id]);
+
+        // Thêm liên kết mới
+        foreach ($_POST['subcategories'] as $subcategory_id) {
+            $pdo->prepare("INSERT INTO product_subcategories (product_id, subcategory_id) VALUES (?, ?)")->execute([$product_id, $subcategory_id]);
+        }
+    }
 
     // Xử lý xóa ảnh phụ
     if (!empty($_POST['delete_images'])) {
@@ -68,8 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     unlink($file_path);
                 }
                 // Xóa DB
-                $del_stmt2 = $pdo->prepare("DELETE FROM product_images WHERE id = ?");
-                $del_stmt2->execute([$del_id]);
+                $pdo->prepare("DELETE FROM product_images WHERE id = ?")->execute([$del_id]);
             }
         }
     }
@@ -84,8 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (move_uploaded_file($filetmp, $target_additional)) {
                 // Lưu vào bảng product_images
-                $img_stmt = $pdo->prepare("INSERT INTO product_images (product_id, image_path) VALUES (?, ?)");
-                $img_stmt->execute([$product_id, $filename]);
+                $pdo->prepare("INSERT INTO product_images (product_id, image_path) VALUES (?, ?)")->execute([$product_id, $filename]);
             }
         }
     }
@@ -114,22 +137,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="product_code">Mã sản phẩm:</label>
         <input type="text" id="product_code" name="product_code" value="<?php echo htmlspecialchars($product['product_code']); ?>" required>
 
-        <label for="category">Chọn loại sản phẩm:</label>
+        <label for="subcategories">Loại sản phẩm:</label>
         <div class="checkbox-group">
-            <?php
-            $categories = ['Bé gái', 'Bé trai', 'BST Thu Đông', 'BST Đồ Bộ Mặc Nhà', 'BST Đồ Đi Chơi Noel', 'BST Disney - Friends'];
-            $selected_categories = explode(',', $product['category']);
-            foreach ($categories as $cat): ?>
+            <?php foreach ($subcategories as $subcategory): ?>
                 <label>
-                    <input type="checkbox" name="category[]" value="<?php echo $cat; ?>"
-                        <?php echo in_array($cat, $selected_categories) ? 'checked' : ''; ?>>
-                    <?php echo $cat; ?>
+                    <input type="checkbox" name="subcategories[]" value="<?php echo $subcategory['subcategory_id']; ?>"
+                        <?php echo in_array($subcategory['subcategory_id'], $linked_subcategories) ? 'checked' : ''; ?>>
+                    <?php echo htmlspecialchars($subcategory['category_name'] . " - " . $subcategory['subcategory_name']); ?>
                 </label>
             <?php endforeach; ?>
         </div>
-
-        <label for="category_name">Tên loại sản phẩm:</label>
-        <input type="text" id="category_name" name="category_name" value="<?php echo htmlspecialchars($product['category_name']); ?>" required>
 
         <label for="name">Tên sản phẩm:</label>
         <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($product['name']); ?>" required>
