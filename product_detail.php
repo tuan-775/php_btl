@@ -84,26 +84,24 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <!-- Ảnh chính trong thumbnail -->
                     <div class="thumbnail">
-                        <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Ảnh chính" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
+                        <img src="uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Ảnh chính" width="80" height='80' style="cursor:pointer;" onclick="changeMainImage(this.src)">
 
                         <!-- Ảnh phụ -->
                         <?php foreach ($productImages as $img): ?>
-                            <img src="uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="Ảnh phụ" width="50" style="cursor:pointer;" onclick="changeMainImage(this.src)">
+                            <img src="uploads/<?php echo htmlspecialchars($img['image_path']); ?>" alt="Ảnh phụ" width="80" height='80' style="cursor:pointer;" onclick="changeMainImage(this.src)">
                         <?php endforeach; ?>
                     </div>
                 </div>
 
                 <div class="infomation">
                     <h1><?php echo htmlspecialchars($product['name']); ?></h1>
-                    <?php if ($product['sale_percentage'] > 0): ?>
-                        <div class="price-sale">
-                            ₫<?php
-                            $sale_price = $product['price'] * (1 - $product['sale_percentage'] / 100);
-                            echo number_format($sale_price, 0, ',', '.'); ?> <span class="sale-percentage"></span>
-                        </div>
-                    <?php else: ?>
-                        <p class="price">₫<?php echo number_format($product['price'], 0, ',', '.'); ?></p>
-                    <?php endif; ?>
+                    <div class="price">
+                        ₫
+                        <?php
+                        $sale_price = $product['price'] * (1 - $product['sale_percentage'] / 100);
+                        echo number_format($sale_price, 0, ',', '.');
+                        ?>
+                    </div>
                     <p><strong>Danh mục:</strong> <?php echo htmlspecialchars($product['category_name']); ?></p>
                     <p><strong>Loại sản phẩm:</strong> <?php echo htmlspecialchars($product['subcategories']); ?></p>
                     <p><strong>Mã sản phẩm:</strong> <?php echo htmlspecialchars($product['product_code']); ?></p>
@@ -127,7 +125,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <?php if (isset($_SESSION['user_id'])): ?>
                                 <button type="submit" id='add-to-cart' name="add_to_cart">Thêm vào giỏ hàng</button>
-                                <?php else: ?>
+                            <?php else: ?>
                                 <div>
                                     <i class="fas fa-exclamation-circle"></i>
                                     Vui lòng <a href="login/login.php">đăng nhập</a> để thêm sản phẩm vào giỏ hàng!
@@ -136,7 +134,7 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                         </form>
 
                     <?php else: ?>
-                        
+
                         <form action="cart/add_to_cart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                             <label id='quantity'>Số lượng: <input type="number" name="quantity" value="1" min="1"></label>
@@ -152,25 +150,23 @@ $related_products = $related_products_stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php endif; ?>
                         </form>
                     <?php endif; ?>
-
-                    <!-- Hiển thị đánh giá sản phẩm -->
-                    <h2>Đánh giá sản phẩm</h2>
-                    <button id="toggleReviewsBtn">Xem tất cả đánh giá</button>
-                    <div class="reviews-container" id="reviewsContainer">
-                        <?php foreach ($reviews as $review): ?>
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <span class="review-user"><?php echo htmlspecialchars($review['user_name']); ?></span>
-                                    <span class="review-rating">Đánh giá: <?php echo $review['rating']; ?>/5 sao</span>
-                                    <span class="review-date"><?php echo date("d/m/Y", strtotime($review['created_at'])); ?></span>
-                                </div>
-                                <div class="review-body">
-                                    <p class="review-text"><?php echo nl2br(htmlspecialchars($review['review'])); ?></p>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
                 </div>
+            </div>
+
+            <button id="toggleReviewsBtn">Xem tất cả đánh giá</button>
+            <div class="reviews-container" id="reviewsContainer">
+                <?php foreach ($reviews as $review): ?>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="review-user"><?php echo htmlspecialchars($review['user_name']); ?></span>
+                            <span class="review-rating">Đánh giá: <?php echo $review['rating']; ?>/5 sao</span>
+                            <span class="review-date"><?php echo date("d/m/Y", strtotime($review['created_at'])); ?></span>
+                        </div>
+                        <div class="review-body">
+                            <p class="review-text"><?php echo nl2br(htmlspecialchars($review['review'])); ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </section>
 

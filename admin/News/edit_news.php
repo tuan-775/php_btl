@@ -59,30 +59,36 @@ if (!$news) {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sửa Tin Tức</title>
+    <link rel="stylesheet" href="../css/add_news.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Sửa Tin Tức</h1>
-        <form method="POST" action="" enctype="multipart/form-data">
-            <label for="title">Tiêu đề:</label><br>
-            <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($news['title']); ?>" required><br>
-            <label for="content">Nội dung:</label><br>
-            <textarea name="content" id="content" rows="5" required><?php echo htmlspecialchars($news['content']); ?></textarea><br>
-            <label for="category">Danh mục:</label><br>
-            <input type="text" name="category" id="category" value="<?php echo htmlspecialchars($news['category']); ?>" required><br>
-            <label for="image">Hình ảnh mới:</label><br>
-            <input type="file" name="image" id="image" accept="image/*"><br>
-            <?php if (!empty($news['image'])): ?>
-                <img src="../../uploads/news/<?php echo $news['image']; ?>" alt="Hình ảnh hiện tại" width="100"><br>
-            <?php endif; ?>
-            <br>
-            <button type="submit" name="update_news">Cập Nhật</button>
-        </form>
-        <a href="admin_manage_news.php">Quay lại quản lý tin tức</a>
-    </div>
+    <main>
+        <div class="container">
+            <h1>Sửa Tin Tức</h1>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <label for="title">Tiêu đề:</label><br>
+                <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($news['title']); ?>" required><br>
+                <label for="content">Nội dung:</label><br>
+                <textarea name="content" id="content" rows="5" required><?php echo htmlspecialchars($news['content']); ?></textarea><br>
+                <label for="category">Danh mục:</label><br>
+                <input type="text" name="category" id="category" value="<?php echo htmlspecialchars($news['category']); ?>" required><br>
+                <label for="image">Hình ảnh mới:</label><br>
+                <input type="file" name="image" id="image" accept="image/*"><br>
+                <?php if (!empty($news['image'])): ?>
+                    <img src="../../uploads/news/<?php echo $news['image']; ?>" alt="Hình ảnh hiện tại" width="100"><br>
+                <?php endif; ?>
+                <br>
+                <button type="submit" name="update_news">Cập Nhật</button>
+            </form>
+            <a href="manage_news.php">Quay lại quản lý tin tức</a>
+        </div>
+    </main>
 </body>
+
 </html>

@@ -61,15 +61,13 @@ foreach ($categories as $row) {
                 </a>
             </div>
 
-            <div class="dropdown"><a href="/php_btl/business_strategy.php">Giới thiệu</a></div>
-            <div class="dropdown"><a href="/php_btl/Pages/track_order/track_order.php">Tra cứu đơn hàng</a></div>
 
             <!-- Thanh tìm kiếm ở giữa -->
             <form class="search-bar" action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Bạn cần tìm gì?" required>
                 <button type="search"><i class="fas fa-search"></i></button>
             </form>
-
+            <div class="dropdown"><a href="/php_btl/Pages/track_order/track_order.php">Tra cứu đơn hàng</a></div>
             <div class="dropdown"><a href="/php_btl/Pages/feedback/feedback.php">Góp ý</a></div>
             <div class="dropdown"><a href="/php_btl/Pages/News/new_list.php">Tin tức</a></div>
 
@@ -77,7 +75,7 @@ foreach ($categories as $row) {
             <div class="header-icons">
                 <?php if ($isLoggedIn): ?>
                     <div class="user-welcome">
-                        <?php echo htmlspecialchars($_SESSION['role'] === 'admin' ? 'AD-' : '') . htmlspecialchars($_SESSION['username']); ?>!
+                        <?php echo htmlspecialchars($_SESSION['role'] === 'admin' ? 'admin' : htmlspecialchars($_SESSION['username'])) ?>
                         <div class="dropdown-menu">
                             <?php if ($_SESSION['role'] === 'admin'): ?>
                                 <a href="/php_btl/admin/dashboard.php">Quản trị</a>
@@ -115,6 +113,7 @@ foreach ($categories as $row) {
         <nav class="header-nav">
             <ul>
                 <div><a href="/php_btl/index.php">Trang chủ</a></div>
+                <div class="dropdown"><a href="/php_btl/business_strategy.php">Giới thiệu</a></div>
 
                 <?php foreach ($menu as $category_name => $subcategories): ?>
                     <li class="dropdown">

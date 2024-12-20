@@ -23,6 +23,7 @@ if (!$news) {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,23 +32,27 @@ if (!$news) {
     <link rel="stylesheet" href="../../css/footer.css">
     <link rel="stylesheet" href="../../css/header.css">
 </head>
+
 <body>
-    <?php include "../../header.php";?>
-    <div class="container">
-        <h1><?php echo htmlspecialchars($news['title']); ?></h1>
-        <p class="news-date">Ngày đăng: <?php echo htmlspecialchars($news['post_date']); ?></p>
-        <p class="news-category">Danh mục: <?php echo htmlspecialchars($news['category']); ?></p>
+    <?php include "../../header.php"; ?>
+    <main>
+        <div class="container">
+            <h1><?php echo htmlspecialchars($news['title']); ?></h1>
+            <p class="news-date">Ngày đăng: <?php echo htmlspecialchars($news['post_date']); ?></p>
+            <p class="news-category">Danh mục: <?php echo htmlspecialchars($news['category']); ?></p>
 
-        <?php if (!empty($news['image'])): ?>
-            <img src="../../uploads/news/<?php echo htmlspecialchars($news['image']); ?>" alt="Hình ảnh tin tức" class="news-image">
-        <?php endif; ?>
+            <?php if (!empty($news['image'])): ?>
+                <img src="../../uploads/news/<?php echo htmlspecialchars($news['image']); ?>" alt="Hình ảnh tin tức" class="news-image">
+            <?php endif; ?>
 
-        <div class="news-content">
-            <?php echo nl2br(htmlspecialchars($news['content'])); ?>
+            <div class="news-content">
+                <?php echo nl2br(htmlspecialchars($news['content'])); ?>
+            </div>
+
+            <a href="new_list.php" class="back-link">Quay lại danh sách tin tức</a>
         </div>
-        
-        <a href="new_list.php" class="back-link">Quay lại danh sách tin tức</a>
-    </div>
-    <?php include "../../footer.php";?>
+    </main>
+    <?php include "../../footer.php"; ?>
 </body>
+
 </html>
