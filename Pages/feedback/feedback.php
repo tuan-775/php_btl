@@ -4,7 +4,7 @@ session_start(); // Đảm bảo rằng người dùng đã đăng nhập
 
 // Kiểm tra xem người dùng đã đăng nhập chưa
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../login.php"); // Chuyển hướng tới trang đăng nhập nếu người dùng chưa đăng nhập
+    header("Location: /php_btl/login/login.php"); // Chuyển hướng tới trang đăng nhập nếu người dùng chưa đăng nhập
     exit();
 }
 
@@ -17,7 +17,7 @@ if (isset($_POST['submit_feedback'])) {
     if (!empty($name) && !empty($email) && !empty($message)) {
         // Lưu thông tin vào cơ sở dữ liệu
         $user_id = $_SESSION['user_id']; // Lấy ID người dùng từ session
-        
+
         // Câu lệnh SQL để lưu góp ý vào cơ sở dữ liệu
         $sql = "INSERT INTO feedbacks (user_id, name, email, message, status) VALUES (:user_id, :name, :email, :message, 'pending')";
         $stmt = $pdo->prepare($sql);
@@ -36,12 +36,14 @@ if (isset($_POST['submit_feedback'])) {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Góp Ý</title>
     <link rel="stylesheet" href="../../css/feedback.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Góp Ý</h1>
@@ -50,7 +52,7 @@ if (isset($_POST['submit_feedback'])) {
         <?php if (isset($success_message)): ?>
             <p style="color: green;"><?php echo $success_message; ?></p>
         <?php endif; ?>
-        
+
         <?php if (isset($error_message)): ?>
             <p style="color: red;"><?php echo $error_message; ?></p>
         <?php endif; ?>
@@ -73,4 +75,5 @@ if (isset($_POST['submit_feedback'])) {
         <a href="../../index.php">Quay lại trang chủ</a>
     </div>
 </body>
+
 </html>

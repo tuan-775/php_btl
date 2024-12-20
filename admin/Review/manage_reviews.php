@@ -55,16 +55,20 @@ if (isset($_GET['delete_review_id'])) {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý đánh giá</title>
     <link rel="stylesheet" href="../css/manage_review.css">
 </head>
+
 <body>
     <div class="admin-container">
         <h1>Quản lý đánh giá</h1>
-        
+
+        <a href="../dashboard.php">Quay về Quản trị</a>
+
         <?php if (!isset($reviews)): ?>
             <!-- Hiển thị danh sách người dùng nếu không có đánh giá -->
             <table class="admin-table">
@@ -94,7 +98,7 @@ if (isset($_GET['delete_review_id'])) {
         <?php else: ?>
             <!-- Nếu người dùng đã có đánh giá, hiển thị các đánh giá của người đó -->
             <h2>Đánh giá của người dùng <?php echo htmlspecialchars($users[array_search($user_id, array_column($users, 'id'))]['username']); ?></h2>
-            
+
             <table class="admin-table">
                 <thead>
                     <tr>
@@ -122,4 +126,5 @@ if (isset($_GET['delete_review_id'])) {
         <?php endif; ?>
     </div>
 </body>
+
 </html>

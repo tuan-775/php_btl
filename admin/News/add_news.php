@@ -39,26 +39,32 @@ if (isset($_POST['add_news'])) {
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Tin Tức</title>
+    <link rel="stylesheet" href="../css/add_news.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Thêm Tin Tức</h1>
-        <form method="POST" action="" enctype="multipart/form-data">
-            <label for="title">Tiêu đề:</label><br>
-            <input type="text" name="title" id="title" required><br>
-            <label for="content">Nội dung:</label><br>
-            <textarea name="content" id="content" rows="5" required></textarea><br>
-            <label for="category">Danh mục:</label><br>
-            <input type="text" name="category" id="category" required><br>
-            <label for="image">Hình ảnh:</label><br>
-            <input type="file" name="image" id="image" accept="image/*"><br><br>
-            <button type="submit" name="add_news">Thêm Tin Tức</button>
-        </form>
-        <a href="admin_manage_news.php">Quay lại quản lý tin tức</a>
-    </div>
+    <main>
+        <div class="container">
+            <h1>Thêm Tin Tức</h1>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <label for="title">Tiêu đề:</label><br>
+                <input type="text" name="title" id="title" required><br>
+                <label for="content">Nội dung:</label><br>
+                <textarea name="content" id="content" rows="5" required></textarea><br>
+                <label for="category">Danh mục:</label><br>
+                <input type="text" name="category" id="category" required><br>
+                <label for="image">Hình ảnh:</label><br>
+                <input type="file" name="image" id="image" accept="image/*"><br><br>
+                <button type="submit" name="add_news">Thêm Tin Tức</button>
+            </form>
+            <a href="manage_news.php">Quay lại quản lý tin tức</a>
+        </div>
+    </main>
 </body>
+
 </html>

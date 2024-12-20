@@ -6,18 +6,50 @@ session_start();
 $items_per_page = 6;
 
 // Lấy danh mục từ URL
-$category_name = isset($_GET['category_name']) ? trim($_GET['category_name']) : '';
-$category = isset($_GET['category']) ? trim($_GET['category']) : '';
+$category_id = isset($_GET['category_id']) ? intval($_GET['category_id']) : 0;
+$subcategory_id = isset($_GET['subcategory_id']) ? intval($_GET['subcategory_id']) : 0;
 
-// Truy vấn tổng số sản phẩm trong danh mục
-if (!empty($category_name) && !empty($category)) {
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE category LIKE CONCAT('%', :category, '%') AND category_name = :category_name");
-    $stmt->execute([':category' => $category, ':category_name' => $category_name]);
-} elseif (!empty($category)) {
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE category LIKE CONCAT('%', :category, '%')");
-    $stmt->execute([':category' => $category]);
-} else {
-    die("Vui lòng chọn danh mục hợp lệ.");
+// Truy vấn tên danh mục
+$category_name = '';
+if ($category_id) {
+    $stmt = $pdo->prepare("SELECT name FROM categories WHERE id = ?");
+    $stmt->execute([$category_id]);
+    $category = $stmt->fetch(PDO::FETCH_ASSOC);
+    $category_name = $category ? $category['name'] : '';
+}
+
+// Truy vấn tên loại sản phẩm
+$subcategory_name = '';
+if ($subcategory_id) {
+    $stmt = $pdo->prepare("SELECT name FROM subcategories WHERE id = ?");
+    $stmt->execute([$subcategory_id]);
+    $subcategory = $stmt->fetch(PDO::FETCH_ASSOC);
+    $subcategory_name = $subcategory ? $subcategory['name'] : '';
+}
+
+// Kiểm tra xem category_id hoặc subcategory_id có hợp lệ không
+if (!$category_id && !$subcategory_id) {
+    die("Vui lòng chọn danh mục hoặc loại sản phẩm hợp lệ.");
+}
+
+// Truy vấn tổng số sản phẩm trong danh mục hoặc loại sản phẩm
+if ($subcategory_id) {
+    $stmt = $pdo->prepare("
+        SELECT COUNT(DISTINCT p.id) 
+        FROM products p
+        INNER JOIN product_subcategories ps ON p.id = ps.product_id
+        WHERE ps.subcategory_id = ?
+    ");
+    $stmt->execute([$subcategory_id]);
+} elseif ($category_id) {
+    $stmt = $pdo->prepare("
+        SELECT COUNT(DISTINCT p.id) 
+        FROM products p
+        INNER JOIN product_subcategories ps ON p.id = ps.product_id
+        INNER JOIN subcategories sc ON ps.subcategory_id = sc.id
+        WHERE sc.category_id = ?
+    ");
+    $stmt->execute([$category_id]);
 }
 
 // Lấy tổng số sản phẩm
@@ -39,22 +71,32 @@ if ($current_page < 1) {
 // Tính toán offset (vị trí bắt đầu lấy dữ liệu)
 $offset = ($current_page - 1) * $items_per_page;
 
-// Truy vấn sản phẩm cho trang hiện tại (bổ sung LIMIT và OFFSET)
-if (!empty($category_name) && !empty($category)) {
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE category LIKE CONCAT('%', :category, '%') AND category_name = :category_name LIMIT :offset, :limit");
-    $stmt->bindValue(':category', $category);
-    $stmt->bindValue(':category_name', $category_name);
+// Truy vấn sản phẩm cho trang hiện tại
+if ($subcategory_id) {
+    $stmt = $pdo->prepare("
+        SELECT p.* 
+        FROM products p
+        INNER JOIN product_subcategories ps ON p.id = ps.product_id
+        WHERE ps.subcategory_id = :subcategory_id
+        LIMIT :offset, :limit
+    ");
+    $stmt->bindValue(':subcategory_id', $subcategory_id, PDO::PARAM_INT);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
     $stmt->execute();
-} elseif (!empty($category)) {
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE category LIKE CONCAT('%', :category, '%') LIMIT :offset, :limit");
-    $stmt->bindValue(':category', $category);
+} elseif ($category_id) {
+    $stmt = $pdo->prepare("
+        SELECT p.* 
+        FROM products p
+        INNER JOIN product_subcategories ps ON p.id = ps.product_id
+        INNER JOIN subcategories sc ON ps.subcategory_id = sc.id
+        WHERE sc.category_id = :category_id
+        LIMIT :offset, :limit
+    ");
+    $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
     $stmt->execute();
-} else {
-    die("Vui lòng chọn danh mục hợp lệ.");
 }
 
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -66,7 +108,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($category_name); ?></title>
+    <title><?php echo htmlspecialchars($subcategory_id ? $subcategory_name : $category_name); ?></title>
     <link rel="stylesheet" href="./css/category.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -75,18 +117,22 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include 'header.php'; ?>
 
     <main>
+        <!-- Breadcrumb -->
         <div class="breadcrumb">
-            <a href="index.php">Trang chủ</a> /
-            <a href="category.php?category=<?php echo urlencode($category); ?>">
-                <?php echo htmlspecialchars($category); ?>
-            </a>
-            <?php if (!empty($category_name)): ?>
-                / <span><?php echo htmlspecialchars($category_name); ?></span>
+            <a href="index.php">Trang chủ</a>
+            <?php if ($category_id): ?>
+                / <a href="category.php?category_id=<?php echo urlencode($category_id); ?>">
+                    <?php echo htmlspecialchars($category_name); ?>
+                </a>
+            <?php endif; ?>
+            <?php if ($subcategory_id): ?>
+                / <span><?php echo htmlspecialchars($subcategory_name); ?></span>
             <?php endif; ?>
         </div>
 
+        <!-- Danh sách sản phẩm -->
         <?php if (empty($products)): ?>
-            <p>Không có sản phẩm nào trong danh mục này.</p>
+            <p>Không có sản phẩm nào trong danh mục hoặc loại sản phẩm này.</p>
         <?php else: ?>
             <div class="product">
                 <div class="product-container">
@@ -118,19 +164,19 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="pagination">
             <ul>
                 <?php if ($current_page > 1): ?>
-                    <li><a href="?category=<?php echo urlencode($category); ?>&page=1">Đầu</a></li>
-                    <li><a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $current_page - 1; ?>">«</a></li>
+                    <li><a href="?<?php echo $category_id ? 'category_id=' . urlencode($category_id) : 'subcategory_id=' . urlencode($subcategory_id); ?>&page=1">Đầu</a></li>
+                    <li><a href="?<?php echo $category_id ? 'category_id=' . urlencode($category_id) : 'subcategory_id=' . urlencode($subcategory_id); ?>&page=<?php echo $current_page - 1; ?>">«</a></li>
                 <?php endif; ?>
 
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                     <li class="<?php echo $i == $current_page ? 'active' : ''; ?>">
-                        <a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        <a href="?<?php echo $category_id ? 'category_id=' . urlencode($category_id) : 'subcategory_id=' . urlencode($subcategory_id); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
                     </li>
                 <?php endfor; ?>
 
                 <?php if ($current_page < $total_pages): ?>
-                    <li><a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $current_page + 1; ?>">»</a></li>
-                    <li><a href="?category=<?php echo urlencode($category); ?>&page=<?php echo $total_pages; ?>">Cuối</a></li>
+                    <li><a href="?<?php echo $category_id ? 'category_id=' . urlencode($category_id) : 'subcategory_id=' . urlencode($subcategory_id); ?>&page=<?php echo $current_page + 1; ?>">»</a></li>
+                    <li><a href="?<?php echo $category_id ? 'category_id=' . urlencode($category_id) : 'subcategory_id=' . urlencode($subcategory_id); ?>&page=<?php echo $total_pages; ?>">Cuối</a></li>
                 <?php endif; ?>
             </ul>
         </div>

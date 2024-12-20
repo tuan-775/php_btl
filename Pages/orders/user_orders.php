@@ -47,10 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_received'])) 
 </head>
 
 <body>
-    <?php include '../../header.php'; ?>
+    <?php //include '../../header.php'; 
+    ?>
     <main>
         <div>
             <h1>Đơn hàng của tôi</h1>
+            <a href="/php_btl/index.php">Quay về Trang chủ</a>
             <table border="1" cellpadding="10" cellspacing="0">
                 <tr>
                     <th>ID Đơn Hàng</th>
@@ -85,7 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_received'])) 
             </table>
         </div>
     </main>
-    <?php include '../../footer.php'; ?>
+    <?php //include '../../footer.php'; 
+    ?>
 </body>
 
 </html>

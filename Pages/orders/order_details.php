@@ -55,7 +55,8 @@ if (isset($_POST['submit_review'])) {
 }
 
 // Kiểm tra xem người dùng đã đánh giá sản phẩm chưa
-function hasReviewed($order_id, $product_id) {
+function hasReviewed($order_id, $product_id)
+{
     global $pdo;
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM product_reviews WHERE order_id = ? AND product_id = ?");
     $stmt->execute([$order_id, $product_id]);
@@ -76,9 +77,11 @@ function hasReviewed($order_id, $product_id) {
 </head>
 
 <body>
-    <?php include '../../header.php'; ?>
+    <?php //include '../../header.php'; 
+    ?>
     <main>
         <h1>Chi tiết Đơn Hàng #<?php echo htmlspecialchars($order['id']); ?></h1>
+        <a href="user_orders.php">Quay về Đơn hàng</a>
         <table border="1" cellpadding="10" cellspacing="0">
             <tr>
                 <th>Tên sản phẩm</th>
@@ -140,7 +143,8 @@ function hasReviewed($order_id, $product_id) {
             document.getElementById('reviewPopup').style.display = 'none';
         }
     </script>
-    <?php include '../../footer.php'; ?>
+    <?php //include '../../footer.php'; 
+    ?>
 </body>
 
 </html>

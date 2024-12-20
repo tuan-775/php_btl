@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require 'db.php';
 
@@ -6,11 +9,8 @@ require 'db.php';
 $isLoggedIn = isset($_SESSION['username']);
 $isAdmin = ($isLoggedIn && $_SESSION['role'] === 'admin');
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Tính số lượng sản phẩm trong giỏ hàng
 $cart_count = 0;
-
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $stmt = $pdo->prepare("SELECT SUM(quantity) AS total_quantity FROM cart WHERE user_id = ?");
@@ -19,15 +19,22 @@ if (isset($_SESSION['user_id'])) {
     $cart_count = $result['total_quantity'] ?? 0;
 }
 
-$stmt_be_gai = $pdo->prepare("SELECT DISTINCT category_name FROM products WHERE category = ?");
-$stmt_be_gai->execute(['Bé gái']);
-$subcategories_be_gai = $stmt_be_gai->fetchAll(PDO::FETCH_ASSOC);
+// Lấy danh sách danh mục và loại sản phẩm
+$categories = $pdo->query("
+    SELECT c.id AS category_id, c.name AS category_name, sc.id AS subcategory_id, sc.name AS subcategory_name
+    FROM categories c
+    LEFT JOIN subcategories sc ON c.id = sc.category_id
+    ORDER BY c.name, sc.name
+")->fetchAll(PDO::FETCH_ASSOC);
 
-
-// Lấy danh mục con cho Bé trai
-$stmt_be_trai = $pdo->prepare("SELECT DISTINCT category_name FROM products WHERE category = ?");
-$stmt_be_trai->execute(['Bé trai']);
-$subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
+// Tổ chức danh mục và loại sản phẩm thành mảng
+$menu = [];
+foreach ($categories as $row) {
+    $menu[$row['category_name']][] = [
+        'subcategory_id' => $row['subcategory_id'],
+        'subcategory_name' => $row['subcategory_name']
+    ];
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,12 +44,11 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle ?? 'Trang Web'; ?></title>
-    <!-- <link rel="stylesheet" href="css/style.css">  -->
     <link rel="stylesheet" href="./css/header.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playpen+Sans:wght@100..800&family=Sofadi+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -51,63 +57,40 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
             <!-- Logo -->
             <div class="logo">
                 <a href="/php_btl/index.php">
-                    <img src="/php_btl/logo.png" />
+                    <img src="/php_btl/logo.png" alt="Logo">
                 </a>
             </div>
 
-            <div class="dropdown">
-                <a href="/php_btl/business_strategy.php">Giới thiệu</a>
-            </div>
-
-            <div class="dropdown">
-                <a href="/php_btl/Pages/track_order/track_order.php">Tra cứu đơn hàng</a>
-            </div>
 
             <!-- Thanh tìm kiếm ở giữa -->
             <form class="search-bar" action="search.php" method="GET">
                 <input type="text" name="query" placeholder="Bạn cần tìm gì?" required>
                 <button type="search"><i class="fas fa-search"></i></button>
-                </input>
             </form>
-
-            <div class="dropdown">
-                <a href="/php_btl/Pages/feedback/feedback.php">Góp ý</a>
-            </div>
-
-            <div class="dropdown">
-                <a href="/php_btl/Pages/News/new_list.php">Tin tức</a>
-            </div>
+            <div class="dropdown"><a href="/php_btl/Pages/track_order/track_order.php">Tra cứu đơn hàng</a></div>
+            <div class="dropdown"><a href="/php_btl/Pages/feedback/feedback.php">Góp ý</a></div>
+            <div class="dropdown"><a href="/php_btl/Pages/News/new_list.php">Tin tức</a></div>
 
             <!-- Icon bên phải -->
             <div class="header-icons">
-                <?php if (isset($_SESSION['username']) && isset($_SESSION['role'])): ?>
-                    <?php if ($_SESSION['role'] === 'admin'): ?>
-                        <!-- Menu cho Admin -->
-                        <div class="user-welcome">
-                            AD-<?php echo htmlspecialchars($_SESSION['username']); ?>!
-                            <div class="dropdown-menu">
+                <?php if ($isLoggedIn): ?>
+                    <div class="user-welcome">
+                        <?php echo htmlspecialchars($_SESSION['role'] === 'admin' ? 'admin' : htmlspecialchars($_SESSION['username'])) ?>
+                        <div class="dropdown-menu">
+                            <?php if ($_SESSION['role'] === 'admin'): ?>
                                 <a href="/php_btl/admin/dashboard.php">Quản trị</a>
-                                <a href="/php_btl/change_password.php">Đổi mật khẩu</a>
-                                <a href="/php_btl/login/logout.php">Đăng xuất</a>
-                            </div>
-                        </div>
-                    <?php else: ?>
-                        <!-- Menu cho Người dùng -->
-                        <div class="user-welcome">
-                            <?php echo htmlspecialchars($_SESSION['username']); ?>!
-                            <div class="dropdown-menu">
+                            <?php else: ?>
                                 <a href="/php_btl/profile.php">Hồ sơ</a>
                                 <a href="/php_btl/Pages/orders/user_orders.php">Đơn hàng</a>
                                 <a href="/php_btl/Pages/orders/purchase_history.php">Lịch sử mua hàng</a>
                                 <a href="/php_btl/Pages/History_review/history_reviews.php">Lịch sử đánh giá</a>
                                 <a href="/php_btl/Pages/feedback/feedback_history.php">Lịch sử góp ý</a>
-                                <a href="/php_btl/change_password.php">Đổi mật khẩu</a>
-                                <a href="/php_btl/login/logout.php">Đăng xuất</a>
-                            </div>
+                            <?php endif; ?>
+                            <a href="/php_btl/change_password.php">Đổi mật khẩu</a>
+                            <a href="/php_btl/login/logout.php">Đăng xuất</a>
                         </div>
-                    <?php endif; ?>
+                    </div>
                 <?php else: ?>
-                    <!-- Menu cho khách chưa đăng nhập -->
                     <div class="user-icon">
                         <i class="fas fa-user"></i>
                         <div class="dropdown-menu">
@@ -116,6 +99,7 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                 <?php endif; ?>
+
                 <div class="icon cart-icon">
                     <a href="/php_btl/cart/cart.php">
                         <i class="fas fa-shopping-cart"></i>
@@ -129,54 +113,27 @@ $subcategories_be_trai = $stmt_be_trai->fetchAll(PDO::FETCH_ASSOC);
         <nav class="header-nav">
             <ul>
                 <div><a href="/php_btl/index.php">Trang chủ</a></div>
+                <div class="dropdown"><a href="/php_btl/business_strategy.php">Giới thiệu</a></div>
 
-                <li class="dropdown">
-                    <a href="/php_btl/category.php?category=Bé gái" class="dropdown-toggle">Bé gái</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/php_btl/category.php?category=Bé gái&&category_name=Đầm váy">Đầm váy</a></li>
-                        <li><a href="/php_btl/category.php?category=Bé gái&category_name=Áo">Áo</a></li>
-                        <li><a href="/php_btl/category.php?category=Bé gái&category_name=Đồ bộ">Đồ bộ</a></li>
-                        <li><a href="/php_btl/category.php?category=Bé gái&category_name=Phụ kiện">Phụ kiện</a></li>
-                    </ul>
-                </li>
-                <!-- Bé trai -->
-                <li class="dropdown">
-                    <a href="/php_btl/category.php?category=Bé trai" class="dropdown-toggle">Bé trai</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Áo">Áo</a></li>
-                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Quần">Quần</a></li>
-                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Đồ bộ">Đồ bộ</a></li>
-                        <li><a href="/php_btl/category.php?category=Bé trai&category_name=Phụ kiện">Phụ kiện</a></li>
-                        <!-- <li><a href="/php_btl/category.php?category=id&category_name={name}">{name}</a></li> -->
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Bộ sưu tập</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/php_btl/collection.php?collection=BST Thu Đông">BST Thu Đông</a></li>
-                        <li><a href="/php_btl/collection.php?collection=BST Đồ Bộ Mặc Nhà">BST Đồ Bộ Mặc Nhà</a></li>
-                        <li><a href="/php_btl/collection.php?collection=BST Đồ Đi Chơi Noel">BST Đồ Đi Chơi Noel</a></li>
-                        <li><a href="/php_btl/collection.php?collection=BST Disney - Friends">BST Disney - Friends</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">New Arrival</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/php_btl/new_arrival.php?category=Bé gái">New Arrival Bé gái</a></li>
-                        <li><a href="/php_btl/new_arrival.php?category=Bé trai">New Arrival Bé trai</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">⚡ SALE ⚡</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/php_btl/sale.php?sale_range=10-25">Sale 10%-25%</a></li>
-                        <li><a href="/php_btl/sale.php?sale_range=25-50">Sale 25%-50%</a></li>
-                        <li><a href="/php_btl/sale.php?category=Bé gái">Sale Bé gái</a></li>
-                        <li><a href="/php_btl/sale.php?category=Bé trai">Sale Bé trai</a></li>
-                    </ul>
-                </li>
-
+                <?php foreach ($menu as $category_name => $subcategories): ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><?php echo htmlspecialchars($category_name); ?></a>
+                        <ul class="dropdown-menu">
+                            <?php foreach ($subcategories as $subcategory): ?>
+                                <?php if (!empty($subcategory['subcategory_id'])): ?>
+                                    <li>
+                                        <a href="/php_btl/category.php?category=<?php echo urlencode($category_name); ?>&subcategory_id=<?php echo $subcategory['subcategory_id']; ?>">
+                                            <?php echo htmlspecialchars($subcategory['subcategory_name']); ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </nav>
     </header>
 </body>
+
+</html>
